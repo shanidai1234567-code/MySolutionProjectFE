@@ -13,10 +13,10 @@ namespace ViewModel
     public class RegisteredDB : PersonDB
     {
      
-        public RegisteredList SelectAll()
+        public VolunteerList SelectAll()
         {
             command.CommandText = $"SELECT Person.*, Registered.GroupActivity, Registered.MissedGA FROM  (Registered INNER JOIN   Person ON Registered.id = Person.Id)";
-            RegisteredList pList = new RegisteredList(base.Select());
+            VolunteerList pList = new VolunteerList(base.Select());
             return pList;
         }
         protected override BaseEntity CreateModel(BaseEntity entity)
@@ -34,7 +34,7 @@ namespace ViewModel
         {
             return new Registered();
         }
-        static private RegisteredList list = new RegisteredList();
+        static private VolunteerList list = new VolunteerList();
         public static Registered SelectById(int id)
         {
             RegisteredDB db = new RegisteredDB();

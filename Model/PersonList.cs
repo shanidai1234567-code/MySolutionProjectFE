@@ -9,7 +9,7 @@ namespace Model
     public class PersonList: List<Person>
     {
         public PersonList() { }
-        public PersonList(IEnumerable<Instructor> list) : base(list) { }
+        public PersonList(IEnumerable<PasserBy> list) : base(list) { }
         public PersonList(IEnumerable<BaseEntity> list) : base(list.Cast<Person>().ToList()) { }
     }
 }

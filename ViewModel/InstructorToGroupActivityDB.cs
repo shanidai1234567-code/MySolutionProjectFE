@@ -12,10 +12,10 @@ namespace ViewModel
     public class InstructorToGroupActivityDB : BaseDB
     {
        
-            public InstructorToGroupActivityList SelectAll()
+            public ReportList SelectAll()
             {
                 command.CommandText = $"SELECT * FROM InstructorToGroupActivity";
-            InstructorToGroupActivityList groupList = new InstructorToGroupActivityList(base.Select());
+            ReportList groupList = new ReportList(base.Select());
                 return groupList;
             }
 
@@ -30,7 +30,7 @@ namespace ViewModel
             {
                 return new InstructorToGroupActivity();
             }
-            static private InstructorToGroupActivityList list = new InstructorToGroupActivityList();
+            static private ReportList list = new ReportList();
 
             public static InstructorToGroupActivity SelectById(int id)
             {

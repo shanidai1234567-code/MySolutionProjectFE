@@ -39,7 +39,7 @@ namespace Test1
             //    Console.WriteLine(c);
 
             RegisteredDB Reg = new();
-            RegisteredList ListR = Reg.SelectAll(); //Registered
+            VolunteerList ListR = Reg.SelectAll(); //Registered
             foreach (Registered c in ListR)
                 Console.WriteLine(c);
 
@@ -52,7 +52,7 @@ namespace Test1
             int x = Reg.SaveChanges();
 
 
-            RegisteredList List = Reg.SelectAll(); //Registered
+            VolunteerList List = Reg.SelectAll(); //Registered
             foreach (Registered c in List)
                 Console.WriteLine(c);
 

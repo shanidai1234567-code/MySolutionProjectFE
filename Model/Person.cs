@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,16 +12,28 @@ namespace Model
         private string firstName;
         private string lastName;
         private string livingAdress;
-        private string telNum;
+        private string phone_Numer;
 
+        private string street;
+        private int city_Num;
+        private int streetNumber;
+        private string pass;
         public string FirstName { get => firstName; set => firstName = value; }
         public string LastName { get => lastName; set => lastName = value; }
         public string LivingAdress { get => livingAdress; set => livingAdress = value; }
-        public string TelNum { get => telNum; set => telNum = value; }
+        public string Phone_Numer { get => phone_Numer; set => phone_Numer = value; }
+
+        public string Street {  get => street;  set => street = value; }
+
+        public int CityNumber{ get => city_Num;   set => city_Num = value;}
+
+        public int StreetNumber{ get => streetNumber; set => streetNumber = value; }
+
+        public string Pass  { get => pass; set => pass = value;}
 
         public override string ToString()
         {
-            return $"{firstName} {lastName}, livingAdress: {livingAdress} , telNum: {telNum}";
+            return $"{FirstName} {LastName}, Address: {livingAdress}, {Street} St., No. {StreetNumber}, City Code: {CityNumber}, Phone: {phone_Numer}, pass: {pass}";
         }
     }
 }
