@@ -10,15 +10,15 @@ namespace Model
     {
         private Volunteer idVol;
         private Report idReport;
-        private Status status;
+        private Status repsond_status;
 
         public Volunteer IdVol { get => idVol; set => idVol = value; }
         public Report IdReport { get => idReport; set => idReport = value; }
-        public Status Status1 { get => status; set => status = value; }
+        public Status Repsond_status { get => repsond_status; set => repsond_status = value; }
 
         public override string ToString()
         {
-            return $" Volunteer: {idVol}, Report: {idReport}, Status: {status}";
+            return $" Volunteer: {idVol}, Report: {idReport}, Status: {repsond_status}";
         }
     }
 }

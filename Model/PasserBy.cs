@@ -8,16 +8,16 @@ namespace Model
 {
     public class PasserBy:Person
     {
-        private string Help_Category;
-        private DateTime JoinDate;
+        private Help_Category help_Category;
+        private DateTime joinDate;
 
        
-        public DateTime StartDate { get => JoinDate; set => JoinDate = value; }
-        public string TeachesGroupActivity { get => Help_Category; set => Help_Category = value; }
+        public DateTime JoinDate { get => joinDate; set => joinDate = value; }
+        public Help_Category Help_Category { get => help_Category; set => help_Category = value; }
 
         public override string ToString()
         {
-            return $"chose to help in: {Help_Category}, Start Date: {JoinDate.ToShortDateString()}";
+            return $"chose to help in: {help_Category}, Start Date: {joinDate.ToShortDateString()}";
         }
     }
 }

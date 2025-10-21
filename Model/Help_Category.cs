@@ -8,13 +8,13 @@ namespace Model
 {
     public class Help_Category:BaseEntity
     {
-        private string Description;
+        private string description;
 
-        public string NameOfTheHelp_Category { get => Description; set => Description = value; }
+        public string Description { get => description; set => description = value; }
 
         public override string ToString()
         {
-            return $"Group Activity: {Description}";
+            return $"Group Activity: {description}";
         }
     }
 }
