@@ -15,7 +15,7 @@ namespace Model
         private string phone_Numer;
 
         private string street;
-        private int city_Num;
+        private City city_Num;
         private int streetNumber;
         private string pass;
         public string FirstName { get => firstName; set => firstName = value; }
@@ -25,15 +25,15 @@ namespace Model
 
         public string Street {  get => street;  set => street = value; }
 
-        public int CityNumber{ get => city_Num;   set => city_Num = value;}
-
+        
         public int StreetNumber{ get => streetNumber; set => streetNumber = value; }
 
         public string Pass  { get => pass; set => pass = value;}
+        public City City_Num { get => city_Num; set => city_Num = value; }
 
         public override string ToString()
         {
-            return $"{FirstName} {LastName}, Address: {livingAdress}, {Street} St., No. {StreetNumber}, City Code: {CityNumber}, Phone: {phone_Numer}, pass: {pass}";
+            return $"{FirstName} {LastName}, Address: {livingAdress}, {Street} St., No. {StreetNumber}, City Code: {city_Num}, Phone: {phone_Numer}, pass: {pass}";
         }
     }
 }

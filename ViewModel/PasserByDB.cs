@@ -5,51 +5,46 @@ using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Model;
 
 namespace ViewModel
 {
-    public class PersonDB : BaseDB
+    public class PasserByDB: PersonDB
     {
-        public PersonList SelectAll()
+        public new PasserByList SelectAll()
         {
-            command.CommandText = $"SELECT * FROM Person";
-            PersonList pList = new PersonList(base.Select());
+            command.CommandText = $"SELECT * FROM PasserBy";
+            PasserByList pList = new PasserByList(base.Select());
             return pList;
         }
+
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
-            Person p = entity as Person;
-            p.FirstName = reader["firstName"].ToString();
-            p.LastName = reader["lastName"].ToString();
+            PasserBy p = entity as PasserBy;
+            p.FirstName = reader["FirstName"].ToString();
+            p.LastName = reader["LastName"].ToString();
             p.Phone_Numer = reader["telephone num"].ToString();
-            p.LivingAdress = reader["livingAdress"].ToString();
-            p.Street = reader["street"].ToString();
-            p.StreetNumber = Convert.ToInt32(reader["streetNumber"]);
-            p.City_Num = CityDB.SelectById((int)reader["CityNumber"]);
-            p.Pass = reader["pass"].ToString();
-
+            p.LivingAdress = reader["LivingAdress"].ToString();
 
             base.CreateModel(entity);
             return p;
         }
         public override BaseEntity NewEntity()
         {
-            return new Person();
+            return new PasserBy();
         }
-        static private PersonList list = new PersonList();
-        public static Person SelectById(int id)
+        static private PasserByList list = new PasserByList();
+        public static PasserBy SelectById(int id)
         {
-            PersonDB db = new PersonDB();
+            PasserByDB db = new PasserByDB();
             list = db.SelectAll();
 
-            Person g = list.Find(item => item.Id == id);
-            return g;
+            PasserBy c = list.Find(item => item.Id == id);
+            return c;
         }
 
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            Person c = entity as Person;
+            PasserBy c = entity as PasserBy;
             if (c != null)
             {
                 string sqlStr = $"DELETE FROM Person where id=@pid";
@@ -60,7 +55,7 @@ namespace ViewModel
         }
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            Person c = entity as Person;
+            PasserBy c = entity as PasserBy;
             if (c != null)
             {
                 string sqlStr = $"Insert INTO  Person (FirstName) VALUES (@cName)";
@@ -75,18 +70,21 @@ namespace ViewModel
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            Person c = entity as Person;
+            PasserBy c = entity as PasserBy;
             if (c != null)
             {
-                string sqlStr = $"UPDATE Person SET FirstName=@cName, LastName=@lName, LivingAdress=@bName, Phone_Numer=@hName WHERE ID=@id";
-                cmd.CommandText = sqlStr;
-                cmd.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
-                cmd.Parameters.Add(new OleDbParameter("@lName", c.LastName));
-                cmd.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                cmd.Parameters.Add(new OleDbParameter("@hName", c.Phone_Numer));
-                cmd.Parameters.Add(new OleDbParameter("@id", c.Id));
+                string sqlStr = $"UPDATE PasserBy  SET FirstName=@cName , LastName=@lName, Livingadress= @bName , [ Phone_Numer] = @hName WHERE ID=@id";
+                //   string sqlStr = $"UPDATE Person  SET FirstName=@cName,lastName=@lName,livingadress=@ladd WHERE ID=@id";
 
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
+                command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
+                command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
+                command.Parameters.Add(new OleDbParameter("@hName", c.Phone_Numer));
+                command.Parameters.Add(new OleDbParameter("@id", c.Id));
             }
         }
+
+
     }
 }

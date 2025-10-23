@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    internal class AdminList : List<Admin>
+    public class AdminList : List<Admin>
     {
         public AdminList() { }
         public AdminList(IEnumerable<Admin> list) : base(list) { }

@@ -7,6 +7,14 @@ namespace Test1
     {
         static void Main(string[] args)
         {
+            Person p = PersonDB.SelectById(1);
+            System.Console.WriteLine(p);
+
+            VolunteerDB cdb = new();
+            VolunteerList cList = cdb.SelectAll();
+
+           
+
         }
     }
 }
