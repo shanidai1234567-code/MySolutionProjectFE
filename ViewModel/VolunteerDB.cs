@@ -23,10 +23,22 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Volunteer p = entity as Volunteer;
-            p.FirstName = reader["FirstName"].ToString();
-            p.LastName = reader["LastName"].ToString();
-            p.Phone_Numer = reader["telephone num"].ToString();
-            p.LivingAdress = reader["LivingAdress"].ToString();
+
+            //p.FirstName = reader["FirstName"].ToString();
+            //p.LastName = reader["LastName"].ToString();
+            //p.Phone_Numer = reader["telephone num"].ToString();
+            //p.LivingAdress = reader["LivingAdress"].ToString();
+            //p.Street = reader["street"].ToString();
+            //p.StreetNumber = Convert.ToInt32(reader["streetNumber"]);
+            //p.City_Num = CityDB.SelectById((int)reader["CityNumber"]);
+            //p.Pass = reader["pass"].ToString();
+
+            p.StoreOpeningTime = Convert.ToDateTime(reader["storeOpeningTime"]);
+            p.StoreClosingTime = Convert.ToDateTime(reader["storeClosingTime"]);
+            p.JoinDate = Convert.ToDateTime(reader["joinDate"]);
+            p.Location_X = Convert.ToDouble(reader["location_X"]);
+            p.Location_Y = Convert.ToDouble(reader["location_Y"]);
+            p.Help_Category = Help_CategoryDB.SelectById(Convert.ToInt32(reader["ID"]));
 
             base.CreateModel(entity);
             return p;

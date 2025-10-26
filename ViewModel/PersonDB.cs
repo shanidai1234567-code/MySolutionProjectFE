@@ -20,13 +20,12 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Person p = entity as Person;
-            p.FirstName = reader["firstName"].ToString();
-            p.LastName = reader["lastName"].ToString();
-            p.Phone_Numer = reader["telephone num"].ToString();
-            p.LivingAdress = reader["livingAdress"].ToString();
-            p.Street = reader["street"].ToString();
+            p.FirstName = reader["First_Name"].ToString();
+            p.LastName = reader["Last_Name"].ToString();
+            p.Phone_Numer = reader["Phone_Number"].ToString();
+            p.Street = reader["Street"].ToString();
             p.StreetNumber = Convert.ToInt32(reader["streetNumber"]);
-            p.City_Num = CityDB.SelectById((int)reader["CityNumber"]);
+            p.City_Num = CityDB.SelectById((int)reader["City_Num"]);
             p.Pass = reader["pass"].ToString();
 
 

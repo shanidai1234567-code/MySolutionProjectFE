@@ -13,7 +13,7 @@ namespace Model
         private DateTime joinDate;
         private double location_X;
         private double location_Y;
-        private string help_Category;
+        private Help_Category help_Category;
         public DateTime StoreOpening { get => StoreOpeningTime; set => StoreOpeningTime = value; }
 
         public DateTime StoreOpeningTime { get => storeOpeningTime; set => storeOpeningTime = value; }
@@ -24,8 +24,7 @@ namespace Model
         public double Location_X {get => location_X; set => location_X = value; }
 
         public double Location_Y {get => location_Y; set => location_Y = value; }
-
-        public string HelpCategory{ get => help_Category; set => help_Category = value;}
+        public Help_Category Help_Category { get => help_Category; set => help_Category = value; }
 
         public override string ToString()
         {

@@ -1,5 +1,6 @@
 ﻿using Model;
 using ViewModel;
+using System;
 
 namespace Test1
 {
@@ -7,13 +8,22 @@ namespace Test1
     {
         static void Main(string[] args)
         {
-            Person p = PersonDB.SelectById(1);
-            System.Console.WriteLine(p);
+            //PersonDB pdb = new();
+            //PersonList pList = pdb.SelectAll();
+            //foreach (Person c in pList)
+            //    Console.WriteLine(c.FirstName);
 
-            VolunteerDB cdb = new();
-            VolunteerList cList = cdb.SelectAll();
+            VolunteerDB V = new();
+            VolunteerList vList = V.SelectAll();
+            foreach (Volunteer c in vList)
+            {
+                Console.WriteLine($"{c.Id} | {c.FirstName} {c.LastName} | Help: {c.Help_Category} | Opens: {c.StoreOpeningTime:t} | Closes: {c.StoreClosingTime:t}");
 
-           
+
+            }
+
+
+
 
         }
     }
