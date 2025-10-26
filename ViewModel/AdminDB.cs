@@ -13,7 +13,7 @@ namespace ViewModel
 
         public new AdminList SelectAll()
         {
-            command.CommandText = $"SELECT * FROM Admin";
+            command.CommandText = $"SELECT Admin.Admin_Pass, Admin.ID, Person.First_Name, Person.Last_Name, Person.Phone_Number, Person.Street, Person.City_Num, Person.Pass, Person.streetNumber\r\nFROM (Admin INNER JOIN\r\n  Person ON Admin.ID = Person.ID)";
             AdminList pList = new AdminList(base.Select());
             return pList;
         }
@@ -21,13 +21,12 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Admin p = entity as Admin;
-            p.FirstName = reader["FirstName"].ToString();
-            p.LastName = reader["LastName"].ToString();
-            p.Phone_Numer = reader["telephone num"].ToString();
-            p.LivingAdress = reader["LivingAdress"].ToString();
-            p.Street = reader["street"].ToString();
+            p.FirstName = reader["First_Name"].ToString();
+            p.LastName = reader["Last_Name"].ToString();
+            p.Phone_Numer = reader["Phone_Number"].ToString();
+            p.Street = reader["Street"].ToString();
             p.StreetNumber = Convert.ToInt32(reader["streetNumber"]);
-            p.City_Num = CityDB.SelectById((int)reader["CityNumber"]);
+            p.City_Num = CityDB.SelectById((int)reader["City_Num"]);
             p.Admin_password = reader["pass"].ToString();
 
             base.CreateModel(entity);

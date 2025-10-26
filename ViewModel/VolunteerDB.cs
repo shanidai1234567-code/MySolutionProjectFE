@@ -15,7 +15,7 @@ namespace ViewModel
  
         public new VolunteerList SelectAll()
         {
-            command.CommandText = $"SELECT * FROM Volunteer";
+            command.CommandText = $"SELECT Person.ID, Person.First_Name, Person.Last_Name, Person.Phone_Number, Person.City_Num, Person.Street, Person.Pass, Person.streetNumber, Volunteer.StoreOpeningTime, Volunteer.JoinDate, Volunteer.StoreClosingTime, \r\n Volunteer.Location_X, Volunteer.Location_Y, Volunteer.Help_Category\r\nFROM (Person INNER JOIN\r\n                         Volunteer ON Person.ID = Volunteer.ID)";
             VolunteerList pList = new VolunteerList(base.Select());
             return pList;
         }
@@ -33,11 +33,11 @@ namespace ViewModel
             //p.City_Num = CityDB.SelectById((int)reader["CityNumber"]);
             //p.Pass = reader["pass"].ToString();
 
-            p.StoreOpeningTime = Convert.ToDateTime(reader["storeOpeningTime"]);
-            p.StoreClosingTime = Convert.ToDateTime(reader["storeClosingTime"]);
-            p.JoinDate = Convert.ToDateTime(reader["joinDate"]);
-            p.Location_X = Convert.ToDouble(reader["location_X"]);
-            p.Location_Y = Convert.ToDouble(reader["location_Y"]);
+            p.StoreOpeningTime = Convert.ToDateTime(reader["StoreOpeningTime"]);
+            p.StoreClosingTime = Convert.ToDateTime(reader["StoreClosingTime"]);
+            p.JoinDate = Convert.ToDateTime(reader["JoinDate"]);
+            p.Location_X = Convert.ToDouble(reader["Location_X"]);
+            p.Location_Y = Convert.ToDouble(reader["Location_Y"]);
             p.Help_Category = Help_CategoryDB.SelectById(Convert.ToInt32(reader["ID"]));
 
             base.CreateModel(entity);

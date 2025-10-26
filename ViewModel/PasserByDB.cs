@@ -12,7 +12,7 @@ namespace ViewModel
     {
         public new PasserByList SelectAll()
         {
-            command.CommandText = $"SELECT * FROM PasserBy";
+            command.CommandText = $"SELECT        PasserBy.ID, PasserBy.Help_Category, PasserBy.JoinDate, Person.First_Name, Person.Last_Name, Person.Phone_Number, Person.Street, Person.City_Num, Person.streetNumber, Person.Pass\r\nFROM            (PasserBy INNER JOIN\r\n                         Person ON PasserBy.ID = Person.ID)";
             PasserByList pList = new PasserByList(base.Select());
             return pList;
         }
@@ -20,10 +20,8 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             PasserBy p = entity as PasserBy;
-            p.FirstName = reader["FirstName"].ToString();
-            p.LastName = reader["LastName"].ToString();
-            p.Phone_Numer = reader["telephone num"].ToString();
-            p.LivingAdress = reader["LivingAdress"].ToString();
+            p.JoinDate = Convert.ToDateTime(reader["JoinDate"]);
+            p.Help_Category = Help_CategoryDB.SelectById((int)reader["ID"]);
 
             base.CreateModel(entity);
             return p;
