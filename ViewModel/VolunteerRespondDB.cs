@@ -21,14 +21,11 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             VolunteerRespond p = entity as VolunteerRespond;
-            p.IdVol = VolunteerDB.SelectById(Convert.ToInt32(reader["ID_Volunteer"]));
-            p.IdReport = ReportDB.SelectById(Convert.ToInt32(reader["ID_Report"]));
-            p.Repsond_status = StatusDB.SelectById(Convert.ToInt32(reader["Status"]));
+            p.IdReport = Convert.ToInt32(reader["ID_Report"]);
 
-            
+            p.IdVol = Convert.ToInt32(reader["ID_Volunteer"]);
+            return p;   
 
-            base.CreateModel(entity);
-            return p;
         }
         public override BaseEntity NewEntity()
         {
