@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class StautList : List<Status>
+    public class StatusList : List<Status>
     {
-        public StautList() { }
-        public StautList(IEnumerable<Status> list) : base(list) { }
-        public StautList(IEnumerable<BaseEntity> list) : base(list.Cast<Status>().ToList()) { }
+        public StatusList() { }
+        public StatusList(IEnumerable<Status> list) : base(list) { }
+        public StatusList(IEnumerable<BaseEntity> list) : base(list.Cast<Status>().ToList()) { }
     }
 }

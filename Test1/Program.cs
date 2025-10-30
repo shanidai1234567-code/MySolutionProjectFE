@@ -41,13 +41,23 @@ namespace Test1
             //    Console.WriteLine("-----------------------------------");
             //}
 
-            AdminDB A = new();
-            AdminList aList = A.SelectAll();
+            //AdminDB A = new();
+            //AdminList aList = A.SelectAll();
 
-            foreach (Admin a in aList)
+            //foreach (Admin a in aList)
+            //{
+            //    Console.WriteLine($"ID: {a.Id}");
+            //    Console.WriteLine($"Pass: {a.Admin_password}");
+            //    Console.WriteLine("-----------------------------------");
+            //}
+
+            StatusDB s = new();
+            StatusList sList = s.SelectAll();
+
+            foreach (Status S in sList)
             {
-                Console.WriteLine($"ID: {a.Id}");
-                Console.WriteLine($"Pass: {a.Admin_password}");
+                Console.WriteLine($"ID: {S.Id}");
+                Console.WriteLine($"des: {S.Description}");
                 Console.WriteLine("-----------------------------------");
             }
 

@@ -8,75 +8,75 @@ using System.Data.OleDb;
 
 namespace ViewModel
 {
-    public class StatusDB/*: BaseDB*/
+    public class StatusDB: BaseDB
     {
-        //public new StatusList SelectAll()
-        //{
-        //    command.CommandText = $"SELECT * FROM Status";
-        //    StatusList pList = new StatusList(base.Select());
-        //    return pList;
-        //}
+        public new StatusList SelectAll()
+        {
+            command.CommandText = $"SELECT * FROM Status";
+            StatusList pList = new StatusList(base.Select());
+            return pList;
+        }
 
-        //protected override BaseEntity CreateModel(BaseEntity entity)
-        //{
-        //    Help_Category p = entity as Help_Category;
-        //    p.Description = reader["Description"].ToString();
-        //    //p.Id = reader["ID"].ToString();
+        protected override BaseEntity CreateModel(BaseEntity entity)
+        {
+            Status p = entity as Status;
+            p.Description = reader["Description"].ToString();
+            //p.Id = reader["ID"].ToString();
 
-        //    base.CreateModel(entity);
-        //    return p;
-        //}
-        //public override BaseEntity NewEntity()
-        //{
-        //    return new Help_Category();
-        //}
-        //static private StatusList list = new StatusList();
-        //public static Help_Category SelectById(int id)
-        //{
-        //    Help_CategoryDB db = new Help_CategoryDB();
-        //    list = db.SelectAll();
+            base.CreateModel(entity);
+            return p;
+        }
+        public override BaseEntity NewEntity()
+        {
+            return new Status();
+        }
+        static private StatusList list = new StatusList();
+        public static Status SelectById(int id)
+        {
+            StatusDB db = new StatusDB();
+            list = db.SelectAll();
 
-        //    Help_Category c = list.Find(item => item.Id == id);
-        //    return c;
-        //}
+            Status c = list.Find(item => item.Id == id);
+            return c;
+        }
 
-        //protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
-        //{
-        //    Help_Category c = entity as Help_Category;
-        //    if (c != null)
-        //    {
-        //        string sqlStr = $"DELETE FROM Help_Category where id=@pid";
+        protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Status c = entity as Status;
+            if (c != null)
+            {
+                string sqlStr = $"DELETE FROM Status where id=@pid";
 
-        //        command.CommandText = sqlStr;
-        //        command.Parameters.Add(new OleDbParameter("@pid", c.Id));
-        //    }
-        //}
-        //protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
-        //{
-        //    Help_Category c = entity as Help_Category;
-        //    if (c != null)
-        //    {
-        //        string sqlStr = $"Insert INTO  Help_Category (Description) VALUES (@cName)";
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@pid", c.Id));
+            }
+        }
+        protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Status c = entity as Status;
+            if (c != null)
+            {
+                string sqlStr = $"Insert INTO  Status (Description) VALUES (@cName)";
 
-        //        command.CommandText = sqlStr;
-        //        command.Parameters.Add(new OleDbParameter("@cName", c.Description));
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@cName", c.Description));
 
-        //    }
-        //}
+            }
+        }
 
-        //protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
-        //{
-        //    Help_Category c = entity as Help_Category;
-        //    if (c != null)
-        //    {
-        //        string sqlStr = $"UPDATE Help_Category  SET Description=@cName WHERE ID=@id";
-        //        //   string sqlStr = $"UPDATE Person  SET FirstName=@cName,lastName=@lName,livingadress=@ladd WHERE ID=@id";
+        protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Status c = entity as Status ;
+            if (c != null)
+            {
+                string sqlStr = $"UPDATE Help_Category  SET Description=@cName WHERE ID=@id";
+                //   string sqlStr = $"UPDATE Person  SET FirstName=@cName,lastName=@lName,livingadress=@ladd WHERE ID=@id";
 
-        //        command.CommandText = sqlStr;
-        //        command.Parameters.Add(new OleDbParameter("@cName", c.Description));
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@cName", c.Description));
 
-        //        command.Parameters.Add(new OleDbParameter("@id", c.Id));
-        //    }
-        //}
+                command.Parameters.Add(new OleDbParameter("@id", c.Id));
+            }
+        }
     }
 }
