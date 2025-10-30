@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class VolounteerRespondList : List<VolounteerRespond>
+    public class VolunteerRespondList : List<VolounteerRespond>
     {
-        public VolounteerRespondList() { }
-        public VolounteerRespondList(IEnumerable<VolounteerRespond> list) : base(list) { }
-        public VolounteerRespondList(IEnumerable<BaseEntity> list) : base(list.Cast<VolounteerRespond>().ToList()) { }
+        public VolunteerRespondList() { }
+        public VolunteerRespondList(IEnumerable<VolounteerRespond> list) : base(list) { }
+        public VolunteerRespondList(IEnumerable<BaseEntity> list) : base(list.Cast<VolounteerRespond>().ToList()) { }
 
     }
 }
