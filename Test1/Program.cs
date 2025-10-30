@@ -99,10 +99,11 @@ namespace Test1
             VolunteerRespondList vList = VR.SelectAll();
             foreach (VolunteerRespond R in vList)
             {
-                Console.WriteLine($"VolunteerRespond: {R.IdVol}");
-                Console.WriteLine($"Report ID: {R.IdReport}");
-                Console.WriteLine($"Status: {R.Repsond_status}");
+                Console.WriteLine($"VolunteerRespond: {R.IdVol.Id}");
+                Console.WriteLine($"Report ID: {R.IdReport.Id}");
+                Console.WriteLine($"Status: {R.Repsond_status.Id}");
                 Console.WriteLine("-----------------------------------");
+
             }
         }
     }
