@@ -12,7 +12,7 @@ namespace Model
         public string Description { get => description; set => description = value; }
         public override string ToString()
         {
-            return $"Status Description: {description}.";
+            return $"Status Description: {description}." + base.ToString();
         }
     }
 }

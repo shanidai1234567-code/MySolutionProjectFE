@@ -18,7 +18,7 @@ namespace Model
 
         public override string ToString()
         {
-            return $" Volunteer: {idVol}, Report: {idReport}, Status: {repsond_status}";
+            return $" Volunteer: {idVol}, Report: {idReport}, Status: {repsond_status}" + base.ToString();
         }
     }
 }

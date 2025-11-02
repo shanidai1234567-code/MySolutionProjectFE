@@ -12,7 +12,7 @@ namespace Model
         private string firstName;
         private string lastName;
         private string livingAdress;
-        private string phone_Numer;
+        private string phone_Number;
 
         private string street;
         private City city_Num;
@@ -21,7 +21,7 @@ namespace Model
         public string FirstName { get => firstName; set => firstName = value; }
         public string LastName { get => lastName; set => lastName = value; }
         public string LivingAdress { get => livingAdress; set => livingAdress = value; }
-        public string Phone_Numer { get => phone_Numer; set => phone_Numer = value; }
+        public string Phone_Number { get => phone_Number; set => phone_Number = value; }
 
         public string Street {  get => street;  set => street = value; }
 
@@ -33,7 +33,7 @@ namespace Model
 
         public override string ToString()
         {
-            return $"{FirstName} {LastName}, Address: {livingAdress}, {Street} St., No. {StreetNumber}, City Code: {city_Num}, Phone: {phone_Numer}, pass: {pass}";
+            return base.ToString() + $"{FirstName} {LastName}, Address: {livingAdress}, {Street} St., No. {StreetNumber}, City Code: {city_Num}, Phone: {phone_Number}, pass: {pass}";
         }
     }
 }

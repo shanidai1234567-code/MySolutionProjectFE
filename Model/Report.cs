@@ -30,7 +30,7 @@ namespace Model
         public override string ToString()
         {
             return $"PasserBy_ID: {passerBy_ID}, Update_Time:{update_Time}, Location_X:{location_X}, Location_Y: {location_Y}" +
-                $"Help_Category: {hCategory}, Description: {description}, Photo_Optinal: {photo_optinal}, City_Num: {city_num}.";
+                $"Help_Category: {hCategory}, Description: {description}, Photo_Optinal: {photo_optinal}, City_Num: {city_num}." + base.ToString();
         }
     }
 }
