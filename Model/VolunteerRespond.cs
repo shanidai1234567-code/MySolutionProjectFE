@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-        public class VolunteerRespond : BaseEntity
+        public class VolunteerRespond:BaseEntity
     {
         private Volunteer idVol;
         private Report idReport;
