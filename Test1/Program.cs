@@ -21,30 +21,40 @@ namespace Test1
                 Console.WriteLine("---------------");
             }
 
-            //Person p = new Person()
-            //{
-            //    FirstName = "TestFirstName",
-            //    LastName = "TestLastName",
-            //    Phone_Number = "0501234567",
-            //    Street = "TestStreet",
-            //    StreetNumber = 10,
-            //    Pass = "TestPass",
-            //    City_Num = CityDB.SelectById(1)
-            //};
 
-            //PersonDB pdb2 = new();
-            //PersonList pList2 = pdb.SelectAll();
-            //foreach (Person c in pList2)
-            //{
-            //    Console.WriteLine("---------------");
-            //    Console.WriteLine($"Name: {c.FirstName} {c.LastName}");
-            //    Console.WriteLine($"Phone: {c.Phone_Number}");
-            //    Console.WriteLine($"Address: {c.Street} {c.StreetNumber}");
-            //    Console.WriteLine($"Password: {c.Pass}");
-            //    Console.WriteLine($"City: {c.City_Num}");
-            //    Console.WriteLine("---------------");
+            Person p = new Person()
+            {
+                Id = pList[0].Id,
+                FirstName = "UpdatedFirstName",
+                LastName = "UpdatedLastName",
+                Phone_Number = "0527654321",
+                Street = "UpdatedStreet",
+                StreetNumber = 20,
+                Pass = "UpdatedPass",
+                City_Num = CityDB.SelectById(2)
+            };
 
-            //}
+
+
+            pdb.Update(p);  // if you want to UPDATE
+                            // or
+                            // pdb.Insert(p);  // if you want to ADD a new one
+
+            // === Get the updated list from DB again ===
+            PersonList updatedList = pdb.SelectAll();
+
+            // Print again to confirm the update/insert
+            Console.WriteLine("=== Updated Person List ===");
+            foreach (Person c in updatedList)
+            {
+                Console.WriteLine("---------------");
+                Console.WriteLine($"Name: {c.FirstName} {c.LastName}");
+                Console.WriteLine($"Phone: {c.Phone_Number}");
+                Console.WriteLine($"Address: {c.Street} {c.StreetNumber}");
+                Console.WriteLine($"Password: {c.Pass}");
+                Console.WriteLine($"City: {c.City_Num}");
+            }
+            Console.WriteLine("---------------");
 
             //VolunteerDB V = new();
             //VolunteerList vList = V.SelectAll();
