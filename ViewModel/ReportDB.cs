@@ -21,6 +21,14 @@ namespace ViewModel
         {
             Report p = entity as Report;
             p.Description = reader["Description"].ToString();
+            p.Location_X = Convert.ToDouble( reader["Location_X"]);
+            p.Location_Y = Convert.ToDouble(reader["Location_Y"]);
+            p.Update_Time = Convert.ToDateTime(reader["Update_Time"]);
+            p.PasserBy_ID = Convert.ToInt32(reader["PasserBy_ID"]);
+            p.HCategory = Help_CategoryDB .SelectById( Convert.ToInt32( reader["Help_Category"]));
+            p.City_Num = CityDB.SelectById(Convert.ToInt32(reader["City_Num"]));
+            p.Photo_Optinal = reader["Photo_Optinal"].ToString();
+            
             //p.Id = reader["ID"].ToString();
 
             base.CreateModel(entity);
