@@ -22,7 +22,7 @@ namespace ViewModel
         {
             City p = entity as City;
             p.City_Name = reader["City_Name"].ToString();
-            p.Id = Convert.ToInt32(reader["ID"]);
+        
 
             base.CreateModel(entity);
             return p;

@@ -8,11 +8,11 @@ using System.Data.OleDb;
 
 namespace ViewModel
 {
-    public class StatusDB: BaseDB
+    public class StatusDB :BaseDB
     {
         public new StatusList SelectAll()
         {
-            command.CommandText = $"SELECT * FROM Status";
+            command.CommandText = $"SELECT Status.*\r\nFROM Status";
             StatusList pList = new StatusList(base.Select());
             return pList;
         }
@@ -21,6 +21,7 @@ namespace ViewModel
         {
             Status p = entity as Status;
             p.Description = reader["Description"].ToString();
+       
             //p.Id = reader["ID"].ToString();
 
             base.CreateModel(entity);
@@ -66,10 +67,10 @@ namespace ViewModel
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            Status c = entity as Status ;
+            Status c = entity as Status;
             if (c != null)
             {
-                string sqlStr = $"UPDATE Help_Category  SET Description=@cName WHERE ID=@id";
+                string sqlStr = $"UPDATE Status  SET Description=@cName WHERE ID=@id";
                 //   string sqlStr = $"UPDATE Person  SET FirstName=@cName,lastName=@lName,livingadress=@ladd WHERE ID=@id";
 
                 command.CommandText = sqlStr;

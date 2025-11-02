@@ -51,18 +51,59 @@ namespace Test1
             //    Console.WriteLine("-----------------------------------");
             //}
 
-            StatusDB s = new();
-            StatusList sList = s.SelectAll();
+            //CityDB C = new();
+            //CityList cList = C.SelectAll();
 
-            foreach (Status S in sList)
+            //foreach (City c in cList)
+            //{
+            //    Console.WriteLine($"ID: {c.Id}");
+            //    Console.WriteLine($"City: {c.City_Name}");
+            //    Console.WriteLine("-----------------------------------");
+            //}
+
+            //Help_CategoryDB H = new();
+            //Help_CategoryList hList = H.SelectAll();
+            //foreach (Help_Category h in hList)
+            //{
+            //    Console.WriteLine($"ID: {h.Id}");
+            //    Console.WriteLine($"Description: {h.Description}");
+            //    Console.WriteLine("-----------------------------------");
+
+            //}
+
+            //ReportDB R = new();
+            //ReportList rList = R.SelectAll();
+            //foreach (Report r in rList)
+            //{
+            //    Console.WriteLine($"ID: {r.Id}");
+            //    Console.WriteLine($"passer ID: {r.PasserBy_ID}");
+            //    Console.WriteLine($"Description: {r.Description}");
+            //    Console.WriteLine($"Location x: {r.Location_X}");
+            //    Console.WriteLine($"Location y: {r.Location_Y}");
+            //    Console.WriteLine($"help in: {r.HCategory}");
+            //    Console.WriteLine($"City: {r.City_Num}");
+            //    Console.WriteLine($"Update Time: {r.Update_Time1}");
+            //    Console.WriteLine("-----------------------------------");
+            //}
+
+            //StatusDB S = new();
+            //StatusList sList = S.SelectAll();
+            //foreach (Status s in sList)
+            //{
+            //    Console.WriteLine($"ID: {s.Id}");
+            //    Console.WriteLine($"Description: {s.Description}");
+            //    Console.WriteLine("-----------------------------------");
+            //}
+
+            VolunteerRespondDB VR = new();
+            VolunteerRespondList vList = VR.SelectAll();
+            foreach (VolunteerRespond R in vList)
             {
-                Console.WriteLine($"ID: {S.Id}");
-                Console.WriteLine($"des: {S.Description}");
+                Console.WriteLine($"VolunteerRespond: {R.IdVol}");
+                Console.WriteLine($"Report ID: {R.IdReport}");
+                Console.WriteLine($"Status: {R.Repsond_status}");
                 Console.WriteLine("-----------------------------------");
             }
-
-
-
         }
     }
 }

@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using Model;
 using System.Data.OleDb;
 
+
 namespace ViewModel
 {
     public class ReportDB: BaseDB
     {
         public new ReportList SelectAll()
         {
-            command.CommandText = $"SELECT * FROM Report";
+            command.CommandText = $"SELECT Report.*\r\nFROM Report";
             ReportList pList = new ReportList(base.Select());
             return pList;
         }
@@ -20,12 +21,23 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Report p = entity as Report;
+
+          
             p.Description = reader["Description"].ToString();
-            //p.Id = reader["ID"].ToString();
+            p.Update_Time = Convert.ToDateTime(reader["Update_Time"]);
+
+            p.PasserBy_ID = Convert.ToInt32(reader["PasserBy_ID"]);
+            p.Location_X = Convert.ToDouble(reader["Location_X"]);
+            p.Location_Y = Convert.ToDouble(reader["Location_Y"]);
+          //  p.Photo_Optinal = reader["Photo_Optional"].ToString();
+            p.HCategory = Help_CategoryDB.SelectById(Convert.ToInt32(reader["Help_Category"]));
+            p.City_Num = CityDB.SelectById((int)reader["City_Num"]);
+
 
             base.CreateModel(entity);
             return p;
         }
+
         public override BaseEntity NewEntity()
         {
             return new Report();
