@@ -8,12 +8,12 @@ using System.Data.OleDb;
 
 namespace ViewModel
 {
-    public class VolunteerRespondDB: BaseDB
+    public class VolunteerRespondDB : BaseDB
     {
 
         public new VolunteerRespondList SelectAll()
         {
-            command.CommandText = $"SELECT VolunteerRespond.* FROM VolunteerRespond ";
+            command.CommandText = $"SELECT * FROM VolunteerRespond ";
             VolunteerRespondList pList = new VolunteerRespondList(base.Select());
             return pList;
         }
@@ -21,12 +21,27 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             VolunteerRespond p = entity as VolunteerRespond;
-            p.IdReport = Convert.ToInt32(reader["ID_Report"]);
+            if (reader["ID_Report"] != DBNull.Value)
+            {
+                int reportId = Convert.ToInt32(reader["ID_Report"]);
+                p.IdReport = new Report { Id = reportId }; // Create a new Report object with the ID
+            }
 
-            p.IdVol = Convert.ToInt32(reader["ID_Volunteer"]);
-            return p;   
+            if (reader["ID_Volunteer"] != DBNull.Value)
+            {
+                int volunteerId = Convert.ToInt32(reader["ID_Volunteer"]);
+                p.IdVol = new Volunteer { Id = volunteerId }; // Create a new Volunteer object with the ID
+            }
 
+            if (reader["Respond_status"] != DBNull.Value)
+            {
+                int statusId = Convert.ToInt32(reader["Respond_status"]);
+                p.Repsond_status = new Status { Id = statusId }; // Create a new Status object with the ID
+            }
+
+            return p;
         }
+
         public override BaseEntity NewEntity()
         {
             return new VolunteerRespond();
