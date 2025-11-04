@@ -1,5 +1,4 @@
 ﻿using Model;
-using Model;
 using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
@@ -23,10 +22,10 @@ namespace ViewModel
             Person p = entity as Person;
             p.FirstName = reader["First_Name"].ToString();
             p.LastName = reader["Last_Name"].ToString();
-            p.Phone_Number = reader["Phone_Number"].ToString();
+            p.PhoneNumber = reader["Phone_Number"].ToString();
             p.Street = reader["Street"].ToString();
+            p.CityNum = CityDB.SelectById((int)reader["City_Num"]);
             p.StreetNumber = Convert.ToInt32(reader["streetNumber"]);
-            p.City_Num = CityDB.SelectById((int)reader["City_Num"]);
             p.Pass = reader["Pass"].ToString();
 
 
@@ -64,20 +63,21 @@ namespace ViewModel
             if (c != null)
             {
                 string sqlStr = @"INSERT INTO Person 
-            (First_Name, Last_Name, LivingAddress, Phone_Number, Pass, Street, StreetNumber, City_Num)
+            (First_Name, Last_Name, Phone_Number, Pass, Street, streetNumber, City_Num)
             VALUES
             (@cName, @lName, @bName, @hName, @pName, @sName, @snName, @cnName)";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
                 command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
-                command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                command.Parameters.Add(new OleDbParameter("@hName", c.Phone_Number));
+                //command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
+                command.Parameters.Add(new OleDbParameter("@hName", c.PhoneNumber));
                 command.Parameters.Add(new OleDbParameter("@pName", c.Pass));
                 command.Parameters.Add(new OleDbParameter("@sName", c.Street));
                 command.Parameters.Add(new OleDbParameter("@snName", c.StreetNumber));
-                command.Parameters.Add(new OleDbParameter("@cnName", c.City_Num.Id));
-                
+                command.Parameters.Add(new OleDbParameter("@cnName", c.CityNum.Id));
+                command.Parameters.Add(new OleDbParameter("@id", c.Id));
+
             }
         }
 
@@ -86,20 +86,36 @@ namespace ViewModel
             Person c = entity as Person;
             if (c != null)
             {
-                string sqlStr = $"UPDATE Person SET FirstName=@cName, LastName=@lName, LivingAdress=@bName, Phone_Numer=@hName, Pass=@pName, Street=@sName, StreetNumber=@snName , City_Num=@cnName  WHERE ID=@id";
-                cmd.CommandText = sqlStr;
+                string sqlStr = @"UPDATE Person SET 
+                                    First_Name=@cName,
+                                    Last_Name=@lName,
+                                    Phone_Number=@hName,
+                                    Street=@sName,
+                                    City_Num=@cnName,
+                                    streetNumber=@snName,
+                                    Pass=@pName,
+                                  WHERE ID=@id";
+                
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
                 command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
-                command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
+                // command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
                 command.Parameters.Add(new OleDbParameter("@hName", c.Phone_Number));
-                command.Parameters.Add(new OleDbParameter("@pName", c.Pass));
                 command.Parameters.Add(new OleDbParameter("@sName", c.Street));
-                command.Parameters.Add(new OleDbParameter("@snName", c.StreetNumber));
                 command.Parameters.Add(new OleDbParameter("@cnName", c.City_Num.Id));
+                command.Parameters.Add(new OleDbParameter("@snName", c.StreetNumber));
+                command.Parameters.Add(new OleDbParameter("@pName", c.Pass));
+                
+               
+                command.Parameters.Add(new OleDbParameter("@id", c.Id));
+
 
             }
-
         }
+
+
+
+
     }
 }
+

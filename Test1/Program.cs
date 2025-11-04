@@ -1,60 +1,41 @@
 ﻿using Model;
 using ViewModel;
 using System;
+using System.Collections.Generic;
 
 namespace Test1
 {
     public class Program
     {
+      
         static void Main(string[] args)
         {
-            PersonDB pdb = new();
+
+            PersonDB pdb = new PersonDB();
             PersonList pList = pdb.SelectAll();
-            foreach (Person c in pList)
+
+            Console.WriteLine("=== Before Update ===");
+            foreach (Person p in pList)
             {
-                Console.WriteLine("---------------");
-                Console.WriteLine($"Name: {c.FirstName} {c.LastName}");
-                Console.WriteLine($"Phone: {c.Phone_Number}");
-                Console.WriteLine($"Address: {c.Street} {c.StreetNumber}");
-                Console.WriteLine($"Password: {c.Pass}");
-                Console.WriteLine($"City: {c.City_Num.ToString()}");
-                Console.WriteLine("---------------");
+                Console.WriteLine(p); // ToString() is called automatically!
             }
 
+            Person personToUpdate = pList[0];
+            personToUpdate.FirstName = "UpdatedFirstName";
+            personToUpdate.LastName = "UpdatedLastName";
+            personToUpdate.Phone_Number = "000-0000000";
+            personToUpdate.Street = "UpdatedStreet";
+            personToUpdate.StreetNumber = 20;
+            personToUpdate.Pass = "UpdatedPass";
+            personToUpdate.City_Num = CityDB.SelectById(2);
 
-            Person p = new Person()
-            {
-                Id = pList[0].Id,
-                FirstName = "UpdatedFirstName",
-                LastName = "UpdatedLastName",
-                Phone_Number = "0527654321",
-                Street = "UpdatedStreet",
-                StreetNumber = 20,
-                Pass = "UpdatedPass",
-                City_Num = CityDB.SelectById(2)
-            };
+            pdb.Update(personToUpdate);
+            Console.WriteLine($"{pdb.SaveChanges()}");
 
+            Console.WriteLine("\n=== After Update ===");
+            Person updated = PersonDB.SelectById(personToUpdate.Id);
+            Console.WriteLine(updated); // Prints using ToString()
 
-
-            pdb.Update(p);  // if you want to UPDATE
-                            // or
-                            // pdb.Insert(p);  // if you want to ADD a new one
-
-            // === Get the updated list from DB again ===
-            PersonList updatedList = pdb.SelectAll();
-
-            // Print again to confirm the update/insert
-            Console.WriteLine("=== Updated Person List ===");
-            foreach (Person c in updatedList)
-            {
-                Console.WriteLine("---------------");
-                Console.WriteLine($"Name: {c.FirstName} {c.LastName}");
-                Console.WriteLine($"Phone: {c.Phone_Number}");
-                Console.WriteLine($"Address: {c.Street} {c.StreetNumber}");
-                Console.WriteLine($"Password: {c.Pass}");
-                Console.WriteLine($"City: {c.City_Num}");
-            }
-            Console.WriteLine("---------------");
 
             //VolunteerDB V = new();
             //VolunteerList vList = V.SelectAll();
