@@ -20,14 +20,14 @@ namespace Test1
                 Console.WriteLine(p); // ToString() is called automatically!
             }
 
-            Person personToUpdate = pList[0];
+            Person personToUpdate = pList[1];
             personToUpdate.FirstName = "UpdatedFirstName";
             personToUpdate.LastName = "UpdatedLastName";
-            personToUpdate.Phone_Number = "000-0000000";
+            personToUpdate.PhoneNumber = "0000000000";
             personToUpdate.Street = "UpdatedStreet";
             personToUpdate.StreetNumber = 20;
             personToUpdate.Pass = "UpdatedPass";
-            personToUpdate.City_Num = CityDB.SelectById(2);
+            personToUpdate.CityNum = CityDB.SelectById(2);
 
             pdb.Update(personToUpdate);
             Console.WriteLine($"{pdb.SaveChanges()}");
