@@ -100,9 +100,9 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
                 command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
                 // command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                command.Parameters.Add(new OleDbParameter("@hName", c.Phone_Number));
+                command.Parameters.Add(new OleDbParameter("@hName", c.PhoneNumber));
                 command.Parameters.Add(new OleDbParameter("@sName", c.Street));
-                command.Parameters.Add(new OleDbParameter("@cnName", c.City_Num.Id));
+                command.Parameters.Add(new OleDbParameter("@cnName", c.CityNum.Id));
                 command.Parameters.Add(new OleDbParameter("@snName", c.StreetNumber));
                 command.Parameters.Add(new OleDbParameter("@pName", c.Pass));
                 

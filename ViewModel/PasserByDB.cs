@@ -62,7 +62,7 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
                 command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
                // command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                command.Parameters.Add(new OleDbParameter("@hName", c.Phone_Number));
+                command.Parameters.Add(new OleDbParameter("@hName", c.PhoneNumber));
             }
         }
 
@@ -78,7 +78,7 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
                 command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
              //   command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                command.Parameters.Add(new OleDbParameter("@hName", c.Phone_Number));
+                command.Parameters.Add(new OleDbParameter("@hName", c.PhoneNumber));
                 command.Parameters.Add(new OleDbParameter("@id", c.Id));
             }
         }

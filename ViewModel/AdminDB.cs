@@ -21,12 +21,6 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Admin p = entity as Admin;
-            p.FirstName = reader["First_Name"].ToString();
-            p.LastName = reader["Last_Name"].ToString();
-            p.Phone_Number = reader["Phone_Number"].ToString();
-            p.Street = reader["Street"].ToString();
-            p.StreetNumber = Convert.ToInt32(reader["streetNumber"]);
-            p.City_Num = CityDB.SelectById((int)reader["City_Num"]);
             p.Admin_password = reader["pass"].ToString();
 
             base.CreateModel(entity);
@@ -68,7 +62,7 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
                 command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
               //  command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                command.Parameters.Add(new OleDbParameter("@hName", c.Phone_Number));
+                command.Parameters.Add(new OleDbParameter("@hName", c.PhoneNumber));
             }
         }
 
@@ -84,7 +78,7 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
                 command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
                 //command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                command.Parameters.Add(new OleDbParameter("@hName", c.Phone_Number));
+                command.Parameters.Add(new OleDbParameter("@hName", c.PhoneNumber));
                 command.Parameters.Add(new OleDbParameter("@id", c.Id));
 
                 //p.FirstName = reader["FirstName"].ToString();

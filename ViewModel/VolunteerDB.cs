@@ -39,7 +39,7 @@ namespace ViewModel
             p.Location_X = Convert.ToDouble(reader["Location_X"]);
             p.Location_Y = Convert.ToDouble(reader["Location_Y"]);
             p.Help_Category = Help_CategoryDB.SelectById(Convert.ToInt32(reader["ID"]));
-            p.City_Num = CityDB.SelectById(Convert.ToInt32(reader["City_Num"]));
+            p.CityNum = CityDB.SelectById(Convert.ToInt32(reader["City_Num"]));
 
             base.CreateModel(entity);
             return p;
@@ -80,7 +80,7 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
                 command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
               //  command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                command.Parameters.Add(new OleDbParameter("@hName", c.Phone_Number));
+                command.Parameters.Add(new OleDbParameter("@hName", c.PhoneNumber));
             }
         }
 
@@ -96,7 +96,7 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
                 command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
               //  command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                command.Parameters.Add(new OleDbParameter("@hName", c.Phone_Number));
+                command.Parameters.Add(new OleDbParameter("@hName", c.PhoneNumber));
                 command.Parameters.Add(new OleDbParameter("@id", c.Id));
             }
         }
