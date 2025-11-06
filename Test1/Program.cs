@@ -17,24 +17,24 @@ namespace Test1
             Console.WriteLine("=== Before Update ===");
             foreach (Person p in pList)
             {
-                Console.WriteLine(p); // ToString() is called automatically!
+                Console.WriteLine(p); 
             }
 
-            Person personToUpdate = pList[1];
-            personToUpdate.FirstName = "UpdatedFirstName";
-            personToUpdate.LastName = "UpdatedLastName";
-            personToUpdate.PhoneNumber = "0000000000";
-            personToUpdate.Street = "UpdatedStreet";
-            personToUpdate.StreetNumber = 20;
-            personToUpdate.Pass = "UpdatedPass";
-            personToUpdate.CityNum = CityDB.SelectById(2);
+            //Person personToUpdate = pList[1];
+            //personToUpdate.FirstName = "UpdatedFirstName";
+            //personToUpdate.LastName = "UpdatedLastName";
+            //personToUpdate.PhoneNumber = "0000000000";
+            //personToUpdate.Street = "UpdatedStreet";
+            //personToUpdate.StreetNumber = 20;
+            //personToUpdate.Pass = "UpdatedPass";
+            //personToUpdate.CityNum = CityDB.SelectById(2);
 
-            pdb.Update(personToUpdate);
-            Console.WriteLine($"{pdb.SaveChanges()}");
+            //pdb.Update(personToUpdate);
+            //Console.WriteLine($"{pdb.SaveChanges()}");
 
-            Console.WriteLine("\n=== After Update ===");
-            Person updated = PersonDB.SelectById(personToUpdate.Id);
-            Console.WriteLine(updated); // Prints using ToString()
+            //Console.WriteLine("\n=== After Update ===");
+            //Person updated = PersonDB.SelectById(personToUpdate.Id);
+            //Console.WriteLine(updated); 
 
 
             //VolunteerDB V = new();

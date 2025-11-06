@@ -51,12 +51,13 @@ namespace ViewModel
             Person c = entity as Person;
             if (c != null)
             {
-                string sqlStr = $"DELETE FROM Person where id=@pid";
+                string sqlStr = "DELETE FROM Person WHERE ID=@pid";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@pid", c.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@pid", c.Id));
             }
         }
+
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
             Person c = entity as Person;
@@ -65,21 +66,20 @@ namespace ViewModel
                 string sqlStr = @"INSERT INTO Person 
             (First_Name, Last_Name, Phone_Number, Pass, Street, streetNumber, City_Num)
             VALUES
-            (@cName, @lName, @bName, @hName, @pName, @sName, @snName, @cnName)";
+            (@cName, @lName, @hName, @pName, @sName, @snName, @cnName)";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
-                command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
-                //command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                command.Parameters.Add(new OleDbParameter("@hName", c.PhoneNumber));
-                command.Parameters.Add(new OleDbParameter("@pName", c.Pass));
-                command.Parameters.Add(new OleDbParameter("@sName", c.Street));
-                command.Parameters.Add(new OleDbParameter("@snName", c.StreetNumber));
-                command.Parameters.Add(new OleDbParameter("@cnName", c.CityNum.Id));
-                command.Parameters.Add(new OleDbParameter("@id", c.Id));
-
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
+                cmd.Parameters.Add(new OleDbParameter("@lName", c.LastName));
+                cmd.Parameters.Add(new OleDbParameter("@hName", c.PhoneNumber));
+                cmd.Parameters.Add(new OleDbParameter("@pName", c.Pass));
+                cmd.Parameters.Add(new OleDbParameter("@sName", c.Street));
+                cmd.Parameters.Add(new OleDbParameter("@snName", c.StreetNumber));
+                cmd.Parameters.Add(new OleDbParameter("@cnName", c.CityNum.Id));
             }
         }
+
+
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
         {
@@ -87,31 +87,27 @@ namespace ViewModel
             if (c != null)
             {
                 string sqlStr = @"UPDATE Person SET 
-                                    First_Name=@cName,
-                                    Last_Name=@lName,
-                                    Phone_Number=@hName,
-                                    Street=@sName,
-                                    City_Num=@cnName,
-                                    streetNumber=@snName,
-                                    Pass=@pName,
-                                  WHERE ID=@id";
-                
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
-                command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
-                // command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                command.Parameters.Add(new OleDbParameter("@hName", c.PhoneNumber));
-                command.Parameters.Add(new OleDbParameter("@sName", c.Street));
-                command.Parameters.Add(new OleDbParameter("@cnName", c.CityNum.Id));
-                command.Parameters.Add(new OleDbParameter("@snName", c.StreetNumber));
-                command.Parameters.Add(new OleDbParameter("@pName", c.Pass));
-                
-               
-                command.Parameters.Add(new OleDbParameter("@id", c.Id));
+                            First_Name=@cName,
+                            Last_Name=@lName,
+                            Phone_Number=@hName,
+                            Street=@sName,
+                            City_Num=@cnName,
+                            streetNumber=@snName,
+                            Pass=@pName
+                          WHERE ID=@id";
 
-
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
+                cmd.Parameters.Add(new OleDbParameter("@lName", c.LastName));
+                cmd.Parameters.Add(new OleDbParameter("@hName", c.PhoneNumber));
+                cmd.Parameters.Add(new OleDbParameter("@sName", c.Street));
+                cmd.Parameters.Add(new OleDbParameter("@cnName", c.CityNum.Id));
+                cmd.Parameters.Add(new OleDbParameter("@snName", c.StreetNumber));
+                cmd.Parameters.Add(new OleDbParameter("@pName", c.Pass));
+                cmd.Parameters.Add(new OleDbParameter("@id", c.Id));
             }
         }
+
 
 
 
