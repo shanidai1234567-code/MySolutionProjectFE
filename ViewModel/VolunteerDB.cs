@@ -39,7 +39,7 @@ namespace ViewModel
             p.Location_X = Convert.ToDouble(reader["Location_X"]);
             p.Location_Y = Convert.ToDouble(reader["Location_Y"]);
             p.Help_Category = Help_CategoryDB.SelectById(Convert.ToInt32(reader["ID"]));
-            p.CityNum = CityDB.SelectById(Convert.ToInt32(reader["City_Num"]));
+          
 
             base.CreateModel(entity);
             return p;
@@ -100,6 +100,17 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@id", c.Id));
             }
         }
+
+        public override void Update(BaseEntity entity)
+        {
+            Volunteer Volunteer = entity as Volunteer;
+            if (Volunteer != null)
+            {
+                updated.Add(new ChangeEntity(this.CreateUpdatedSQL, entity));
+                updated.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));
+            }
+        }
+
 
     }
 }

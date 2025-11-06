@@ -87,11 +87,11 @@ namespace ViewModel
             if (c != null)
             {
                 string sqlStr = @"UPDATE Person SET 
-                            First_Name=@cName,
-                            Last_Name=@lName,
-                            Phone_Number=@hName,
+                            FirstName=@cName,
+                            LastName=@lName,
+                            PhoneNumber=@hName,
                             Street=@sName,
-                            City_Num=@cnName,
+                            CityNum=@cnName,
                             streetNumber=@snName,
                             Pass=@pName
                           WHERE ID=@id";

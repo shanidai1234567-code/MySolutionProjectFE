@@ -11,30 +11,27 @@ namespace Test1
         static void Main(string[] args)
         {
 
-            PersonDB pdb = new PersonDB();
-            PersonList pList = pdb.SelectAll();
+            //PersonDB pdb = new PersonDB();
+            //PersonList pList = pdb.SelectAll();
 
-            Console.WriteLine("=== Before Update ===");
-            foreach (Person p in pList)
-            {
-                Console.WriteLine(p); 
-            }
+            //Console.WriteLine(pList[1]);
+
 
             //Person personToUpdate = pList[1];
-            //personToUpdate.FirstName = "UpdatedFirstName";
-            //personToUpdate.LastName = "UpdatedLastName";
-            //personToUpdate.PhoneNumber = "0000000000";
-            //personToUpdate.Street = "UpdatedStreet";
-            //personToUpdate.StreetNumber = 20;
-            //personToUpdate.Pass = "UpdatedPass";
-            //personToUpdate.CityNum = CityDB.SelectById(2);
+            //personToUpdate.FirstName = "Tal";
+            //personToUpdate.LastName = "Varsnichkov";
+            //personToUpdate.PhoneNumber = "0504762884";
+            //personToUpdate.Street = "Tnohot hanoer";
+            //personToUpdate.StreetNumber = 9;
+            //personToUpdate.Pass = "12345";
+            //personToUpdate.CityNum = CityDB.SelectById(4);
 
             //pdb.Update(personToUpdate);
             //Console.WriteLine($"{pdb.SaveChanges()}");
 
             //Console.WriteLine("\n=== After Update ===");
             //Person updated = PersonDB.SelectById(personToUpdate.Id);
-            //Console.WriteLine(updated); 
+            //Console.WriteLine(updated);
 
 
             //VolunteerDB V = new();

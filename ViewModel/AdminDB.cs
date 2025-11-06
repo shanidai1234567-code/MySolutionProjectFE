@@ -56,13 +56,11 @@ namespace ViewModel
             Admin c = entity as Admin;
             if (c != null)
             {
-                string sqlStr = $"Insert INTO  Admin (FirstName) VALUES (@cName)";
+                string sqlStr = $"Insert INTO  Admin (Admin_Pass) VALUES (@cName)";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
-                command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
-              //  command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                command.Parameters.Add(new OleDbParameter("@hName", c.PhoneNumber));
+                command.Parameters.Add(new OleDbParameter("@cName", c.Admin_password));
+           
             }
         }
 
@@ -71,25 +69,23 @@ namespace ViewModel
             Admin c = entity as Admin;
             if (c != null)
             {
-                string sqlStr = $"UPDATE Volunteer  SET FirstName=@cName , LastName=@lName, Livingadress= @bName , [ Phone_Numer] = @hName WHERE ID=@id";
+                string sqlStr = $"UPDATE Volunteer  SET Admin_password=@cName WHERE ID=@id";
                 //   string sqlStr = $"UPDATE Person  SET FirstName=@cName,lastName=@lName,livingadress=@ladd WHERE ID=@id";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
-                command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
-                //command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                command.Parameters.Add(new OleDbParameter("@hName", c.PhoneNumber));
+                command.Parameters.Add(new OleDbParameter("@cName", c.Admin_password));
                 command.Parameters.Add(new OleDbParameter("@id", c.Id));
 
-                //p.FirstName = reader["FirstName"].ToString();
-                //p.LastName = reader["LastName"].ToString();
-                //p.Phone_Numer = reader["telephone num"].ToString();
-                //p.LivingAdress = reader["LivingAdress"].ToString();
-                //p.Street = reader["street"].ToString();
-                //p.StreetNumber = Convert.ToInt32(reader["streetNumber"]);
-                //p.City_Num = CityDB.SelectById((int)reader["CityNumber"]);
-                //p.Admin_password = reader["pass"].ToString();
+            }
+        }
 
+        public override void Update(BaseEntity entity)
+        {
+            Admin Admin = entity as Admin;
+            if (Admin != null)
+            {
+                updated.Add(new ChangeEntity(this.CreateUpdatedSQL, entity));
+                updated.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));
             }
         }
 

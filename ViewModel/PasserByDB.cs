@@ -12,7 +12,7 @@ namespace ViewModel
     {
         public new PasserByList SelectAll()
         {
-            command.CommandText = $"SELECT        PasserBy.ID, PasserBy.Help_Category, PasserBy.JoinDate, Person.First_Name, Person.Last_Name, Person.Phone_Number, Person.Street, Person.City_Num, Person.streetNumber, Person.Pass\r\nFROM            (PasserBy INNER JOIN\r\n                         Person ON PasserBy.ID = Person.ID)";
+            command.CommandText = $"SELECT PasserBy.ID, PasserBy.Help_Category, PasserBy.JoinDate, Person.First_Name, Person.Last_Name, Person.Phone_Number, Person.Street, Person.City_Num, Person.streetNumber, Person.Pass\r\nFROM (PasserBy INNER JOIN\r\n  Person ON PasserBy.ID = Person.ID)";
             PasserByList pList = new PasserByList(base.Select());
             return pList;
         }
@@ -56,13 +56,12 @@ namespace ViewModel
             PasserBy c = entity as PasserBy;
             if (c != null)
             {
-                string sqlStr = $"Insert INTO  Person (FirstName) VALUES (@cName)";
+                string sqlStr = $"Insert INTO  Person ( Help_Category, JoinDate) VALUES (@cName  @lName)";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
-                command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
-               // command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                command.Parameters.Add(new OleDbParameter("@hName", c.PhoneNumber));
+                command.Parameters.Add(new OleDbParameter("@cName", c.Help_Category));
+                command.Parameters.Add(new OleDbParameter("@lName", c.JoinDate));
+              
             }
         }
 
@@ -71,17 +70,25 @@ namespace ViewModel
             PasserBy c = entity as PasserBy;
             if (c != null)
             {
-                string sqlStr = $"UPDATE PasserBy  SET FirstName=@cName , LastName=@lName, Livingadress= @bName , [ Phone_Numer] = @hName WHERE ID=@id";
+                string sqlStr = $"UPDATE PasserBy  SET Help_Category=@cName , JoinDate=@lName WHERE ID=@id";
                 //   string sqlStr = $"UPDATE Person  SET FirstName=@cName,lastName=@lName,livingadress=@ladd WHERE ID=@id";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
-                command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
-             //   command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                command.Parameters.Add(new OleDbParameter("@hName", c.PhoneNumber));
+                command.Parameters.Add(new OleDbParameter("@cName", c.Help_Category));
+                command.Parameters.Add(new OleDbParameter("@lName", c.JoinDate));
                 command.Parameters.Add(new OleDbParameter("@id", c.Id));
             }
         }
+        public override void Update(BaseEntity entity)
+        {
+            PasserBy PasserBy = entity as PasserBy;
+            if (PasserBy != null)
+            {
+                updated.Add(new ChangeEntity(this.CreateUpdatedSQL, entity));
+                updated.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));
+            }
+        }
+
 
 
     }
