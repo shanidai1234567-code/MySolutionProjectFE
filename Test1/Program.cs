@@ -32,20 +32,20 @@ namespace Test1
             //Console.WriteLine("\n=== After Update ===");
             //Person updated = PersonDB.SelectById(personToUpdate.Id);
             //Console.WriteLine(updated);
+            //עדכון אנשים והדפסתם 1
 
-
-            //VolunteerDB V = new();
+            //VolunteerDB V = new VolunteerDB();
             //VolunteerList vList = V.SelectAll();
 
-            //foreach (Volunteer volunteer in vList)
-            //{
-            //    Console.WriteLine($"ID: {volunteer.Id}");
-            //    Console.WriteLine($"Help Category: {volunteer.Help_Category}");
-            //    Console.WriteLine($"Location X: {volunteer.Location_X}");
-            //    Console.WriteLine($"Location Y: {volunteer.Location_Y}");
-            //    Console.WriteLine("-----------------------------------");
-            //}
+            //Volunteer vv = vList[0];
+            //vv.Help_Category = Help_CategoryDB.SelectById(2);
+            //vv.LastName= "Cohen";
+            //V.Update(vv);
+            //Console.WriteLine($"{V.SaveChanges()}");
 
+
+           
+           //עדכון מתנדבים והדפסתם 2
             //PasserByDB P = new();
             //PasserByList PList = P.SelectAll();
 
@@ -66,6 +66,22 @@ namespace Test1
             //    Console.WriteLine($"Pass: {a.Admin_password}");
             //    Console.WriteLine("-----------------------------------");
             //}
+
+            //Admin adminToUpdate = aList[0];
+            //adminToUpdate.FirstName = "yyyyyy";
+            //adminToUpdate.LastName = "yyyyyy";
+            //adminToUpdate.PhoneNumber = "yyyyyyyy";
+            //adminToUpdate.Street = "yyyyyyyyyy";
+            //adminToUpdate.StreetNumber = 2;
+            //adminToUpdate.Pass = "yyyyyy";
+            //adminToUpdate.Admin_password = "yyyyyy";
+            //adminToUpdate.CityNum = CityDB.SelectById(3);
+            //A.Update(adminToUpdate);
+            //Console.WriteLine($"{A.SaveChanges()}");
+            //Console.WriteLine("\n=== After Update ===");
+            //Admin updated = AdminDB.SelectById(adminToUpdate.Id);
+            //Console.WriteLine(updated);
+
 
             //CityDB C = new();
             //CityList cList = C.SelectAll();

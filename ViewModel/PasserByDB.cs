@@ -12,7 +12,7 @@ namespace ViewModel
     {
         public new PasserByList SelectAll()
         {
-            command.CommandText = $"SELECT PasserBy.ID, PasserBy.Help_Category, PasserBy.JoinDate, Person.First_Name, Person.Last_Name, Person.Phone_Number, Person.Street, Person.City_Num, Person.streetNumber, Person.Pass\r\nFROM (PasserBy INNER JOIN\r\n  Person ON PasserBy.ID = Person.ID)";
+            command.CommandText = $"SELECT PasserBy.ID, PasserBy.Help_Category, PasserBy.JoinDate, Person.FirstName, Person.LastName, Person.PhoneNumber, Person.Street, Person.City_Num, Person.StreetNumber, Person.Pass\r\nFROM (PasserBy INNER JOIN\r\n  Person ON PasserBy.ID = Person.ID)";
             PasserByList pList = new PasserByList(base.Select());
             return pList;
         }

@@ -13,7 +13,7 @@ namespace ViewModel
 
         public new AdminList SelectAll()
         {
-            command.CommandText = $"SELECT Admin.Admin_Pass, Admin.ID, Person.First_Name, Person.Last_Name, Person.Phone_Number, Person.Street, Person.City_Num, Person.Pass, Person.streetNumber\r\nFROM (Admin INNER JOIN\r\n  Person ON Admin.ID = Person.ID)";
+            command.CommandText = $"SELECT Admin.Admin_Pass, Admin.ID, Person.FirstName, Person.LastName, Person.PhoneNumber, Person.Street, Person.CityNum, Person.Pass, Person.StreetNumber\r\nFROM (Admin INNER JOIN\r\n  Person ON Admin.ID = Person.ID)";
             AdminList pList = new AdminList(base.Select());
             return pList;
         }
@@ -69,7 +69,7 @@ namespace ViewModel
             Admin c = entity as Admin;
             if (c != null)
             {
-                string sqlStr = $"UPDATE Volunteer  SET Admin_password=@cName WHERE ID=@id";
+                string sqlStr = $"UPDATE Admin  SET Admin_password=@cName WHERE ID=@id";
                 //   string sqlStr = $"UPDATE Person  SET FirstName=@cName,lastName=@lName,livingadress=@ladd WHERE ID=@id";
 
                 command.CommandText = sqlStr;

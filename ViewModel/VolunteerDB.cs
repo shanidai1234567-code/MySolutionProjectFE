@@ -15,7 +15,11 @@ namespace ViewModel
  
         public new VolunteerList SelectAll()
         {
-            command.CommandText = $"SELECT Person.ID, Person.First_Name, Person.Last_Name, Person.Phone_Number, Person.City_Num, Person.Street, Person.Pass, Person.streetNumber, Volunteer.StoreOpeningTime, Volunteer.JoinDate, Volunteer.StoreClosingTime, \r\n Volunteer.Location_X, Volunteer.Location_Y, Volunteer.Help_Category\r\nFROM (Person INNER JOIN\r\n                         Volunteer ON Person.ID = Volunteer.ID)";
+            command.CommandText = $"SELECT Person.ID, Person.FirstName, Person.LastName, Person.PhoneNumber, Person.CityNum," +
+                $" Person.Street, Person.Pass, Person.StreetNumber, Volunteer.StoreOpeningTime," +
+                $" Volunteer.JoinDate, Volunteer.StoreClosingTime, \r\n Volunteer.Location_X," +
+                $" Volunteer.Location_Y, Volunteer.Help_Category\r\nFROM (Person INNER JOIN\r\n " +
+                $"Volunteer ON Person.ID = Volunteer.ID)";
             VolunteerList pList = new VolunteerList(base.Select());
             return pList;
         }
@@ -38,7 +42,7 @@ namespace ViewModel
             p.JoinDate = Convert.ToDateTime(reader["JoinDate"]);
             p.Location_X = Convert.ToDouble(reader["Location_X"]);
             p.Location_Y = Convert.ToDouble(reader["Location_Y"]);
-            p.Help_Category = Help_CategoryDB.SelectById(Convert.ToInt32(reader["ID"]));
+            p.Help_Category = Help_CategoryDB.SelectById(Convert.ToInt32(reader["Help_Category"].ToString()));
           
 
             base.CreateModel(entity);
@@ -77,10 +81,13 @@ namespace ViewModel
                 string sqlStr = $"Insert INTO  Person (FirstName) VALUES (@cName)";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
-                command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
-              //  command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                command.Parameters.Add(new OleDbParameter("@hName", c.PhoneNumber));
+                cmd.Parameters.Add(new OleDbParameter("@StoreClosingTime", c.StoreClosingTime));
+                cmd.Parameters.Add(new OleDbParameter("@StoreOpeningTime", c.StoreOpeningTime));
+                cmd.Parameters.Add(new OleDbParameter("@JoinDate", c.JoinDate));
+                cmd.Parameters.Add(new OleDbParameter("@HelpCategory", c.Help_Category));
+                cmd.Parameters.Add(new OleDbParameter("@LocationX", c.Location_X));
+                cmd.Parameters.Add(new OleDbParameter("@LocationY", c.Location_Y));
+
             }
         }
 
@@ -89,17 +96,27 @@ namespace ViewModel
             Volunteer c = entity as Volunteer;
             if (c != null)
             {
-                string sqlStr = $"UPDATE Volunteer  SET FirstName=@cName , LastName=@lName, Livingadress= @bName , [ Phone_Numer] = @hName WHERE ID=@id";
-                //   string sqlStr = $"UPDATE Person  SET FirstName=@cName,lastName=@lName,livingadress=@ladd WHERE ID=@id";
+                string sqlStr = @"UPDATE Volunteer 
+                          SET StoreClosingTime = @StoreClosingTime, 
+                              StoreOpeningTime = @StoreOpeningTime, 
+                              JoinDate = @JoinDate, 
+                              Help_Category = @HelpCategory, 
+                              Location_X = @LocationX, 
+                              Location_Y = @LocationY 
+                          WHERE ID = @Id";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
-                command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
-              //  command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                command.Parameters.Add(new OleDbParameter("@hName", c.PhoneNumber));
-                command.Parameters.Add(new OleDbParameter("@id", c.Id));
+                cmd.CommandText = sqlStr;
+
+                cmd.Parameters.Add(new OleDbParameter("@StoreClosingTime", c.StoreClosingTime));
+                cmd.Parameters.Add(new OleDbParameter("@StoreOpeningTime", c.StoreOpeningTime));
+                cmd.Parameters.Add(new OleDbParameter("@JoinDate", c.JoinDate));
+                cmd.Parameters.Add(new OleDbParameter("@HelpCategory", c.Help_Category.Id));
+                cmd.Parameters.Add(new OleDbParameter("@LocationX", c.Location_X));
+                cmd.Parameters.Add(new OleDbParameter("@LocationY", c.Location_Y));
+                cmd.Parameters.Add(new OleDbParameter("@Id", c.Id));
             }
         }
+
 
         public override void Update(BaseEntity entity)
         {
