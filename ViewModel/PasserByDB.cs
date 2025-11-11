@@ -12,7 +12,7 @@ namespace ViewModel
     {
         public new PasserByList SelectAll()
         {
-            command.CommandText = $"SELECT PasserBy.ID, PasserBy.Help_Category, PasserBy.JoinDate, Person.FirstName, Person.LastName, Person.PhoneNumber, Person.Street, Person.City_Num, Person.StreetNumber, Person.Pass\r\nFROM (PasserBy INNER JOIN\r\n  Person ON PasserBy.ID = Person.ID)";
+            command.CommandText = $"SELECT PasserBy.ID, PasserBy.Help_Category, PasserBy.JoinDate, Person.FirstName, Person.LastName, Person.PhoneNumber, Person.Street, Person.CityNum, Person.Pass, Person.StreetNumber\r\nFROM (PasserBy INNER JOIN\r\n Person ON PasserBy.ID = Person.ID)";
             PasserByList pList = new PasserByList(base.Select());
             return pList;
         }
@@ -21,7 +21,7 @@ namespace ViewModel
         {
             PasserBy p = entity as PasserBy;
             p.JoinDate = Convert.ToDateTime(reader["JoinDate"]);
-            p.Help_Category = Help_CategoryDB.SelectById((int)reader["ID"]);
+            p.Help_Category = Help_CategoryDB.SelectById((int)reader["Help_Category"]);
 
             base.CreateModel(entity);
             return p;
@@ -74,7 +74,7 @@ namespace ViewModel
                 //   string sqlStr = $"UPDATE Person  SET FirstName=@cName,lastName=@lName,livingadress=@ladd WHERE ID=@id";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@cName", c.Help_Category));
+                command.Parameters.Add(new OleDbParameter("@cName", c.Help_Category.Id));
                 command.Parameters.Add(new OleDbParameter("@lName", c.JoinDate));
                 command.Parameters.Add(new OleDbParameter("@id", c.Id));
             }
