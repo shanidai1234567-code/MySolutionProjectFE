@@ -13,7 +13,7 @@ namespace Model
 
         public override string ToString()
         {
-            return $"Admin: {FirstName} {LastName}, Address: {LivingAdress}, {Street} St., No. {StreetNumber}, City Code: {City_Num}, Phone: {Phone_Number}, pass: {admin_password}";
+            return $"Admin: {FirstName} {LastName}, St. {Street} , No. {StreetNumber}, City Code: {CityNum}, Phone: {PhoneNumber}, pass: {admin_password}";
         }
     }
 }

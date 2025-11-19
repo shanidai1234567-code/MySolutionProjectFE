@@ -14,7 +14,7 @@ namespace Model
 
         public override string ToString()
         {
-            return $"Group Activity: {description}";
+            return $"Help Category: {description}";
         }
     }
 }

@@ -85,15 +85,22 @@ namespace ViewModel
             VolunteerRespond c = entity as VolunteerRespond;
             if (c != null)
             {
-                string sqlStr = $"UPDATE VolunteerRespond  SET Description=@cName WHERE ID=@id";
-                //   string sqlStr = $"UPDATE Person  SET FirstName=@cName,lastName=@lName,livingadress=@ladd WHERE ID=@id";
+                string sqlStr = @"UPDATE VolunteerRespond 
+                          SET ID_Volunteer = @ID_Volunteer, 
+                              ID_Report = @ID_Report, 
+                              repsond_status = @repsond_status, 
+                        
+                          WHERE Id = @Id";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@cName", c.IdVol));
+                cmd.CommandText = sqlStr;
 
-                command.Parameters.Add(new OleDbParameter("@id", c.Id));
+                cmd.Parameters.Add(new OleDbParameter("@ID_Volunteer", c.IdVol));
+                cmd.Parameters.Add(new OleDbParameter("@ID_Report", c.IdReport));
+                cmd.Parameters.Add(new OleDbParameter("@repsond_status", c.Repsond_status));
+                cmd.Parameters.Add(new OleDbParameter("@Id", c.Id));
             }
         }
+
     }
 }
 
