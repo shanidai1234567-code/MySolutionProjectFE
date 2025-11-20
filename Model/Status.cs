@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Status: BaseEntity
+    public class Status : BaseEntity
     {
         private string description;
         public string Description { get => description; set => description = value; }

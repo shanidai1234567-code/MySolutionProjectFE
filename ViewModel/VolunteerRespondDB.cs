@@ -24,21 +24,21 @@ namespace ViewModel
             if (reader["ID_Report"] != DBNull.Value)
             {
                 int reportId = Convert.ToInt32(reader["ID_Report"]);
-                p.IdReport = new Report { Id = reportId }; // Create a new Report object with the ID
+                p.IdReport = ReportDB.SelectById(reportId); 
             }
 
             if (reader["ID_Volunteer"] != DBNull.Value)
             {
                 int volunteerId = Convert.ToInt32(reader["ID_Volunteer"]);
-                p.IdVol = new Volunteer { Id = volunteerId }; // Create a new Volunteer object with the ID
+                p.IdVol = VolunteerDB.SelectById(volunteerId); 
             }
 
             if (reader["Respond_status"] != DBNull.Value)
             {
                 int statusId = Convert.ToInt32(reader["Respond_status"]);
-                p.Repsond_status = new Status { Id = statusId }; // Create a new Status object with the ID
+                p.Repsond_status = StatusDB.SelectById(statusId); 
             }
-
+            base.CreateModel(p);
             return p;
         }
 
@@ -85,18 +85,14 @@ namespace ViewModel
             VolunteerRespond c = entity as VolunteerRespond;
             if (c != null)
             {
-                string sqlStr = @"UPDATE VolunteerRespond 
-                          SET ID_Volunteer = @ID_Volunteer, 
-                              ID_Report = @ID_Report, 
-                              repsond_status = @repsond_status, 
-                        
-                          WHERE Id = @Id";
+                string sqlStr = $" UPDATE VolunteerRespond  SET ID_Volunteer = @ID_Volunteer,   ID_Report = @ID_Report,   respond_status = @respond_status  WHERE Id = @Id" ;
+
 
                 cmd.CommandText = sqlStr;
 
-                cmd.Parameters.Add(new OleDbParameter("@ID_Volunteer", c.IdVol));
-                cmd.Parameters.Add(new OleDbParameter("@ID_Report", c.IdReport));
-                cmd.Parameters.Add(new OleDbParameter("@repsond_status", c.Repsond_status));
+                cmd.Parameters.Add(new OleDbParameter("@ID_Volunteer", c.IdVol.Id));
+                cmd.Parameters.Add(new OleDbParameter("@ID_Report", c.IdReport.Id));
+                cmd.Parameters.Add(new OleDbParameter("@repsond_status", c.Repsond_status.Id));
                 cmd.Parameters.Add(new OleDbParameter("@Id", c.Id));
             }
         }

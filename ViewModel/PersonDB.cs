@@ -64,18 +64,21 @@ namespace ViewModel
             if (c != null)
             {
                 string sqlStr = @"INSERT INTO Person 
-            (First_Name, Last_Name, Phone_Number, Pass, Street, streetNumber, City_Num)
+            (FirstName, LastName, PhoneNumber, Street, CityNum, Pass, streetNumber)
             VALUES
-            (@cName, @lName, @hName, @pName, @sName, @snName, @cnName)";
+            (@cName, @lName, @hName, @sName, @cnName, @pName, @snName)";
 
                 cmd.CommandText = sqlStr;
                 cmd.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
                 cmd.Parameters.Add(new OleDbParameter("@lName", c.LastName));
                 cmd.Parameters.Add(new OleDbParameter("@hName", c.PhoneNumber));
-                cmd.Parameters.Add(new OleDbParameter("@pName", c.Pass));
+               
                 cmd.Parameters.Add(new OleDbParameter("@sName", c.Street));
+                cmd.Parameters.Add(new OleDbParameter("@cnName",  c.CityNum.Id));
+                cmd.Parameters.Add(new OleDbParameter("@pName", c.Pass));
+                
                 cmd.Parameters.Add(new OleDbParameter("@snName", c.StreetNumber));
-                cmd.Parameters.Add(new OleDbParameter("@cnName", c.CityNum.Id));
+             
             }
         }
 

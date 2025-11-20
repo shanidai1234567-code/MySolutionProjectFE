@@ -78,7 +78,7 @@ namespace ViewModel
             Volunteer c = entity as Volunteer;
             if (c != null)
             {
-                string sqlStr = $"Insert INTO  Person (FirstName) VALUES (@cName)";
+                string sqlStr = $"Insert INTO  Volunteer (StoreClosingTime, StoreOpeningTime, JoinDate, HelpCategory,LocationX, LocationY) VALUES (@cName)";
 
                 command.CommandText = sqlStr;
                 cmd.Parameters.Add(new OleDbParameter("@StoreClosingTime", c.StoreClosingTime));
@@ -125,6 +125,16 @@ namespace ViewModel
             {
                 updated.Add(new ChangeEntity(this.CreateUpdatedSQL, entity));
                 updated.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));
+            }
+        }
+
+        public override void Insert(BaseEntity entity)
+        {
+              BaseEntity reqEntity = this.NewEntity();
+            if (entity != null & entity.GetType()==reqEntity.GetType())
+            {
+                inserted.Add(new ChangeEntity(base.CreateInsertdSQL, entity));
+                inserted.Add(new ChangeEntity(this.CreateInsertdSQL, entity));
             }
         }
 

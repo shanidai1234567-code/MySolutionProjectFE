@@ -68,6 +68,13 @@ namespace ViewModel
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@cName", c.Description));
+                command.Parameters.Add(new OleDbParameter("@PasserBy_ID", c.PasserBy_ID));
+                command.Parameters.Add(new OleDbParameter("@Help_Category", c.HCategory.Id));
+                command.Parameters.Add(new OleDbParameter("@City_Num", c.City_Num.Id));
+                command.Parameters.Add(new OleDbParameter("@Location_X", c.Location_X));
+                command.Parameters.Add(new OleDbParameter("@Location_Y", c.Location_Y));
+                command.Parameters.Add(new OleDbParameter("@Update_Time", c.Update_Time));  
+                command.Parameters.Add(new OleDbParameter("@Photo_Optinal", c.Photo_Optinal ?? (object)DBNull.Value));
 
             }
         }
