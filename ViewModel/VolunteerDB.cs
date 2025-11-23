@@ -73,23 +73,28 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@pid", c.Id));
             }
         }
-        protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
+        protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand command)
         {
             Volunteer c = entity as Volunteer;
             if (c != null)
             {
-                string sqlStr = $"Insert INTO  Volunteer (StoreClosingTime, StoreOpeningTime, JoinDate, HelpCategory,LocationX, LocationY) VALUES (@cName)";
+                string sqlStr =
+                    "INSERT INTO Volunteer " +
+                    "       (id, StoreClosingTime, StoreOpeningTime, JoinDate, Help_Category, Location_X, Location_Y) " +
+                    "VALUES (@id, @StoreClosingTime, @StoreOpeningTime, @JoinDate, @Help_Category, @Location_X, @Location_Y)";
 
                 command.CommandText = sqlStr;
-                cmd.Parameters.Add(new OleDbParameter("@StoreClosingTime", c.StoreClosingTime));
-                cmd.Parameters.Add(new OleDbParameter("@StoreOpeningTime", c.StoreOpeningTime));
-                cmd.Parameters.Add(new OleDbParameter("@JoinDate", c.JoinDate));
-                cmd.Parameters.Add(new OleDbParameter("@HelpCategory", c.Help_Category));
-                cmd.Parameters.Add(new OleDbParameter("@LocationX", c.Location_X));
-                cmd.Parameters.Add(new OleDbParameter("@LocationY", c.Location_Y));
+                command.Parameters.Add(new OleDbParameter("@Sid", c.Id));
 
+                command.Parameters.Add(new OleDbParameter("@StoreClosingTime", c.StoreClosingTime));
+                command.Parameters.Add(new OleDbParameter("@StoreOpeningTime", c.StoreOpeningTime));
+                command.Parameters.Add(new OleDbParameter("@JoinDate", c.JoinDate));
+                command.Parameters.Add(new OleDbParameter("@Help_Category", c.Help_Category.Id));
+                command.Parameters.Add(new OleDbParameter("@Location_X", c.Location_X));
+                command.Parameters.Add(new OleDbParameter("@Location_Y", c.Location_Y));
             }
         }
+
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
         {

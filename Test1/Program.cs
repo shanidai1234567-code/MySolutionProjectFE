@@ -14,13 +14,15 @@ namespace Test1
 
             //SELECT ALL 
 
-            //    VolunteerDB vdb = new VolunteerDB();
-            //    VolunteerList vlist = vdb.SelectAll();
-            //    foreach (Volunteer v in vlist)
-            //    {
-            //        Console.WriteLine(v.ToString());
-            //    }
-            //    Console.WriteLine();
+            //VolunteerDB vdb = new VolunteerDB();
+            //VolunteerList vlist = vdb.SelectAll();
+            //foreach (Volunteer v in vlist)
+            //{
+            //    Console.WriteLine(v.FirstName);
+            //    Console.WriteLine(v.LastName);
+            //    Console.WriteLine(v.Id);
+            //}
+            //Console.WriteLine();
 
             //    PersonDB pdb = new PersonDB();
             //    PersonList plist = pdb.SelectAll();
@@ -218,7 +220,7 @@ namespace Test1
 
 
 
-            //Insert ALL
+            //INSERT ALL
 
 
             //Console.WriteLine("\nInsert City");
@@ -253,15 +255,18 @@ namespace Test1
 
             Console.WriteLine("\nInsert Volunteer");
             VolunteerDB volunteerDB = new VolunteerDB();
+            CityDB cityDB = new CityDB();
+            CityList Citylist = cityDB.SelectAll();
+
             Volunteer newVolunteer = new Volunteer
             {
-                FirstName = "David",
+                FirstName = "Ilan",
                 LastName = "Cohen",
-                PhoneNumber = "0523456789",
-                Pass = "password123",
-                Street = " Main",
+                PhoneNumber = "0523666689",
+                Pass = "677584",
+                Street = "Rahoven",
                 StreetNumber = 10,
-                CityNum = 19,
+                CityNum = Citylist.Last(),
                 StoreOpeningTime = new DateTime(2023, 1, 1, 9, 0, 0),
                 StoreClosingTime = new DateTime(2023, 1, 1, 17, 0, 0),
                 JoinDate = DateTime.Now,
@@ -275,11 +280,8 @@ namespace Test1
             Console.WriteLine($"{vy} rows were inserted");
             Console.WriteLine("volunteers after insert: ");
             VolunteerList volunteers = volunteerDB.SelectAll();
-            foreach (Volunteer v in volunteers)
-                Console.WriteLine(v.FirstName + "  id:" + v.Id);
-
-            //Console.WriteLine("\nInsert VolunteerRespond");
-
+             foreach (Volunteer v in volunteers)
+                 Console.WriteLine(v.FirstName + "  id:" + v.Id );
 
 
         }
