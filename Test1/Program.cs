@@ -103,7 +103,7 @@ namespace Test1
             //Console.WriteLine("cities after delete: ");
             //cities = cdb.SelectAll();
             //foreach (City c in cities)
-            //    Console.WriteLine(c.City_Name + "  id:" + c.Id );
+            //    Console.WriteLine(c.City_Name + "  id:" + c.Id);
 
 
             //Console.WriteLine("\nDelete status");
@@ -117,7 +117,7 @@ namespace Test1
             //Console.WriteLine("statuses after delete: ");
             //statuses = sdb.SelectAll();
             //foreach (Status s in statuses)
-            //    Console.WriteLine(s.Description + "  id:" + s.Id );
+            //    Console.WriteLine(s.Description + "  id:" + s.Id);
 
             //Console.WriteLine("\nDelete Volunteer");
             //VolunteerDB volunteerDB = new VolunteerDB();
@@ -130,7 +130,7 @@ namespace Test1
             //Console.WriteLine("volunteers after delete: ");
             //volunteers = volunteerDB.SelectAll();
             //foreach (Volunteer v in volunteers)
-            //    Console.WriteLine(v.FirstName + "  id:" + v.Id );
+            //    Console.WriteLine(v.FirstName + "  id:" + v.Id);
 
             //Console.WriteLine("\nDelete VolunteerRespond");
             //VolunteerRespondDB volunteerRespondDB = new VolunteerRespondDB();
@@ -155,7 +155,7 @@ namespace Test1
             //Console.WriteLine("admins after delete: ");
             //alist = adb.SelectAll();
             //foreach (Admin a in alist)
-            //    Console.WriteLine(a.FirstName + "  id:" + a.Id );
+            //    Console.WriteLine(a.FirstName + "  id:" + a.Id);
 
 
             //Console.WriteLine("\nDelete Volunteer");
@@ -206,7 +206,7 @@ namespace Test1
             //foreach (Help_Category hc in help_CategoryList)
             //    Console.WriteLine(hc.Description + "  id:" + hc.Id);
 
-            // Console.WriteLine("\n delete Report");
+            //Console.WriteLine("\n delete Report");
             //ReportDB reportDB = new ReportDB();
             //ReportList reportList = reportDB.SelectAll();
             //Report reportToDelete = reportList[0];
@@ -223,225 +223,228 @@ namespace Test1
             //INSERT ALL
 
 
-            //Console.WriteLine("\nInsert City");
-            //CityDB cdb = new CityDB();
-            //City newCity = new City
-            //{
-            //    City_Name = "Kiryat Ekron"
-            //};
-            //cdb.Insert(newCity);
-            //int cy = cdb.SaveChanges();
-            //Console.WriteLine($"{cy} rows were inserted");
-            //Console.WriteLine("cities after insert: ");
-            //CityList cities = cdb.SelectAll();
-            //foreach (City c in cities)
-            //    Console.WriteLine(c.City_Name + "  id:" + c.Id);
+            Console.WriteLine("\nInsert City");
+            CityDB cdb3 = new CityDB();
+            City newCity3 = new City
+            {
+                City_Name = "Kiryat Ekron"
+            };
+            cdb3.Insert(newCity3);
+            int cy = cdb3.SaveChanges();
+            Console.WriteLine($"{cy} rows were inserted");
+            Console.WriteLine("cities after insert: ");
+            CityList cities = cdb3.SelectAll();
+            foreach (City c in cities)
+                Console.WriteLine(c.City_Name + "  id:" + c.Id);
 
 
-            //Console.WriteLine("\nInsert Status");
-            //StatusDB sdb = new StatusDB();
-            //Status newStatus = new Status
-            //{
-            //    Description = "In Progress"
-            //};
-            //sdb.Insert(newStatus);
-            //int sy = sdb.SaveChanges();
-            //Console.WriteLine($"{sy} rows were inserted");
-            //Console.WriteLine("statuses after insert: ");
-            //StatusList statuses = sdb.SelectAll();
-            //foreach (Status s in statuses)
-            //    Console.WriteLine(s.Description + "  id:" + s.Id );
-            //Console.WriteLine("\nInsert Volunteer");
-
-            //Console.WriteLine("\nInsert Volunteer");
-            //VolunteerDB volunteerDB = new VolunteerDB();
-            //CityDB cityDB = new CityDB();
-            //CityList Citylist = cityDB.SelectAll();
-
-            //Volunteer newVolunteer = new Volunteer
-            //{
-            //    FirstName = "Ilan",
-            //    LastName = "Cohen",
-            //    PhoneNumber = "0523666689",
-            //    Pass = "677584",
-            //    Street = "Rahoven",
-            //    StreetNumber = 10,
-            //    CityNum = Citylist.Last(),
-            //    StoreOpeningTime = new DateTime(2023, 1, 1, 9, 0, 0),
-            //    StoreClosingTime = new DateTime(2023, 1, 1, 17, 0, 0),
-            //    JoinDate = DateTime.Now,
-            //    Location_X = 34.7818,
-            //    Location_Y = 32.0853,
-            //    Help_Category = Help_CategoryDB.SelectById(1)
-
-            //};
-            //volunteerDB.Insert(newVolunteer);
-            //int vy = volunteerDB.SaveChanges();
-            //Console.WriteLine($"{vy} rows were inserted");
-            //Console.WriteLine("volunteers after insert: ");
-            //VolunteerList volunteers = volunteerDB.SelectAll();
-            // foreach (Volunteer v in volunteers)
-            //     Console.WriteLine(v.FirstName + "  id:" + v.Id );
+            Console.WriteLine("\nInsert Status");
+            StatusDB sdb = new StatusDB();
+            Status newStatus = new Status
+            {
+                Description = "In Progress"
+            };
+            sdb.Insert(newStatus);
+            int sy = sdb.SaveChanges();
+            Console.WriteLine($"{sy} rows were inserted");
+            Console.WriteLine("statuses after insert: ");
+            StatusList statuses = sdb.SelectAll();
+            foreach (Status s1 in statuses)
+                Console.WriteLine(s1.Description + "  id:" + s1.Id);
 
 
-            //Console.WriteLine("\nInsert Person");
-            //PersonDB personDB = new PersonDB();
-            //CityDB cityDB = new CityDB();
-            //CityList Citylist = cityDB.SelectAll();
-            //Person newPerson = new Person
-            //{
-            //    FirstName = "David",
-            //    LastName = "Levi",
-            //    PhoneNumber = "0521234567",
-            //    Street = "Herzl",
-            //    CityNum = Citylist.Last(),
-            //    StreetNumber = 5,
-            //    Pass = "123456"
-            //};
-            //personDB.Insert(newPerson);
-            //int personRowsAffected = personDB.SaveChanges();
-            //Console.WriteLine($"{personRowsAffected} rows were inserted");
-            //Console.WriteLine("persons after insert: ");
-            //PersonList personList = personDB.SelectAll();
-            //foreach (Person p in personList)
-            //    Console.WriteLine(p.FirstName + "  id:" + p.Id);
+            Console.WriteLine("\nInsert Volunteer");
+            VolunteerDB volunteerDB = new VolunteerDB();
+            CityDB cityDB = new CityDB();
+            CityList Citylist = cityDB.SelectAll();
+
+            Volunteer newVolunteer = new Volunteer
+            {
+                FirstName = "Ilan",
+                LastName = "Cohen",
+                PhoneNumber = "0523666689",
+                Pass = "677584",
+                Street = "Rahoven",
+                StreetNumber = 10,
+                CityNum = Citylist.Last(),
+                StoreOpeningTime = new DateTime(2023, 1, 1, 9, 0, 0),
+                StoreClosingTime = new DateTime(2023, 1, 1, 17, 0, 0),
+                JoinDate = DateTime.Now,
+                Location_X = 34.7818,
+                Location_Y = 32.0853,
+                Help_Category = Help_CategoryDB.SelectById(1)
+
+            };
+            volunteerDB.Insert(newVolunteer);
+            int vy = volunteerDB.SaveChanges();
+            Console.WriteLine($"{vy} rows were inserted");
+            Console.WriteLine("volunteers after insert: ");
+            VolunteerList volunteers = volunteerDB.SelectAll();
+            foreach (Volunteer v in volunteers)
+                Console.WriteLine(v.FirstName + "  id:" + v.Id);
 
 
-            //Console.WriteLine("\nInsert PasserBy");
-            //PasserByDB passerByDB = new PasserByDB();
-            //CityDB cityDB = new CityDB();
-            //CityList Citylist = cityDB.SelectAll();
-            //PasserBy newPasserBy = new PasserBy
-            //{
-            //    FirstName = "Sara",
-            //    LastName = "Levi",
-            //    PhoneNumber = "0529876543",
-            //    Street = "Ben Gurion",
-            //    CityNum = Citylist.Last(),
-            //    StreetNumber = 12,
-            //    Pass = "654321",
-            //    Help_Category = Help_CategoryDB.SelectById(2),
-            //    JoinDate = DateTime.Now
-            //};
-            //passerByDB.Insert(newPasserBy);
-            //int passerByRowsAffected = passerByDB.SaveChanges();
-            //Console.WriteLine($"{passerByRowsAffected} rows were inserted");
-            //Console.WriteLine("passerBys after insert: ");
-            //PasserByList passerByList = passerByDB.SelectAll();
-            //foreach (PasserBy p in passerByList)
-            //    Console.WriteLine(p.FirstName + "  id:" + p.Id);
-
-            //Console.WriteLine("\n insert HelpCategory");
-            //Help_CategoryDB help_CategoryDB = new Help_CategoryDB();
-            //Help_Category newHelpCategory = new Help_Category
-            //{
-            //    Description = "Food Delivery"
-            //};
-            //help_CategoryDB.Insert(newHelpCategory);
-            //int helpCategoryRowsAffected = help_CategoryDB.SaveChanges();
-            //Console.WriteLine($"{helpCategoryRowsAffected} rows were inserted");
-            //Console.WriteLine("HelpCategories after insert: ");
-            //Help_CategoryList help_CategoryList = help_CategoryDB.SelectAll();
-            //foreach (Help_Category hc in help_CategoryList)
-            //    Console.WriteLine(hc.Description + "  id:" + hc.Id);
+            Console.WriteLine("\nInsert Person");
+            PersonDB personDB5 = new PersonDB();
+            CityDB cityDB5 = new CityDB();
+            CityList Citylist5 = cityDB5.SelectAll();
+            Person newPerson = new Person
+            {
+                FirstName = "David",
+                LastName = "Levi",
+                PhoneNumber = "0521234567",
+                Street = "Herzl",
+                CityNum = Citylist5.Last(),
+                StreetNumber = 5,
+                Pass = "123456"
+            };
+            personDB5.Insert(newPerson);
+            int personRowsAffected = personDB5.SaveChanges();
+            Console.WriteLine($"{personRowsAffected} rows were inserted");
+            Console.WriteLine("persons after insert: ");
+            PersonList personList = personDB5.SelectAll();
+            foreach (Person p in personList)
+                Console.WriteLine(p.FirstName + "  id:" + p.Id);
 
 
-            //Console.WriteLine("\n insert Report");
-            //ReportDB reportDB = new ReportDB();
-            //CityDB cityDB = new CityDB();
-            //CityList Citylist = cityDB.SelectAll();
-            //Report newReport = new Report
-            //{
-            //    Description = "Need help with groceries",
-            //    Location_X = 34.7818,
-            //    Location_Y = 32.0853,
-            //    Update_Time = DateTime.Now,
-            //    PasserBy_ID = PasserByDB.SelectById(1).Id,
-            //    HCategory = Help_CategoryDB.SelectById(1),
-            //    City_Num = Citylist.Last(),
-            //    Photo_Optinal = "photo1.jpg"
-            //};
-            //reportDB.Insert(newReport);
-            //int reportRowsAffected = reportDB.SaveChanges();
-            //Console.WriteLine($"{reportRowsAffected} rows were inserted");
-            //Console.WriteLine("Reports after insert: ");
-            //ReportList reportList = reportDB.SelectAll();
-            //foreach (Report r in reportList)
-            //    Console.WriteLine(r.Description + "  id:" + r.Id);
+            Console.WriteLine("\nInsert PasserBy");
+            PasserByDB passerByDB1 = new PasserByDB();
+            CityDB cityDB2 = new CityDB();
+            CityList Citylist2 = cityDB2.SelectAll();
+            PasserBy newPasserBy = new PasserBy
+            {
+                FirstName = "Sara",
+                LastName = "Levi",
+                PhoneNumber = "0529876543",
+                Street = "Ben Gurion",
+                CityNum = Citylist2.Last(),
+                StreetNumber = 12,
+                Pass = "654321",
+                Help_Category = Help_CategoryDB.SelectById(2),
+                JoinDate = DateTime.Now
+            };
+            passerByDB1.Insert(newPasserBy);
+            int passerByRowsAffected = passerByDB1.SaveChanges();
+            Console.WriteLine($"{passerByRowsAffected} rows were inserted");
+            Console.WriteLine("passerBys after insert: ");
+            PasserByList passerByList = passerByDB1.SelectAll();
+            foreach (PasserBy p in passerByList)
+                Console.WriteLine(p.FirstName + "  id:" + p.Id);
 
-            //Console.WriteLine("\n     volunteer Respond");
-            //VolunteerRespondDB volunteerRespondDB = new VolunteerRespondDB();
-            //VolunteerRespond newVolunteerRespond = new VolunteerRespond
-            //{
-            //  IdReport = ReportDB.SelectById(1),
-            //    IdVol = VolunteerDB.SelectById(1),
-            //    Repsond_status = StatusDB.SelectById(1)
-            //};
-            //volunteerRespondDB.Insert(newVolunteerRespond);
-            //int volunteerRespondRowsAffected = volunteerRespondDB.SaveChanges();
-            //Console.WriteLine($"{volunteerRespondRowsAffected} rows were inserted");
-            //Console.WriteLine("VolunteerResponds after insert: ");
-            //VolunteerRespondList volunteerRespondList = volunteerRespondDB.SelectAll();
-            //foreach (VolunteerRespond vr in volunteerRespondList)
-            //    Console.WriteLine("id:" + vr.Id + "  Report id:" + vr.IdReport + " Volunteer id:" + vr.IdVol);
+            Console.WriteLine("\n insert HelpCategory");
+            Help_CategoryDB help_CategoryDB = new Help_CategoryDB();
+            Help_Category newHelpCategory = new Help_Category
+            {
+                Description = "Food Delivery"
+            };
+            help_CategoryDB.Insert(newHelpCategory);
+            int helpCategoryRowsAffected = help_CategoryDB.SaveChanges();
+            Console.WriteLine($"{helpCategoryRowsAffected} rows were inserted");
+            Console.WriteLine("HelpCategories after insert: ");
+            Help_CategoryList help_CategoryList = help_CategoryDB.SelectAll();
+            foreach (Help_Category hc in help_CategoryList)
+                Console.WriteLine(hc.Description + "  id:" + hc.Id);
+
+
+            Console.WriteLine("\n insert Report");
+            ReportDB reportDB1 = new ReportDB();
+            CityDB cityDB6 = new CityDB();
+            CityList Citylist6 = cityDB6.SelectAll();
+            Report newReport = new Report
+            {
+                Description = "Need help with groceries",
+                Location_X = 34.7818,
+                Location_Y = 32.0853,
+                Update_Time = DateTime.Now,
+                PasserBy_ID = PasserByDB.SelectById(1).Id,
+                HCategory = Help_CategoryDB.SelectById(1),
+                City_Num = Citylist6.Last(),
+                Photo_Optinal = "photo1.jpg"
+            };
+            reportDB1.Insert(newReport);
+            int reportRowsAffected6 = reportDB1.SaveChanges();
+            Console.WriteLine($"{reportRowsAffected6} rows were inserted");
+            Console.WriteLine("Reports after insert: ");
+            ReportList reportList = reportDB1.SelectAll();
+            foreach (Report r in reportList)
+                Console.WriteLine(r.Description + "  id:" + r.Id);
+
+            Console.WriteLine("\n     volunteer Respond");
+            VolunteerRespondDB volunteerRespondDB = new VolunteerRespondDB();
+            VolunteerRespond newVolunteerRespond = new VolunteerRespond
+            {
+                IdReport = ReportDB.SelectById(1),
+                IdVol = VolunteerDB.SelectById(1),
+                Repsond_status = StatusDB.SelectById(1)
+            };
+            volunteerRespondDB.Insert(newVolunteerRespond);
+            int volunteerRespondRowsAffected = volunteerRespondDB.SaveChanges();
+            Console.WriteLine($"{volunteerRespondRowsAffected} rows were inserted");
+            Console.WriteLine("VolunteerResponds after insert: ");
+            VolunteerRespondList volunteerRespondList = volunteerRespondDB.SelectAll();
+            foreach (VolunteerRespond vr in volunteerRespondList)
+                Console.WriteLine("id:" + vr.Id + "  Report id:" + vr.IdReport + " Volunteer id:" + vr.IdVol);
 
 
             //UPDATE ALL    
 
             //Console.WriteLine("\nUpdate City");
             //CityDB cdb = new CityDB();
-            //CityList cities = new CityList();
-            //cities = cdb.SelectAll();
-            //City cityToUpdate = cities.Last();
+            //CityList cities7 = new CityList();
+            //cities7 = cdb.SelectAll();
+            //City cityToUpdate = cities7.Last();
             //cityToUpdate.City_Name = "Updated City Name";
             //cdb.Update(cityToUpdate);
-            //int cy = cdb.SaveChanges();
-            //Console.WriteLine($"{cy} rows were updated");
+            //int cy7 = cdb.SaveChanges();
+            //Console.WriteLine($"{cy7} rows were updated");
             //Console.WriteLine("cities after update: ");
-            //cities = cdb.SelectAll();
-            //foreach (City c in cities)
-            //    Console.WriteLine(c.City_Name + "  id:" + c.Id );
+            //   cities7 = cdb.SelectAll();
+            //foreach (City c in cities7)
+            //    Console.WriteLine(c.City_Name + "  id:" + c.Id);
 
 
             //Console.WriteLine("\nUpdate Status");
-            //StatusDB sdb = new StatusDB();
-            //StatusList statuses = new StatusList();
-            //statuses = sdb.SelectAll();
-            //Status statusToUpdate = statuses.Last();
+            //StatusDB s = new StatusDB();
+            //StatusList sl = new StatusList();
+            //sl = s.SelectAll();
+            //Status statusToUpdate = sl.Last();
             //statusToUpdate.Description = "Updated Status Description";
-            //sdb.Update(statusToUpdate);
-            //int sy = sdb.SaveChanges();
-            //Console.WriteLine($"{sy} rows were updated");
+            //s.Update(statusToUpdate);
+            //int sy1 = s.SaveChanges();
+            //Console.WriteLine($"{sy1} rows were updated");
             //Console.WriteLine("statuses after update: ");
-            //statuses = sdb.SelectAll();
-            //foreach (Status s in statuses)
-            //    Console.WriteLine(s.Description + "  id:" + s.Id );
+            //sl = s.SelectAll();
+            //foreach (Status st in sl)
+            //    Console.WriteLine(st.Description + "  id:" + st.Id);
+
+
 
 
             //Console.WriteLine("\nUpdate Volunteer");
-            //VolunteerDB volunteerDB = new VolunteerDB();
-            //VolunteerList volunteers = new VolunteerList();
-            //volunteers = volunteerDB.SelectAll();
-            //Volunteer volunteerToUpdate = volunteers.Last();
+            //VolunteerDB volunteerDB1 = new VolunteerDB();
+            //VolunteerList volunteerList1 = new VolunteerList();
+            //volunteerList1 = volunteerDB1.SelectAll();
+            //var volunteerToUpdate = volunteerList1.Last();
             //volunteerToUpdate.FirstName = "UpdatedFirstName";
-            //volunteerDB.Update(volunteerToUpdate);      
-            //int vy = volunteerDB.SaveChanges();
-            //Console.WriteLine($"{vy} rows were updated");
+            //volunteerDB1.Update(volunteerToUpdate);
+            //int vy1 = volunteerDB1.SaveChanges();
+            //Console.WriteLine($"{vy1} rows were updated");
             //Console.WriteLine("volunteers after update: ");
-            //volunteers = volunteerDB.SelectAll();
-            //foreach (Volunteer v in volunteers)
+            //volunteerList1 = volunteerDB1.SelectAll();
+            //foreach (Volunteer v in volunteerList1)
             //    Console.WriteLine(v.FirstName + "  id:" + v.Id );
 
+
             //Console.WriteLine("\nUpdate VolunteerRespond");
-            //VolunteerRespondDB volunteerRespondDB = new VolunteerRespondDB();
-            //VolunteerRespondList volunteerRespondList = new VolunteerRespondList();
-            //volunteerRespondList = volunteerRespondDB.SelectAll();
-            //volunteerDB.Update(volunteerToUpdate);  
-            //int vry = volunteerRespondDB.SaveChanges();
+            //VolunteerRespondDB volunteerRespondDB1 = new VolunteerRespondDB();
+            //VolunteerRespondList volunteerRespondList1 = new VolunteerRespondList();
+            //volunteerRespondList1 = volunteerRespondDB1.SelectAll();
+            //volunteerDB.Update(volunteerToUpdate);
+            //int vry = volunteerRespondDB1.SaveChanges();
             //Console.WriteLine($"{vry} rows were updated");
             //Console.WriteLine("volunteerResponds after update: ");
-            //volunteerRespondList = volunteerRespondDB.SelectAll();
-            //foreach (VolunteerRespond vr in volunteerRespondList)
+            //volunteerRespondList1 = volunteerRespondDB1.SelectAll();
+            //foreach (VolunteerRespond vr in volunteerRespondList1)
             //    Console.WriteLine("id:" + vr.Id + "  Report id:" + vr.IdReport + " Volunteer id:" + vr.IdVol);
 
 
@@ -456,17 +459,17 @@ namespace Test1
             //Console.WriteLine("admins after update: ");
             //alist = adb.SelectAll();
             //foreach (Admin a in alist)
-            //    Console.WriteLine(a.FirstName + "  id:" + a.Id );
+            //    Console.WriteLine(a.FirstName + "  id:" + a.Id);
 
 
             //Console.WriteLine("\nUpdate Person");
             //PersonDB personDB = new PersonDB();
-            //PersonList personList = personDB.SelectAll();
+            //PersonList personList1 = personDB.SelectAll();
             //Person personToUpdate = personList.Last();
             //personToUpdate.FirstName = "UpdatedFirstName";
             //personDB.Update(personToUpdate);
-            //int personRowsAffected = personDB.SaveChanges();
-            //Console.WriteLine($"{personRowsAffected} rows were updated");
+            //int personRowsAffected5 = personDB.SaveChanges();
+            //Console.WriteLine($"{personRowsAffected5} rows were updated");
             //Console.WriteLine("Persons after update: ");
             //personList = personDB.SelectAll();
             //foreach (Person p in personList)
@@ -475,11 +478,11 @@ namespace Test1
 
             //Console.WriteLine("\nUpdate PasserBy");
             //PasserByDB passerByDB = new PasserByDB();
-            //PasserByList passerByList = passerByDB.SelectAll();
+            //PasserByList passerByList3 = passerByDB.SelectAll();
             //PasserBy passerByToUpdate = passerByList.Last();
             //passerByToUpdate.FirstName = "UpdatedFirstName";
             //passerByDB.Update(passerByToUpdate);
-            //int passerByRowsAffected = passerByDB.SaveChanges();
+            //int passerByRowsAffected3 = passerByDB.SaveChanges();
             //Console.WriteLine($"{passerByRowsAffected} rows were updated");
             //Console.WriteLine("PasserBys after update: ");
             //passerByList = passerByDB.SelectAll();
@@ -487,13 +490,13 @@ namespace Test1
             //    Console.WriteLine(p.FirstName + "  id:" + p.Id);
 
             //Console.WriteLine("\n update HelpCategory");
-            //Help_CategoryDB help_CategoryDB = new Help_CategoryDB();
-            //Help_CategoryList help_CategoryList = help_CategoryDB.SelectAll();
-            //Help_Category help_CategoryToUpdate = help_CategoryList.Last(); 
+            //Help_CategoryDB help_CategoryDB2 = new Help_CategoryDB();
+            //Help_CategoryList help_CategoryList2 = help_CategoryDB.SelectAll();
+            //Help_Category help_CategoryToUpdate = help_CategoryList.Last();
             //help_CategoryToUpdate.Description = "Updated Help Category Description";
             //help_CategoryDB.Update(help_CategoryToUpdate);
-            //int helpCategoryRowsAffected = help_CategoryDB.SaveChanges();
-            //Console.WriteLine($"{helpCategoryRowsAffected} rows were updated");
+            //int helpCategoryRowsAffected4 = help_CategoryDB.SaveChanges();
+            //Console.WriteLine($"{helpCategoryRowsAffected4} rows were updated");
             //Console.WriteLine("HelpCategories after update: ");
             //help_CategoryList = help_CategoryDB.SelectAll();
             //foreach (Help_Category hc in help_CategoryList)
@@ -501,21 +504,21 @@ namespace Test1
 
 
             //Console.WriteLine("\n update Report");
-            //ReportDB reportDB = new ReportDB();
-            //ReportList reportList = reportDB.SelectAll();
+            //ReportDB reportDB2 = new ReportDB();
+            //ReportList reportList2 = reportDB2.SelectAll();
             //Report reportToUpdate = reportList.Last();
             //reportToUpdate.Description = "Updated Report Description";
-            //reportDB.Update(reportToUpdate);
-            //int reportRowsAffected = reportDB.SaveChanges();
-            //Console.WriteLine($"{reportRowsAffected} rows were updated");
+            //reportDB2.Update(reportToUpdate);
+            //int reportRowsAffected2 = reportDB2.SaveChanges();
+            //Console.WriteLine($"{reportRowsAffected2} rows were updated");
             //Console.WriteLine("Reports after update: ");
-            //reportList = reportDB.SelectAll();
+            //reportList = reportDB2.SelectAll();
             //foreach (Report r in reportList)
             //    Console.WriteLine(r.Description + "  id:" + r.Id);
 
 
-            //Console.WriteLine("\n update passerBy" );
-            //passerByDB= new PasserByDB();
+            //Console.WriteLine("\n update passerBy");
+            //passerByDB = new PasserByDB();
             //passerByList = passerByDB.SelectAll();
             //passerByToUpdate = passerByList.Last();
             //passerByToUpdate.FirstName = "AnotherUpdatedFirstName";
