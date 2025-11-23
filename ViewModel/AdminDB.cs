@@ -13,7 +13,7 @@ namespace ViewModel
 
         public new AdminList SelectAll()
         {
-            command.CommandText = $"SELECT Admin.Admin_Pass, Admin.ID, Person.First_Name, Person.Last_Name, Person.Phone_Number, Person.Street, Person.City_Num, Person.Pass, Person.streetNumber\r\nFROM (Admin INNER JOIN\r\n  Person ON Admin.ID = Person.ID)";
+            command.CommandText = $"SELECT Admin.Admin_Pass, Admin.ID, Person.FirstName, Person.LastName, Person.PhoneNumber, Person.Street, Person.CityNum, Person.Pass, Person.StreetNumber\r\nFROM (Admin INNER JOIN\r\n  Person ON Admin.ID = Person.ID)";
             AdminList pList = new AdminList(base.Select());
             return pList;
         }
@@ -21,12 +21,6 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Admin p = entity as Admin;
-            p.FirstName = reader["First_Name"].ToString();
-            p.LastName = reader["Last_Name"].ToString();
-            p.Phone_Number = reader["Phone_Number"].ToString();
-            p.Street = reader["Street"].ToString();
-            p.StreetNumber = Convert.ToInt32(reader["streetNumber"]);
-            p.City_Num = CityDB.SelectById((int)reader["City_Num"]);
             p.Admin_password = reader["pass"].ToString();
 
             base.CreateModel(entity);
@@ -62,13 +56,11 @@ namespace ViewModel
             Admin c = entity as Admin;
             if (c != null)
             {
-                string sqlStr = $"Insert INTO  Admin (FirstName) VALUES (@cName)";
+                string sqlStr = $"Insert INTO  Admin (Admin_Pass) VALUES (@cName)";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
-                command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
-                command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                command.Parameters.Add(new OleDbParameter("@hName", c.Phone_Number));
+                command.Parameters.Add(new OleDbParameter("@cName", c.Admin_password));
+           
             }
         }
 
@@ -77,25 +69,43 @@ namespace ViewModel
             Admin c = entity as Admin;
             if (c != null)
             {
-                string sqlStr = $"UPDATE Volunteer  SET FirstName=@cName , LastName=@lName, Livingadress= @bName , [ Phone_Numer] = @hName WHERE ID=@id";
+                string sqlStr = $"UPDATE Admin  SET Admin_password=@cName WHERE ID=@id";
                 //   string sqlStr = $"UPDATE Person  SET FirstName=@cName,lastName=@lName,livingadress=@ladd WHERE ID=@id";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
-                command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
-                command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                command.Parameters.Add(new OleDbParameter("@hName", c.Phone_Number));
+                command.Parameters.Add(new OleDbParameter("@cName", c.Admin_password));
                 command.Parameters.Add(new OleDbParameter("@id", c.Id));
 
-                //p.FirstName = reader["FirstName"].ToString();
-                //p.LastName = reader["LastName"].ToString();
-                //p.Phone_Numer = reader["telephone num"].ToString();
-                //p.LivingAdress = reader["LivingAdress"].ToString();
-                //p.Street = reader["street"].ToString();
-                //p.StreetNumber = Convert.ToInt32(reader["streetNumber"]);
-                //p.City_Num = CityDB.SelectById((int)reader["CityNumber"]);
-                //p.Admin_password = reader["pass"].ToString();
+            }
+        }
 
+        public override void Update(BaseEntity entity)
+        {
+            Admin Admin = entity as Admin;
+            if (Admin != null)
+            {
+                updated.Add(new ChangeEntity(this.CreateUpdatedSQL, entity));
+                updated.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));
+            }
+        }
+
+        public virtual void Delete(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity();
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                deleted.Add(new ChangeEntity(this.CreateDeletedSQL, entity));
+                deleted.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));
+            }
+        }
+
+        public override void Insert(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity();
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                inserted.Add(new ChangeEntity(base.CreateInsertdSQL, entity));
+                inserted.Add(new ChangeEntity(this.CreateInsertdSQL, entity));
             }
         }
 
