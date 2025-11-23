@@ -72,10 +72,12 @@ namespace ViewModel
             VolunteerRespond c = entity as VolunteerRespond;
             if (c != null)
             {
-                string sqlStr = $"Insert INTO  VolunteerRespond (Description) VALUES (@cName)";
+                string sqlStr = $"Insert INTO  VolunteerRespond (IdVol,IdReport,Repsond_status) VALUES (@cName, @ID_Report, @respond_status)";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@cName", c.IdVol));
+                command.Parameters.Add(new OleDbParameter("@ID_Report", c.IdReport));
+                command.Parameters.Add(new OleDbParameter("@respond_status", c.Repsond_status));
 
             }
         }

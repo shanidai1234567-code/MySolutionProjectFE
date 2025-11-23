@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ViewModel
 {
-    public class PasserByDB: PersonDB
+    public class PasserByDB : PersonDB
     {
         public new PasserByList SelectAll()
         {
@@ -51,19 +51,39 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@pid", c.Id));
             }
         }
+
+        public override void Insert(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity();
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                inserted.Add(new ChangeEntity(base.CreateInsertdSQL, entity));
+                inserted.Add(new ChangeEntity(this.CreateInsertdSQL, entity));
+            }
+        }
+
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
             PasserBy c = entity as PasserBy;
             if (c != null)
             {
-                string sqlStr = $"Insert INTO  Person ( Help_Category, JoinDate) VALUES (@cName  @lName)";
+                string sqlStr = $"Insert INTO  PasserBy (id, Help_Category, JoinDate) VALUES (@id, @cName,  @JoinDate)";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@cName", c.Help_Category));
-                command.Parameters.Add(new OleDbParameter("@lName", c.JoinDate));
-              
+                command.Parameters.Add(new OleDbParameter("@id", c.Id));
+                command.Parameters.Add(new OleDbParameter("@cName", c.Help_Category.Id));
+
+                OleDbParameter oleDbParameter = new OleDbParameter("@JoinDate", OleDbType.DBDate);
+                oleDbParameter.Value = c.JoinDate;
+                command.Parameters.Add(oleDbParameter);
+
+               
+
+
             }
         }
+
+        
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
         {
@@ -89,15 +109,7 @@ namespace ViewModel
             }
         }
 
-        public override void Insert(BaseEntity entity)
-        {
-            BaseEntity reqEntity = this.NewEntity();
-            if (entity != null & entity.GetType() == reqEntity.GetType())
-            {
-                inserted.Add(new ChangeEntity(base.CreateInsertdSQL, entity));
-                inserted.Add(new ChangeEntity(this.CreateInsertdSQL, entity));
-            }
-        }
+
 
         public virtual void Delete(BaseEntity entity)
         {
@@ -110,6 +122,6 @@ namespace ViewModel
         }
 
 
-
+ 
     }
 }

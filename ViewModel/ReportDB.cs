@@ -77,7 +77,10 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@City_Num", c.City_Num.Id));
                 command.Parameters.Add(new OleDbParameter("@Location_X", c.Location_X));
                 command.Parameters.Add(new OleDbParameter("@Location_Y", c.Location_Y));
-                command.Parameters.Add(new OleDbParameter("@Update_Time", c.Update_Time));
+
+                OleDbParameter oleDbParameter = new OleDbParameter("@Update_Time", OleDbType.DBDate);
+                oleDbParameter.Value = c.Update_Time;
+                command.Parameters.Add(oleDbParameter);
 
                 // Handle nullable photo field
                 command.Parameters.Add(new OleDbParameter("@Photo_Optinal",

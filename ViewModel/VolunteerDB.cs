@@ -86,9 +86,18 @@ namespace ViewModel
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@Sid", c.Id));
 
-                command.Parameters.Add(new OleDbParameter("@StoreClosingTime", c.StoreClosingTime));
-                command.Parameters.Add(new OleDbParameter("@StoreOpeningTime", c.StoreOpeningTime));
-                command.Parameters.Add(new OleDbParameter("@JoinDate", c.JoinDate));
+                OleDbParameter closeP=new OleDbParameter("@StoreClosingTime", OleDbType.DBDate);
+                closeP.Value = c.StoreClosingTime;
+                command.Parameters.Add(closeP);
+
+                OleDbParameter openingP = new OleDbParameter("@StoreOpeningTime", OleDbType.DBDate);
+                openingP.Value = c.StoreOpeningTime;
+                command.Parameters.Add(openingP);
+
+                OleDbParameter oleDbParameter = new OleDbParameter("@JoinDate", OleDbType.DBDate);
+                oleDbParameter.Value = c.JoinDate;
+                command.Parameters.Add(oleDbParameter);
+
                 command.Parameters.Add(new OleDbParameter("@Help_Category", c.Help_Category.Id));
                 command.Parameters.Add(new OleDbParameter("@Location_X", c.Location_X));
                 command.Parameters.Add(new OleDbParameter("@Location_Y", c.Location_Y));
@@ -112,9 +121,18 @@ namespace ViewModel
 
                 cmd.CommandText = sqlStr;
 
-                cmd.Parameters.Add(new OleDbParameter("@StoreClosingTime", c.StoreClosingTime));
-                cmd.Parameters.Add(new OleDbParameter("@StoreOpeningTime", c.StoreOpeningTime));
-                cmd.Parameters.Add(new OleDbParameter("@JoinDate", c.JoinDate));
+                OleDbParameter closeP = new OleDbParameter("@StoreClosingTime", OleDbType.DBDate);
+                closeP.Value = c.StoreClosingTime;
+                command.Parameters.Add(closeP);
+
+                OleDbParameter openingP = new OleDbParameter("@StoreOpeningTime", OleDbType.DBDate);
+                openingP.Value = c.StoreOpeningTime;
+                command.Parameters.Add(openingP);
+
+                OleDbParameter oleDbParameter = new OleDbParameter("@JoinDate", OleDbType.DBDate);
+                oleDbParameter.Value = c.JoinDate;
+                command.Parameters.Add(oleDbParameter);
+
                 cmd.Parameters.Add(new OleDbParameter("@HelpCategory", c.Help_Category.Id));
                 cmd.Parameters.Add(new OleDbParameter("@LocationX", c.Location_X));
                 cmd.Parameters.Add(new OleDbParameter("@LocationY", c.Location_Y));
