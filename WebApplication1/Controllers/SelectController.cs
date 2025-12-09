@@ -111,7 +111,7 @@ namespace WebApplication1.Controllers
 
         //insert all
 
-        [HttpGet]
+        [HttpPost]
         [ActionName("InsertCity")] //1
 
         public int InsertCity(City c)
@@ -123,7 +123,7 @@ namespace WebApplication1.Controllers
 
         }
 
-        [HttpGet]
+        [HttpPost]
         [ActionName("InsertStatus")] //2
 
         public int InsertStatus(Status s)
@@ -135,7 +135,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
         [ActionName("InsertHelp_Category")] //3
         public int InsertHelp_Category(Help_Category h)
         {
@@ -145,7 +145,7 @@ namespace WebApplication1.Controllers
             return x;
         }
 
-        [HttpGet]
+        [HttpPost]
         [ActionName("InsertAdmin")] //4
         public int InsertAdmin(Admin a)
         {
@@ -157,7 +157,7 @@ namespace WebApplication1.Controllers
 
         }
 
-        [HttpGet]
+        [HttpPost]
         [ActionName("InsertPasserBy")] //5
         public int InsertPasserBy(PasserBy p)
         {
@@ -167,7 +167,7 @@ namespace WebApplication1.Controllers
             return x;
         }
 
-        [HttpGet]
+        [HttpPost]
         [ActionName("InsertVolunteer")] //6
         public int InsertVolunteer(Volunteer v)
         {
@@ -177,7 +177,7 @@ namespace WebApplication1.Controllers
             return x;
         }
 
-        [HttpGet]
+        [HttpPost]
         [ActionName("InsertPerson")] //7
         public int InsertPerson(Person p)
         {
@@ -187,7 +187,7 @@ namespace WebApplication1.Controllers
             return x;
         }
 
-        [HttpGet]
+        [HttpPost]
         [ActionName("InsertReport")] //8
         public int InsertReport(Report r)
         {
@@ -199,7 +199,7 @@ namespace WebApplication1.Controllers
 
 
 
-        [HttpGet]
+        [HttpPost]
         [ActionName("InsertVolunteerRespond")] //9
         public int InsertVolunteerRespond(VolunteerRespond vr)
         {
@@ -212,7 +212,7 @@ namespace WebApplication1.Controllers
 
 
         //update all
-        [HttpGet]
+        [HttpPut]
         [ActionName("UpdateCity")] //1
         public void UpdateCity(City c)
         {
@@ -223,7 +223,7 @@ namespace WebApplication1.Controllers
 
         }
 
-        [HttpGet]
+        [HttpPut]
         [ActionName("UpdateStatus")] //2
         public void UpdateStatus(Status s)
         {
@@ -233,7 +233,7 @@ namespace WebApplication1.Controllers
 
         }
 
-        [HttpGet]
+        [HttpPut]
         [ActionName("UpdateAdmin")] //3
         public void UpdateAdmin(Admin a)
         {
@@ -242,7 +242,7 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpGet]
+        [HttpPut]
         [ActionName("UpdateHelp_Category")] //4
         public void UpdateHelp_Category(Help_Category h)
         {
@@ -251,7 +251,7 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpGet]
+        [HttpPut]
         [ActionName("UpdatePasserBy")] //5
         public void UpdatePasserBy(PasserBy p)
         {
@@ -260,7 +260,7 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpGet]
+        [HttpPut]
         [ActionName("UpdateVolunteer")] //6
         public void UpdateVolunteer(Volunteer v)
         {
@@ -269,7 +269,7 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpGet]
+        [HttpPut]
         [ActionName("UpdatePerson")] //7
         public void UpdatePerson(Person p)
         {
@@ -278,7 +278,7 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpGet]
+        [HttpPut]
         [ActionName("UpdateReport")] //8
         public void UpdateReport(Report r)
         {
@@ -287,7 +287,7 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpGet]
+        [HttpPut]
         [ActionName("UpdateVolunteerRespond")] //9
         public void UpdateVolunteerRespond(VolunteerRespond vr)
         {
@@ -299,7 +299,7 @@ namespace WebApplication1.Controllers
 
         //delete all
 
-        [HttpGet]
+        [HttpDelete]
         [ActionName("DeleteCity")]
 
         public void DeleteCity(int id) //1
@@ -311,7 +311,7 @@ namespace WebApplication1.Controllers
 
         }
 
-        [HttpGet]
+        [HttpDelete]
         [ActionName("DeleteStatus")]
         public void DeleteStatus(int id) //2
         {
@@ -321,7 +321,7 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpGet]
+        [HttpDelete]
         [ActionName("DeleteAdmin")]
         public void DeleteAdmin(int id) //3
         {
@@ -332,7 +332,7 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpGet]
+        [HttpDelete]
         [ActionName("DeleteHelp_Category")]
         public void DeleteHelp_Category(int id) //4
         {
@@ -342,7 +342,7 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpGet]
+        [HttpDelete]
         [ActionName("DeletePasserBy")]
         public void DeletePasserBy(int id) //5
         {
@@ -352,7 +352,7 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpGet]
+        [HttpDelete]
         [ActionName("DeleteVolunteer")]
         public void DeleteVolunteer(int id) //6
         {
@@ -362,7 +362,7 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpGet]
+        [HttpDelete]
         [ActionName("DeletePerson")]
         public void DeletePerson(int id) //7
         {
@@ -372,7 +372,7 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpGet]
+        [HttpDelete]
         [ActionName("DeleteReport")]
         public void DeleteReport(int id) //8
         {
@@ -382,7 +382,7 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpGet]
+        [HttpDelete]
         [ActionName("DeleteVolunteerRespond")]
         public void DeleteVolunteerRespond(int id) //9
         {
