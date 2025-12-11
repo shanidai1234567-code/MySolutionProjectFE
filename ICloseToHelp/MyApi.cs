@@ -41,15 +41,35 @@ namespace ICloseToHelp
         {
             try
             {
-           
 
-                return await Client.GetFromJsonAsync<CityList>("/api/Select/CitySelector");
+                // Use GetAsync to get the raw response
+                HttpResponseMessage response = await Client.GetAsync("/api/Select/CitySelector");
+
+                // 🚨 CRITICAL: Check the HTTP Status Code
+                if (!response.IsSuccessStatusCode)
+                {
+                    // If the status is 404, 500, etc., log the full error
+                    string errorContent = await response.Content.ReadAsStringAsync();
+                    throw new Exception($"API returned status code {(int)response.StatusCode}. Content: {errorContent}");
+                }
+
+                // Read the content as a string for inspection
+                string jsonContent = await response.Content.ReadAsStringAsync();
+
+                // 🚨 Inspect/Log the raw JSON here. This will be the empty or invalid string.
+                Console.WriteLine($"--- Raw API Response Content ---");
+                Console.WriteLine(jsonContent);
+                Console.WriteLine($"----------------------------------");
+
+                // Deserialize the content manually
+                // This line will now throw the JsonException if 'jsonContent' is empty/invalid
+                return System.Text.Json.JsonSerializer.Deserialize<CityList>(jsonContent);
+                //return await Client.GetFromJsonAsync<CityList>("/api/Select/CitySelector");
             }
             catch(Exception ex)
             {
                 // Handle exceptions (e.g., log the error)
-                Debug.WriteLine("Error fetching cities", ex.Message);
-                return null; // or throw; based on how you want to handle errors
+                throw new Exception("Error fetching cities: " + ex.Message);
             }
         }
 
