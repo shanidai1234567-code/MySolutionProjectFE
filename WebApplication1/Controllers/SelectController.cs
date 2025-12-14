@@ -20,35 +20,33 @@ namespace WebApplication1.Controllers
         //select all 
         [HttpGet]
         [ActionName("CitySelector")] //1            
-
-
+                                     // Server-side code
         public ActionResult<CityList> SelectAllCities()
         {
-            CityList cities = null;
             try
             {
-                Console.WriteLine("--- SERVER: Starting DB Select ---"); // Check if this logs
-
                 CityDB db = new CityDB();
-                cities = db.SelectAll(); // 🚨 BREAKPOINT HERE: See if this line throws an exception!
+                CityList cities = db.SelectAll(); // 🚨 Set breakpoint here!
 
-                Console.WriteLine($"--- SERVER: Found {cities?.Count ?? 0} cities ---"); // Check if this logs
+                Console.WriteLine($"--- SERVER: Found {cities?.Count ?? 0} cities ---");
 
-                // Return the data
+                // 1. Explicitly handle the empty/null case
+                if (cities == null || cities.Count == 0)
+                {
+                    // Use 204 No Content if the result is intentionally empty
+                    return NoContent();
+                    // OR return Ok(new CityList()); to send "[]" in the body
+                }
+
+                // 2. Success path
                 return Ok(cities);
             }
             catch (Exception ex)
             {
-                // 🚨 CRITICAL: Log or throw the exception clearly. 
-                // If an exception occurs here, the framework might return an empty 200 OK by default.
+                // 3. Keep the 500 error for internal issues
                 Console.WriteLine($"--- SERVER EXCEPTION: {ex.Message} ---");
-                // Depending on your framework, you may need to explicitly return an error status here.
-                // e.g., throw; or return StatusCode(500, ex.Message);
-
-                // Return an empty list to avoid null issues if you must continue
-                return new CityList();
+                return StatusCode(500, $"Internal server error: {ex.Message}");
             }
-
         }
 
         [HttpGet]
