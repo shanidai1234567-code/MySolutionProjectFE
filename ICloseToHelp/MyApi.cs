@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http.Json;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Model;
 using ViewModel;
 
 
@@ -18,7 +20,7 @@ namespace ICloseToHelp
 
         public MyApi()
         {
-        
+
             uri = "https://p0119g06-5062.euw.devtunnels.ms";
             Client = new HttpClient();
             Client.BaseAddress = new Uri(uri);
@@ -26,257 +28,657 @@ namespace ICloseToHelp
 
         public MyApi(HttpClient client, string baseUri)
         {
-            uri = baseUri;
-            client = new HttpClient();
-            this.Client = client ?? throw new ArgumentNullException(nameof(client));
             this.uri = baseUri ?? throw new ArgumentNullException(nameof(baseUri));
+            // Don't do: client = new HttpClient(); 
+            this.Client = client ?? new HttpClient();
+            this.Client.BaseAddress = new Uri(uri);
         }
 
         public async Task<AdminList> GetAllAdmins()  // Implementation of GetAdmins method 1
         {
-           return await Client.GetFromJsonAsync<AdminList>( uri + "/api/Select/AdminSelector");
+            HttpResponseMessage response = await Client.GetAsync("/api/Select/AdminSelector");
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                throw new Exception($"API returned {(int)response.StatusCode}: {err}");
+            }
+            string body = await response.Content.ReadAsStringAsync();
+            if (string.IsNullOrWhiteSpace(body))
+            {
+                // return empty list or null depending on your API contract
+                return new AdminList();
+            }
+            return System.Text.Json.JsonSerializer.Deserialize<AdminList>(body, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
         public async Task<CityList> GetAllCities()  // Implementation of GetCities method 2
         {
-            try
+            HttpResponseMessage response = await Client.GetAsync("/api/Select/CitySelector");
+            if (!response.IsSuccessStatusCode)
             {
-
-                // Use GetAsync to get the raw response
-                HttpResponseMessage response = await Client.GetAsync("/api/Select/CitySelector");
-
-                // 🚨 CRITICAL: Check the HTTP Status Code
-                if (!response.IsSuccessStatusCode)
-                {
-                    // If the status is 404, 500, etc., log the full error
-                    string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"API returned status code {(int)response.StatusCode}. Content: {errorContent}");
-                }
-
-                // Read the content as a string for inspection
-                string jsonContent = await response.Content.ReadAsStringAsync();
-
-                // 🚨 Inspect/Log the raw JSON here. This will be the empty or invalid string.
-                Console.WriteLine($"--- Raw API Response Content ---");
-                Console.WriteLine(jsonContent);
-                Console.WriteLine($"----------------------------------");
-
-                // Deserialize the content manually
-                // This line will now throw the JsonException if 'jsonContent' is empty/invalid
-                return System.Text.Json.JsonSerializer.Deserialize<CityList>(jsonContent);
-                //return await Client.GetFromJsonAsync<CityList>("/api/Select/CitySelector");
+                string err = await response.Content.ReadAsStringAsync();
+                throw new Exception($"API returned {(int)response.StatusCode}: {err}");
             }
-            catch(Exception ex)
+            string body = await response.Content.ReadAsStringAsync();
+            if (string.IsNullOrWhiteSpace(body))
             {
-                // Handle exceptions (e.g., log the error)
-                throw new Exception("Error fetching cities: " + ex.Message);
+                // return empty list or null depending on your API contract
+                return new CityList();
             }
+            return System.Text.Json.JsonSerializer.Deserialize<CityList>(body, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
         }
 
         public async Task<PersonList> GetAllPersons()  // Implementation of GetPersons method 3
         {
-           return await Client.GetFromJsonAsync<PersonList>( uri + "/api/Select/PersonSelector");
+
+            HttpResponseMessage response = await Client.GetAsync("/api/Select/PersonSelector");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                throw new Exception($"API returned {(int)response.StatusCode}: {err}");
+            }
+
+            string body = await response.Content.ReadAsStringAsync();
+
+            if (string.IsNullOrWhiteSpace(body))
+            {
+                // return empty list or null depending on your API contract
+                return new PersonList();
+            }
+
+            return System.Text.Json.JsonSerializer.Deserialize<PersonList>(body, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
         }
 
         public async Task<Help_CategoryList> GetAllHelpCategories()  // Implementation of help_Category method 4
         {
-           return await Client.GetFromJsonAsync<Help_CategoryList>( uri + "/api/Select/Help_CategorySelector");
+            HttpResponseMessage response = await Client.GetAsync("/api/Select/Help_CategorySelector");
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                throw new Exception($"API returned {(int)response.StatusCode}: {err}");
+            }
+            string body = await response.Content.ReadAsStringAsync();
+            if (string.IsNullOrWhiteSpace(body))
+            {
+                // return empty list or null depending on your API contract
+                return new Help_CategoryList();
+            }
+            return System.Text.Json.JsonSerializer.Deserialize<Help_CategoryList>(body, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
         public async Task<VolunteerList> GetAllVolunteers()  // Implementation of   V method 5
         {
-           return await Client.GetFromJsonAsync<VolunteerList>( uri + "/api/Select/VolunteerSelector");
+            HttpResponseMessage response = await Client.GetAsync("/api/Select/VolunteerSelector");
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                throw new Exception($"API returned {(int)response.StatusCode}: {err}");
+            }
+            string body = await response.Content.ReadAsStringAsync();
+            if (string.IsNullOrWhiteSpace(body))
+            {
+                // return empty list or null depending on your API contract
+                return new VolunteerList();
+            }
+            return System.Text.Json.JsonSerializer.Deserialize<VolunteerList>(body, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
         public async Task<ReportList> GetAllReports()  // Implementation of GetReport method 6
         {
-           return await Client.GetFromJsonAsync<ReportList>( uri + "/api/Select/ReportSelector");
+            HttpResponseMessage response = await Client.GetAsync("/api/Select/ReportSelector");
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                throw new Exception($"API returned {(int)response.StatusCode}: {err}");
+            }
+            string body = await response.Content.ReadAsStringAsync();
+            if (string.IsNullOrWhiteSpace(body))
+            {
+                // return empty list or null depending on your API contract
+                return new ReportList();
+            }
+            return System.Text.Json.JsonSerializer.Deserialize<ReportList>(body, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
         public async Task<PasserByList> GetAllPasserBys()  // Implementation of GetPasserBys method 7
         {
-           return await Client.GetFromJsonAsync<PasserByList>( uri + "/api/Select/PasserBySelector");
-        }
-    
-        public async Task<VolunteerRespondList> GetAllVolunteerResponds()  // Implementation of VolunteerRespondList method 8
-        {
-           return await Client.GetFromJsonAsync<VolunteerRespondList>( uri + "/api/Select/VolunteerRespondSelector");
-        }
-        public async  Task<StatusList> GetAllStatuses()  // Implementation of GetStatuses method 9
-        {
-           return await Client.GetFromJsonAsync<StatusList>( uri + "/api/Select/StatusSelector");
+            HttpResponseMessage response = await Client.GetAsync("/api/Select/PasserBySelector");
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                throw new Exception($"API returned {(int)response.StatusCode}: {err}");
+            }
+            string body = await response.Content.ReadAsStringAsync();
+            if (string.IsNullOrWhiteSpace(body))
+            {
+                // return empty list or null depending on your API contract
+                return new PasserByList();
+            }
+            return System.Text.Json.JsonSerializer.Deserialize<PasserByList>(body, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
-       
-      
+        public async Task<VolunteerRespondList> GetAllVolunteerResponds()  // Implementation of VolunteerRespondList method 8
+        {
+            HttpResponseMessage response = await Client.GetAsync("/api/Select/VolunteerRespondSelector");
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                throw new Exception($"API returned {(int)response.StatusCode}: {err}");
+            }
+            string body = await response.Content.ReadAsStringAsync();
+            if (string.IsNullOrWhiteSpace(body))
+            {
+                // return empty list or null depending on your API contract
+                return new VolunteerRespondList();
+            }
+            return System.Text.Json.JsonSerializer.Deserialize<VolunteerRespondList>(body, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        }
+        public async Task<StatusList> GetAllStatuses()  // Implementation of GetStatuses method 9
+        {
+            HttpResponseMessage response = await Client.GetAsync("/api/Select/StatusSelector");
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                throw new Exception($"API returned {(int)response.StatusCode}: {err}");
+            }
+            string body = await response.Content.ReadAsStringAsync();
+            if (string.IsNullOrWhiteSpace(body))
+            {
+                // return empty list or null depending on your API contract
+                return new StatusList();
+            }
+            return System.Text.Json.JsonSerializer.Deserialize<StatusList>(body, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        }
+
+
+
         // Insert all
 
 
-        public async Task<int> InsertACity(City city) // Implementation of InsertACity method 1
+        public async Task<int> InsertACity(City city) //1
         {
-            var response = await Client.PostAsJsonAsync<City>(uri + "/api/Select/InsertCity", city);
-            return response.IsSuccessStatusCode ? 1 : 0;
+            HttpResponseMessage response = await Client.PostAsJsonAsync("/api/Select/InsertCity", city);
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
         }
 
-        public async Task<int> InsertAnAdmin(Admin admin) // Implementation of InsertAnAdmin method 2
+        public async Task<int> InsertAnAdmin(Admin admin) //2
         {
-            var response = await Client.PostAsJsonAsync<Admin>(uri + "/api/Select/InsertAdmin", admin);
-            return response.IsSuccessStatusCode ? 1 : 0;
+            HttpResponseMessage response = await Client.PostAsJsonAsync("/api/Select/InsertAdmin", admin);
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
         }
 
-
-        public async Task<int> InsertAStatus(Status status) // Implementation of InsertAStatus method 3
+        public async Task<int> InsertAStatus(Status status) //3
         {
-            var response = await Client.PostAsJsonAsync<Status>(uri + "/api/Select/InsertStatus", status);
-            return response.IsSuccessStatusCode ? 1 : 0;
+            HttpResponseMessage response = await Client.PostAsJsonAsync("/api/Select/InsertStatus", status);
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
         }
 
-        public async Task<int> InsertAPerson(Person person) // Implementation of InsertAPerson method 4
+        public async Task<int> InsertAPerson(Person person) //4
         {
-            var response = await Client.PostAsJsonAsync<Person>(uri + "/api/Select/InsertPerson", person);
-            return response.IsSuccessStatusCode ? 1 : 0;
+            HttpResponseMessage response = await Client.PostAsJsonAsync("/api/Select/InsertPerson", person);
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
         }
 
-        public async Task<int> InsertAPasserBy(PasserBy passerBy) // Implementation of InsertAPasserBy method 5
+        public async Task<int> InsertAPasserBy(PasserBy passerBy) //5
         {
-            var response = await Client.PostAsJsonAsync<PasserBy>(uri + "/api/Select/InsertPasserBy", passerBy);
-            return response.IsSuccessStatusCode ? 1 : 0;
+            HttpResponseMessage response = await Client.PostAsJsonAsync("/api/Select/InsertPasserBy", passerBy);
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
         }
 
-        public async Task<int> InsertAReport(Report report) // Implementation of InsertAReport method 6
+        public async Task<int> InsertAReport(Report report) //6
         {
-            var response = await Client.PostAsJsonAsync<Report>(uri + "/api/Select/InsertReport", report);
-            return response.IsSuccessStatusCode ? 1 : 0;
+            HttpResponseMessage response = await Client.PostAsJsonAsync("/api/Select/InsertReport", report);
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
         }
 
-        public async Task<int> InsertAVolunteer(Volunteer volunteer) // Implementation of InsertAVolunteer method 7
+        public async Task<int> InsertAVolunteer(Volunteer volunteer) //7
         {
-            var response = await Client.PostAsJsonAsync<Volunteer>(uri + "/api/Select/InsertVolunteer", volunteer);
-            return response.IsSuccessStatusCode ? 1 : 0;
+            HttpResponseMessage response = await Client.PostAsJsonAsync("/api/Select/InsertVolunteer", volunteer);
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
         }
 
-        public async Task<int> InsertAVolunteerRespond(VolunteerRespond volunteerRespond) // Implementation of InsertAVolunteerRespond method 8
+        public async Task<int> InsertAVolunteerRespond(VolunteerRespond volunteerRespond) //8
         {
-            var response = await Client.PostAsJsonAsync<VolunteerRespond>(uri + "/api/Select/InsertVolunteerRespond", volunteerRespond);
-            return response.IsSuccessStatusCode ? 1 : 0;
+            HttpResponseMessage response = await Client.PostAsJsonAsync("/api/Select/InsertVolunteerRespond", volunteerRespond);
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
         }
 
-        public async Task<int> InsertAHelpCategory(Help_Category help_Category) // Implementation of InsertAHelp_Category method 9
+        public async Task<int> InsertAHelpCategory(Help_Category help_Category) ////9
         {
-            var response = await Client.PostAsJsonAsync<Help_Category>(uri + "/api/Select/InsertHelp_Category", help_Category);
-            return response.IsSuccessStatusCode ? 1 : 0;
-        }
-
-        // update all
-        public async Task<int> UpdateACity(City city) // Implementation of UpdateACity method 1
-        {
-            var response = await Client.PutAsJsonAsync<City>(uri + "/api/Select/UpdateCity", city);
-            return response.IsSuccessStatusCode ? 1 : 0;
-        }
-
-        public async Task<int> UpdateAStatus(Status status) // Implementation of UpdateStatus method 2
-        {
-            var response = await Client.PutAsJsonAsync<Status>(uri + "/api/Select/UpdateStatus", status);
-            return response.IsSuccessStatusCode ? 1 : 0;
-        }
-        public async Task<int> UpdateAnAdmin(Admin admin) // Implementation of UpdateAdmin method 3
-        {
-            var response = await Client.PutAsJsonAsync<Admin>(uri + "/api/Select/UpdateAdmin", admin);
-            return response.IsSuccessStatusCode ? 1 : 0;
-        }
-
-        public async Task<int> UpdateAPerson(Person person) // Implementation of UpdatePerson method 4
-        {
-            var response = await Client.PutAsJsonAsync<Person>(uri + "/api/Select/UpdatePerson", person);
-            return response.IsSuccessStatusCode ? 1 : 0;
-        }
-
-        public async Task<int> UpdateAPasserBy(PasserBy passerBy) // Implementation of UpdatePasserBy method 5
-        {
-            var response = await Client.PutAsJsonAsync<PasserBy>(uri + "/api/Select/UpdatePasserBy", passerBy);
-            return response.IsSuccessStatusCode ? 1 : 0;
-        }
-
-        public async Task<int> UpdateAReport(Report report)   // Implementation of UpdateReport method 6
-        {
-            var response = await Client.PutAsJsonAsync<Report>(uri + "/api/Select/UpdateReport", report);
-            return response.IsSuccessStatusCode ? 1 : 0;
-        }
-
-        public async Task<int> UpdateAVolunteer(Volunteer volunteer)  // Implementation of UpdateVolunteer method 7
-        {
-            var response = await Client.PutAsJsonAsync<Volunteer>(uri + "/api/Select/UpdateVolunteer", volunteer);
-            return response.IsSuccessStatusCode ? 1 : 0;
-        }
-
-        public async Task<int> UpdateAVolunteerRespond(VolunteerRespond volunteerRespond) // Implementation of UpdateVolunteerRespond method 8
-        {
-            var response = await Client.PutAsJsonAsync<VolunteerRespond>(uri + "/api/Select/UpdateVolunteerRespond", volunteerRespond);
-            return response.IsSuccessStatusCode ? 1 : 0;
-        }
-
-        public async Task<int> UpdateAHelpCategory(Help_Category helpCategory) // Implementation of UpdateHelp_Category method 9
-        {
-            var response = await Client.PutAsJsonAsync<Help_Category>(uri + "/api/Select/UpdateHelp_Category", helpCategory);
-            return response.IsSuccessStatusCode ? 1 : 0;
+            HttpResponseMessage response = await Client.PostAsJsonAsync("/api/Select/InsertHelp_Category", help_Category);
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
         }
 
         // delete all
-
-        public async Task<int> DeleteACity(int id)  // Implementation of DeleteACity method 1
+        public async Task<int> DeleteACity(int id) //1
         {
-           var response = await Client.DeleteAsync(uri + "/api/Insert/DeleteCity" + id);
-            return response.IsSuccessStatusCode ? 1 : 0;
+            HttpResponseMessage response = await Client.DeleteAsync($"/api/Select/DeleteCity/{id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
         }
 
-        public async Task<int> DeleteAStatus(int id) // Implementation of DeleteAStatus method 2
+        public async Task<int> DeleteAStatus(int id) //2
         {
-            var response = await Client.DeleteAsync(uri + "/api/Insert/DeleteStatus" + id);
-            return response.IsSuccessStatusCode ? 1 : 0;
+            HttpResponseMessage response = await Client.DeleteAsync($"/api/Select/DeleteStatus/{id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
         }
 
-        public async Task<int> DeleteAPerson(int id) // implementation of delete APerson method 3
+        public async Task<int> DeleteAPerson(int id) //3
         {
-            var response = await Client.DeleteAsync(uri + "/api/Insert/DeleteAPerson" + id);
-            return response.IsSuccessStatusCode ? 1 : 0;
+            HttpResponseMessage response = await Client.DeleteAsync($"/api/Select/DeleteAPerson/{id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
         }
 
-        public async Task<int> DeleteAnAdmin(int id) // Implementation of DeleteAnAdmin method 4
+        public async Task<int> DeleteAnAdmin(int id) //4
         {
-            var response = await Client.DeleteAsync(uri + "/api/Insert/DeleteAdmin" + id);
-            return response.IsSuccessStatusCode ? 1 : 0;
+            HttpResponseMessage response = await Client.DeleteAsync($"/api/Select/DeleteAdmin/{id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
         }
 
-        public async Task<int> DeleteAPasserBy(int id) // Implementation of DeleteAPasserBy method 5
+        public async Task<int> DeleteAPasserBy(int id) //5
         {
-            var response = await Client.DeleteAsync(uri + "/api/Insert/DeletePasserBy" + id);
-            return response.IsSuccessStatusCode ? 1 : 0;
+            HttpResponseMessage response = await Client.DeleteAsync($"/api/Select/DeletePasserBy/{id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
         }
 
-        public async Task<int> DeleteAReport(int id) // Implementation of DeleteAReport method 6
+        public async Task<int> DeleteAReport(int id) //6
         {
-            var response = await Client.DeleteAsync(uri + "/api/Insert/DeleteReport" + id);
-            return response.IsSuccessStatusCode ? 1 : 0;
+            HttpResponseMessage response = await Client.DeleteAsync($"/api/Select/DeleteReport/{id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
         }
 
-        public async Task<int> DeleteAVolunteer(int id) // Implementation of DeleteAVolunteer method 7
+        public async Task<int> DeleteAVolunteer(int id) //7
         {
-            var response = await Client.DeleteAsync(uri + "/api/Insert/DeleteVolunteer" + id);
-            return response.IsSuccessStatusCode ? 1 : 0;
+            HttpResponseMessage response = await Client.DeleteAsync($"/api/Select/DeleteVolunteer/{id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
         }
 
-        public async Task<int> DeleteAVolunteerRespond(int id) // Implementation of DeleteAVolunteerRespond method 8
+        public async Task<int> DeleteAVolunteerRespond(int id) //8
         {
-            var response = await Client.DeleteAsync(uri + "/api/Insert/DeleteVolunteerRespond" + id);
-            return response.IsSuccessStatusCode ? 1 : 0;
+            HttpResponseMessage response = await Client.DeleteAsync($"/api/Select/DeleteVolunteerRespond/{id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
         }
 
-        public async Task<int> DeleteAHelpCategory(int id) // Implementation of DeleteAHelp_Category method 9
+        public async Task<int> DeleteAHelpCategory(int id) //9
         {
-            var response = await Client.DeleteAsync(uri + "/api/Insert/DeleteHelp_Category" + id);
-            return response.IsSuccessStatusCode ? 1 : 0;
+            HttpResponseMessage response = await Client.DeleteAsync($"/api/Select/DeleteHelp_Category/{id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
         }
 
-        
-       
+        ///UPDATE
+
+        public async Task<int> UpdateACity(City city) //1
+        {
+            HttpResponseMessage response = await Client.PutAsJsonAsync("/api/Select/UpdateCity", city);
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
+
+        }
+
+        public async Task<int> UpdateAStatus(Status status) //1
+        {
+            HttpResponseMessage response = await Client.PutAsJsonAsync("/api/Select/UpdateStatus", status);
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
+
+        }
+
+        public async Task<int> UpdateAnAdmin(Admin admin) //2
+        {
+            HttpResponseMessage response = await Client.PutAsJsonAsync("/api/Select/UpdateAdmin", admin);
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
+        }
+
+        public async Task<int> UpdateAPerson(Person person) //3
+        {
+            HttpResponseMessage response = await Client.PutAsJsonAsync("/api/Select/UpdatePerson", person);
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
+        }
+
+        public async Task<int> UpdateAPasserBy(PasserBy passerBy) //4
+        {
+            HttpResponseMessage response = await Client.PutAsJsonAsync("/api/Select/UpdatePasserBy", passerBy);
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
+        }
+
+
+
+        public async Task<int> UpdateAReport(Report report) //5
+        {
+            HttpResponseMessage response = await Client.PutAsJsonAsync("/api/Select/UpdateReport", report);
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
+
+        }
+
+        public async Task<int> UpdateAVolunteer(Volunteer volunteer) //6
+        {
+            HttpResponseMessage response = await Client.PutAsJsonAsync("/api/Select/UpdateVolunteer", volunteer);
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
+
+        }
+
+        public async Task<int> UpdateAVolunteerRespond(VolunteerRespond volunteerRespond) //7
+        {
+            HttpResponseMessage response = await Client.PutAsJsonAsync("/api/Select/UpdateVolunteerRespond", volunteerRespond);
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
+        }
+
+        public async Task<int> UpdateAHelpCategory(Help_Category helpCategory) //8
+        {
+            HttpResponseMessage response = await Client.PutAsJsonAsync("/api/Select/UpdateHelp_Category", helpCategory);
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
+
+        }
+
+        public async Task<int> UpdateAHelp_Category(Help_Category help_Category) //9
+        {
+            HttpResponseMessage response = await Client.PutAsJsonAsync("/api/Select/UpdateHelp_Category", help_Category);
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error {(int)response.StatusCode}: {err}");
+                return 0;
+            }
+            return 1;
+        }
+
+
+
+
+
+
+
     }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+

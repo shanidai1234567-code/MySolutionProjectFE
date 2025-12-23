@@ -21,35 +21,13 @@ namespace WebApplication1.Controllers
         [HttpGet]
         [ActionName("CitySelector")] //1            
 
-
-        public ActionResult<CityList> SelectAllCities()
+        public CityList SelectAllCities()
         {
-            CityList cities = null;
-            try
-            {
-                Console.WriteLine("--- SERVER: Starting DB Select ---"); // Check if this logs
-
-                CityDB db = new CityDB();
-                cities = db.SelectAll(); // 🚨 BREAKPOINT HERE: See if this line throws an exception!
-
-                Console.WriteLine($"--- SERVER: Found {cities?.Count ?? 0} cities ---"); // Check if this logs
-
-                // Return the data
-                return Ok(cities);
-            }
-            catch (Exception ex)
-            {
-                // 🚨 CRITICAL: Log or throw the exception clearly. 
-                // If an exception occurs here, the framework might return an empty 200 OK by default.
-                Console.WriteLine($"--- SERVER EXCEPTION: {ex.Message} ---");
-                // Depending on your framework, you may need to explicitly return an error status here.
-                // e.g., throw; or return StatusCode(500, ex.Message);
-
-                // Return an empty list to avoid null issues if you must continue
-                return new CityList();
-            }
-
+            CityDB db = new CityDB();
+            CityList city = db.SelectAll();
+            return city;
         }
+
 
         [HttpGet]
         [ActionName("StatusSelector")] //2
