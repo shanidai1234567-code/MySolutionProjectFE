@@ -298,19 +298,19 @@ namespace WebApplication1.Controllers
 
         //delete all
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ActionName("DeleteCity")]
-
-        public void DeleteCity(int id) //1
+        public IActionResult DeleteCity(int id) //1
         {
             CityDB db = new CityDB();
             City city = CityDB.SelectById(id);
+            if (city == null) return NotFound();   // avoid passing null to Delete
             db.Delete(city);
             int x = db.SaveChanges();
-
+            return Ok(x);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ActionName("DeleteStatus")]
         public void DeleteStatus(int id) //2
         {
@@ -320,7 +320,8 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpDelete]
+       
+        [HttpDelete("{id}")]
         [ActionName("DeleteAdmin")]
         public void DeleteAdmin(int id) //3
         {
@@ -331,7 +332,7 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ActionName("DeleteHelp_Category")]
         public void DeleteHelp_Category(int id) //4
         {
@@ -341,7 +342,7 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ActionName("DeletePasserBy")]
         public void DeletePasserBy(int id) //5
         {
@@ -351,7 +352,7 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ActionName("DeleteVolunteer")]
         public void DeleteVolunteer(int id) //6
         {
@@ -361,7 +362,7 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ActionName("DeletePerson")]
         public void DeletePerson(int id) //7
         {
@@ -371,7 +372,7 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ActionName("DeleteReport")]
         public void DeleteReport(int id) //8
         {
@@ -381,7 +382,7 @@ namespace WebApplication1.Controllers
             int x = db.SaveChanges();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ActionName("DeleteVolunteerRespond")]
         public void DeleteVolunteerRespond(int id) //9
         {

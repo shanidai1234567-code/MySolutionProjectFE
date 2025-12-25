@@ -16,63 +16,63 @@ namespace Test_With_Server
             //select tests:
             //Console.WriteLine("Hello, World!");
             MyApi myApi = new MyApi();
-            //CityList cl = await myApi.GetAllCities(); // call to the server to get all cities 1
-            //if (cl == null)
-            //{
-            //    Console.WriteLine("Failed to get cities. Check logs or API response.");
-            //}
-            //else
-            //{
-            //    foreach (City c in cl) Console.WriteLine(c);
-            //}
+            CityList cl = await myApi.GetAllCities(); // call to the server to get all cities 1
+            if (cl == null)
+            {
+                Console.WriteLine("Failed to get cities. Check logs or API response.");
+            }
+            else
+            {
+                foreach (City c in cl) Console.WriteLine(c);
+            }
 
-            //PersonList pS = await myApi.GetAllPersons(); // call to the server to get all persons 2
-            //foreach (Person p in pS)
-            //{
-            //    Console.WriteLine($"{p}");
-            //}
+            PersonList pS = await myApi.GetAllPersons(); // call to the server to get all persons 2
+            foreach (Person p in pS)
+            {
+                Console.WriteLine($"{p}");
+            }
 
-            //AdminList aS = await myApi.GetAllAdmins(); // call to the server to get all admins 3
-            //foreach (Admin a in aS)
-            //{
-            //    Console.WriteLine($"{a}");
-            //}
+            AdminList aS = await myApi.GetAllAdmins(); // call to the server to get all admins 3
+            foreach (Admin a in aS)
+            {
+                Console.WriteLine($"{a}");
+            }
 
-            //Help_CategoryList hCS = await myApi.GetAllHelpCategories(); // call to the server to get all help categories 4
-            //foreach (Help_Category hC in hCS)
-            //{
-            //    Console.WriteLine($"{hC}");
-            //}
+            Help_CategoryList hCS = await myApi.GetAllHelpCategories(); // call to the server to get all help categories 4
+            foreach (Help_Category hC in hCS)
+            {
+                Console.WriteLine($"{hC}");
+            }
 
-            //PasserByList pbS = await myApi.GetAllPasserBys(); // call to the server to get all passerbys 5
-            //foreach (PasserBy pb in pbS)
-            //{
-            //    Console.WriteLine($"{pb}");
-            //}
+            PasserByList pbS = await myApi.GetAllPasserBys(); // call to the server to get all passerbys 5
+            foreach (PasserBy pb in pbS)
+            {
+                Console.WriteLine($"{pb}");
+            }
 
-            //ReportList rS = await myApi.GetAllReports(); // call to the server to get all reports 6
-            //foreach (Report r in rS)
-            //{
-            //    Console.WriteLine($"{r}");
-            //}
+            ReportList rS = await myApi.GetAllReports(); // call to the server to get all reports 6
+            foreach (Report r in rS)
+            {
+                Console.WriteLine($"{r}");
+            }
 
-            //StatusList sS = await myApi.GetAllStatuses(); // call to the server to get all statuses 7   
-            //foreach (Status s in sS)
-            //{
-            //    Console.WriteLine($"{s}");
-            //}
+            StatusList sS = await myApi.GetAllStatuses(); // call to the server to get all statuses 7   
+            foreach (Status s in sS)
+            {
+                Console.WriteLine($"{s}");
+            }
 
-            //VolunteerList vS = await myApi.GetAllVolunteers(); // call to the server to get all volunteers 8
-            //foreach (Volunteer v in vS)
-            //{
-            //    Console.WriteLine($"{v}");
-            //}
+            VolunteerList vS = await myApi.GetAllVolunteers(); // call to the server to get all volunteers 8
+            foreach (Volunteer v in vS)
+            {
+                Console.WriteLine($"{v}");
+            }
 
-            //VolunteerRespondList vrS = await myApi.GetAllVolunteerResponds(); // call to the server to get all volunteer responds 9
-            //foreach (VolunteerRespond vr in vrS)
-            //{
-            //    Console.WriteLine($"{vr}");
-            //}
+            VolunteerRespondList vrS = await myApi.GetAllVolunteerResponds(); // call to the server to get all volunteer responds 9
+            foreach (VolunteerRespond vr in vrS)
+            {
+                Console.WriteLine($"{vr}");
+            }
 
             //// insert tests:
 
@@ -307,131 +307,131 @@ namespace Test_With_Server
             //delete tests:
 
             // --- Delete City ---1
-            Console.WriteLine("\nDelete City");
-            CityList cities1 = await myApi.GetAllCities();
-            if (cities1.Any())
-            {
-                City cityToDelete = cities1.Last();
-                int cy1 = await myApi.DeleteACity(cityToDelete.Id);
-                Console.WriteLine($"{cy1} rows were deleted");
-                Console.WriteLine("cities after delete: ");
-                cities1 = await myApi.GetAllCities();
-                foreach (City c in cities1)
-                    Console.WriteLine(c.City_Name + "  id:" + c.Id);
+            //Console.WriteLine("\nDelete City");
+            //CityList cities1 = await myApi.GetAllCities();
+            //if (cities1.Any())
+            //{
+            //    City cityToDelete = cities1.Last();
+            //    int cy1 = await myApi.DeleteACity(cityToDelete.Id);
+            //    Console.WriteLine($"{cy1} rows were deleted");
+            //    Console.WriteLine("cities after delete: ");
+            //    cities1 = await myApi.GetAllCities();
+            //    foreach (City c in cities1)
+            //        Console.WriteLine(c.City_Name + "  id:" + c.Id);
 
-            }
+            //}
 
-            Console.WriteLine("\nDelete Status");
-            // --- Delete Status ---2
-            StatusList statuses1 = await myApi.GetAllStatuses();
-            if (statuses1.Any())
-            {
-                Status statusToDelete = statuses1.Last();
-                int sy2 = await myApi.DeleteAStatus(statusToDelete.Id);
-                Console.WriteLine($"{sy2} rows were deleted");
-                Console.WriteLine("statuses after delete: ");
-                statuses1 = await myApi.GetAllStatuses();
-                foreach (Status s1 in statuses1)
-                    Console.WriteLine(s1.Description + "  id:" + s1.Id);
-            }
+            //Console.WriteLine("\nDelete Status");
+            //// --- Delete Status ---2
+            //StatusList statuses1 = await myApi.GetAllStatuses();
+            //if (statuses1.Any())
+            //{
+            //    Status statusToDelete = statuses1.Last();
+            //    int sy2 = await myApi.DeleteAStatus(statusToDelete.Id);
+            //    Console.WriteLine($"{sy2} rows were deleted");
+            //    Console.WriteLine("statuses after delete: ");
+            //    statuses1 = await myApi.GetAllStatuses();
+            //    foreach (Status s1 in statuses1)
+            //        Console.WriteLine(s1.Description + "  id:" + s1.Id);
+            //}
 
-            Console.WriteLine("\nDelete Admin");
-            // --- Delete Admin ---3
-            AdminList admins1 = await myApi.GetAllAdmins();
-            if (admins1.Any())
-            {
-                Admin adminToDelete = admins1.Last();
-                int ay2 = await myApi.DeleteAnAdmin(adminToDelete.Id);
-                Console.WriteLine($"{ay2} rows were deleted");
-                Console.WriteLine("admins after delete: ");
-                admins1 = await myApi.GetAllAdmins();
-                foreach (Admin a in admins1)
-                    Console.WriteLine(a.FirstName + "  id:" + a.Id);
-            }
+            //Console.WriteLine("\nDelete Admin");
+            //// --- Delete Admin ---3
+            //AdminList admins1 = await myApi.GetAllAdmins();
+            //if (admins1.Any())
+            //{
+            //    Admin adminToDelete = admins1.Last();
+            //    int ay2 = await myApi.DeleteAnAdmin(adminToDelete.Id);
+            //    Console.WriteLine($"{ay2} rows were deleted");
+            //    Console.WriteLine("admins after delete: ");
+            //    admins1 = await myApi.GetAllAdmins();
+            //    foreach (Admin a in admins1)
+            //        Console.WriteLine(a.FirstName + "  id:" + a.Id);
+            //}
 
-            Console.WriteLine("\nDelete PasserBy");
-            // --- Delete PasserBy ---4
-            PasserByList passerBys1 = await myApi.GetAllPasserBys();
-            if (passerBys1.Any())
-            {
-                PasserBy passerByToDelete = passerBys1.Last();
-                int pby2 = await myApi.DeleteAPasserBy(passerByToDelete.Id);
-                Console.WriteLine($"{pby2} rows were deleted");
-                Console.WriteLine("passerBys after delete: ");
-                passerBys1 = await myApi.GetAllPasserBys();
-                foreach (PasserBy pb in passerBys1)
-                    Console.WriteLine(pb.FirstName + "  id:" + pb.Id);
-            }
+            //Console.WriteLine("\nDelete PasserBy");
+            //// --- Delete PasserBy ---4
+            //PasserByList passerBys1 = await myApi.GetAllPasserBys();
+            //if (passerBys1.Any())
+            //{
+            //    PasserBy passerByToDelete = passerBys1.Last();
+            //    int pby2 = await myApi.DeleteAPasserBy(passerByToDelete.Id);
+            //    Console.WriteLine($"{pby2} rows were deleted");
+            //    Console.WriteLine("passerBys after delete: ");
+            //    passerBys1 = await myApi.GetAllPasserBys();
+            //    foreach (PasserBy pb in passerBys1)
+            //        Console.WriteLine(pb.FirstName + "  id:" + pb.Id);
+            //}
 
-            Console.WriteLine("\nDelete Help Category");
-            // --- Delete Help Category ---5
-            Help_CategoryList helpCategories1 = await myApi.GetAllHelpCategories();
-            if (helpCategories1.Any())
-            {
-                Help_Category helpCategoryToDelete = helpCategories1.Last();
-                int hcy2 = await myApi.DeleteAHelpCategory(helpCategoryToDelete.Id);
-                Console.WriteLine($"{hcy2} rows were deleted");
-                Console.WriteLine("help categories after delete: ");
-                helpCategories1 = await myApi.GetAllHelpCategories();
-                foreach (Help_Category hc in helpCategories1)
-                    Console.WriteLine(hc.Description + "  id:" + hc.Id);
-            }
+            //Console.WriteLine("\nDelete Help Category");
+            //// --- Delete Help Category ---5
+            //Help_CategoryList helpCategories1 = await myApi.GetAllHelpCategories();
+            //if (helpCategories1.Any())
+            //{
+            //    Help_Category helpCategoryToDelete = helpCategories1.Last();
+            //    int hcy2 = await myApi.DeleteAHelpCategory(helpCategoryToDelete.Id);
+            //    Console.WriteLine($"{hcy2} rows were deleted");
+            //    Console.WriteLine("help categories after delete: ");
+            //    helpCategories1 = await myApi.GetAllHelpCategories();
+            //    foreach (Help_Category hc in helpCategories1)
+            //        Console.WriteLine(hc.Description + "  id:" + hc.Id);
+            //}
 
-            Console.WriteLine("\nDelete Volunteer");
-            // --- Delete Volunteer ---6
-            VolunteerList volunteers1 = await myApi.GetAllVolunteers();
-            if (volunteers1.Any())
-            {
-                Volunteer volunteerToDelete = volunteers1.Last();
-                int vy2 = await myApi.DeleteAVolunteer(volunteerToDelete.Id);
-                Console.WriteLine($"{vy2} rows were deleted");
-                Console.WriteLine("volunteers after delete: ");
-                volunteers1 = await myApi.GetAllVolunteers();
-                foreach (Volunteer v in volunteers1)
-                    Console.WriteLine(v.FirstName + "  id:" + v.Id);
-            }
+            //Console.WriteLine("\nDelete Volunteer");
+            //// --- Delete Volunteer ---6
+            //VolunteerList volunteers1 = await myApi.GetAllVolunteers();
+            //if (volunteers1.Any())
+            //{
+            //    Volunteer volunteerToDelete = volunteers1.Last();
+            //    int vy2 = await myApi.DeleteAVolunteer(volunteerToDelete.Id);
+            //    Console.WriteLine($"{vy2} rows were deleted");
+            //    Console.WriteLine("volunteers after delete: ");
+            //    volunteers1 = await myApi.GetAllVolunteers();
+            //    foreach (Volunteer v in volunteers1)
+            //        Console.WriteLine(v.FirstName + "  id:" + v.Id);
+            //}
 
-            Console.WriteLine("\nDelete Person");
-            // --- Delete Person ---7
-            PersonList persons1 = await myApi.GetAllPersons();
-            if (persons1.Any())
-            {
-                Person personToDelete = persons1.Last();
-                int py2 = await myApi.DeleteAPerson(personToDelete.Id);
-                Console.WriteLine($"{py2} rows were deleted");
-                Console.WriteLine("persons after delete: ");
-                persons1 = await myApi.GetAllPersons();
-                foreach (Person p in persons1)
-                    Console.WriteLine(p.FirstName + "  id:" + p.Id);
-            }
+            //Console.WriteLine("\nDelete Person");
+            //// --- Delete Person ---7
+            //PersonList persons1 = await myApi.GetAllPersons();  //**
+            //if (persons1.Any())
+            //{
+            //    Person personToDelete = persons1.Last();
+            //    int py2 = await myApi.DeleteAPerson(personToDelete.Id);
+            //    Console.WriteLine($"{py2} rows were deleted");
+            //    Console.WriteLine("persons after delete: ");
+            //    persons1 = await myApi.GetAllPersons();
+            //    foreach (Person p in persons1)
+            //        Console.WriteLine(p.FirstName + "  id:" + p.Id);
+            //}
 
-            Console.WriteLine("\nDelete Report");
-            // --- Delete Report ---8
-            ReportList reports1 = await myApi.GetAllReports();
-            if (reports1.Any())
-            {
-                Report personToDelete = reports1.Last();
-                int ry2 = await myApi.DeleteAReport(personToDelete.Id);
-                Console.WriteLine($"{ry2} rows were deleted");
-                Console.WriteLine("reports after delete: ");
-                reports1 = await myApi.GetAllReports();
-                foreach (Report r in reports1)
-                    Console.WriteLine(r.Description + "  id:" + r.Id);
-            }
+            //Console.WriteLine("\nDelete Report");
+            //// --- Delete Report ---8
+            //ReportList reports1 = await myApi.GetAllReports();
+            //if (reports1.Any())
+            //{
+            //    Report personToDelete = reports1.Last();
+            //    int ry2 = await myApi.DeleteAReport(personToDelete.Id);
+            //    Console.WriteLine($"{ry2} rows were deleted");
+            //    Console.WriteLine("reports after delete: ");
+            //    reports1 = await myApi.GetAllReports();
+            //    foreach (Report r in reports1)
+            //        Console.WriteLine(r.Description + "  id:" + r.Id);
+            //}
 
-            Console.WriteLine("\nDelete Volunteer Respond");
-            // --- Delete Volunteer Respond ---9
-            VolunteerRespondList volunteerResponds1 = await myApi.GetAllVolunteerResponds();
-            if (volunteerResponds1.Any())
-            {
-                VolunteerRespond vrToDelete = volunteerResponds1.Last();
-                int vry2 = await myApi.DeleteAVolunteerRespond(vrToDelete.Id);
-                Console.WriteLine($"{vry2} rows were deleted");
-                Console.WriteLine("volunteer responds after delete: ");
-                volunteerResponds1 = await myApi.GetAllVolunteerResponds();
-                foreach (VolunteerRespond vr in volunteerResponds1)
-                    Console.WriteLine("id:" + vr.Id + " Report id:" + vr.IdReport?.Id + " Volunteer id:" + vr.IdVol?.Id);
-            }
+            //Console.WriteLine("\nDelete Volunteer Respond");
+            //// --- Delete Volunteer Respond ---9
+            //VolunteerRespondList volunteerResponds1 = await myApi.GetAllVolunteerResponds();
+            //if (volunteerResponds1.Any())
+            //{
+            //    VolunteerRespond vrToDelete = volunteerResponds1.Last();
+            //    int vry2 = await myApi.DeleteAVolunteerRespond(vrToDelete.Id);
+            //    Console.WriteLine($"{vry2} rows were deleted");
+            //    Console.WriteLine("volunteer responds after delete: ");
+            //    volunteerResponds1 = await myApi.GetAllVolunteerResponds();
+            //    foreach (VolunteerRespond vr in volunteerResponds1)
+            //        Console.WriteLine("id:" + vr.Id + " Report id:" + vr.IdReport?.Id + " Volunteer id:" + vr.IdVol?.Id);
+            //}
 
             Console.ReadLine();
             Console.WriteLine("End of tests.");

@@ -312,7 +312,7 @@ namespace ICloseToHelp
         // delete all
         public async Task<int> DeleteACity(int id) //1
         {
-            HttpResponseMessage response = await Client.DeleteAsync($"/api/Select/DeleteCity/{id}");
+            HttpResponseMessage response = await Client.DeleteAsync($"api/Select/DeleteCity/{id}");
             if (!response.IsSuccessStatusCode)
             {
                 string err = await response.Content.ReadAsStringAsync();
@@ -324,7 +324,7 @@ namespace ICloseToHelp
 
         public async Task<int> DeleteAStatus(int id) //2
         {
-            HttpResponseMessage response = await Client.DeleteAsync($"/api/Select/DeleteStatus/{id}");
+            HttpResponseMessage response = await Client.DeleteAsync($"api/Select/DeleteStatus/{id}");
             if (!response.IsSuccessStatusCode)
             {
                 string err = await response.Content.ReadAsStringAsync();
@@ -336,7 +336,7 @@ namespace ICloseToHelp
 
         public async Task<int> DeleteAPerson(int id) //3
         {
-            HttpResponseMessage response = await Client.DeleteAsync($"/api/Select/DeleteAPerson/{id}");
+            HttpResponseMessage response = await Client.DeleteAsync($"api/Select/DeleteAPerson/{id}");
             if (!response.IsSuccessStatusCode)
             {
                 string err = await response.Content.ReadAsStringAsync();
@@ -348,7 +348,7 @@ namespace ICloseToHelp
 
         public async Task<int> DeleteAnAdmin(int id) //4
         {
-            HttpResponseMessage response = await Client.DeleteAsync($"/api/Select/DeleteAdmin/{id}");
+            HttpResponseMessage response = await Client.DeleteAsync($"api/Select/DeleteAdmin/{id}");
             if (!response.IsSuccessStatusCode)
             {
                 string err = await response.Content.ReadAsStringAsync();
@@ -360,7 +360,7 @@ namespace ICloseToHelp
 
         public async Task<int> DeleteAPasserBy(int id) //5
         {
-            HttpResponseMessage response = await Client.DeleteAsync($"/api/Select/DeletePasserBy/{id}");
+            HttpResponseMessage response = await Client.DeleteAsync($"api/Select/DeletePasserBy/{id}");
             if (!response.IsSuccessStatusCode)
             {
                 string err = await response.Content.ReadAsStringAsync();
@@ -372,7 +372,7 @@ namespace ICloseToHelp
 
         public async Task<int> DeleteAReport(int id) //6
         {
-            HttpResponseMessage response = await Client.DeleteAsync($"/api/Select/DeleteReport/{id}");
+            HttpResponseMessage response = await Client.DeleteAsync($"api/Select/DeleteReport/{id}");
             if (!response.IsSuccessStatusCode)
             {
                 string err = await response.Content.ReadAsStringAsync();
@@ -384,7 +384,7 @@ namespace ICloseToHelp
 
         public async Task<int> DeleteAVolunteer(int id) //7
         {
-            HttpResponseMessage response = await Client.DeleteAsync($"/api/Select/DeleteVolunteer/{id}");
+            HttpResponseMessage response = await Client.DeleteAsync($"api/Select/DeleteVolunteer/{id}");
             if (!response.IsSuccessStatusCode)
             {
                 string err = await response.Content.ReadAsStringAsync();
@@ -396,7 +396,7 @@ namespace ICloseToHelp
 
         public async Task<int> DeleteAVolunteerRespond(int id) //8
         {
-            HttpResponseMessage response = await Client.DeleteAsync($"/api/Select/DeleteVolunteerRespond/{id}");
+            HttpResponseMessage response = await Client.DeleteAsync($"api/Select/DeleteVolunteerRespond/{id}");
             if (!response.IsSuccessStatusCode)
             {
                 string err = await response.Content.ReadAsStringAsync();
@@ -408,7 +408,7 @@ namespace ICloseToHelp
 
         public async Task<int> DeleteAHelpCategory(int id) //9
         {
-            HttpResponseMessage response = await Client.DeleteAsync($"/api/Select/DeleteHelp_Category/{id}");
+            HttpResponseMessage response = await Client.DeleteAsync($"api/Select/DeleteHelp_Category/{id}");
             if (!response.IsSuccessStatusCode)
             {
                 string err = await response.Content.ReadAsStringAsync();
