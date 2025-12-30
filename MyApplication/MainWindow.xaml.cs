@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MyApplication.pages;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,14 +17,25 @@ using System.Windows.Shapes;
 
 namespace MyApplication
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
-        public MainWindow()
+
+            // מחרוזת התחברות למסד הנתונים - שנה אותה לפי ההגדרות שלך
+            private string connectionString = @"Data Source=C:\Users\User\source\repos\shanidai1234567-code\MySolutionProjectFE\ViewModel\DatabaseBySup.accdb;";
+
+            public MainWindow()
+            {
+                InitializeComponent();
+            }
+
+        private void BtnGoToLogin_Click(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
+            Login loginWin = new Login(); // יצירת החלון שיצרנו קודם
+            loginWin.Show(); // פתיחת חלון ההתחברות
+            this.Close();    // סגירת החלון הנוכחי (הראשי)
         }
+
     }
-}
+    }
+

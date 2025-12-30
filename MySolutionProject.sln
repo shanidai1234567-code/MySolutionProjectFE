@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test1", "Test1\Test1.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{E0DB73F7-D33D-43B7-9A29-0B0E048DE116}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICloseToHelp", "ICloseToHelp\ICloseToHelp.csproj", "{652F29D3-18D5-4A80-85A0-AC42129C9B87}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Link", "ICloseToHelp\Link.csproj", "{652F29D3-18D5-4A80-85A0-AC42129C9B87}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test With Server", "Test With Server\Test With Server.csproj", "{E8DFB3D0-092F-441A-BF32-DF3812E88B25}"
 EndProject

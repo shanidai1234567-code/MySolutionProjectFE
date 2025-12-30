@@ -10,7 +10,7 @@ using ViewModel;
 
 namespace ICloseToHelp
 {
-    public interface InterfaceICloseToHelp
+    public interface InterfaceLink
     {
         //public  Task<CityList> GetCities(); // Retrieve all cities 1
         public Task<int> InsertACity( City city);

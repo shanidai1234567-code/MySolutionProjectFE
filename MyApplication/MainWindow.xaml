@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyApplication"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+       Title="התחברות למערכת" Height="450" Width="800">
+
     <Grid>
-        
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="ברוכים הבאים למערכת" FontSize="32" Margin="0,0,0,30"/>
+
+            <Button Content="עבור למסך התחברות" 
+                    Width="200" Height="50" 
+                    Background="#007ACC" Foreground="White"
+                    Click="BtnGoToLogin_Click"/>
+        </StackPanel>
     </Grid>
+
 </Window>

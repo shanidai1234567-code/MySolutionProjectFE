@@ -13,7 +13,7 @@ using ViewModel;
 
 namespace ICloseToHelp
 {
-    public class MyApi : InterfaceICloseToHelp
+    public class MyApi : InterfaceLink
     {
         string uri;
         public HttpClient Client;

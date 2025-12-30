@@ -9,6 +9,62 @@
       Title="Login">
 
     <Grid>
-        
+        <Image Source="C:\Users\User\Pictures\Screenshots\צילום מסך 2025-12-07 144054.png" 
+            Stretch="UniformToFill">
+            <Image.Effect>
+                <BlurEffect Radius="5" />
+            </Image.Effect>
+        </Image>
+        <Border Background="White" 
+             CornerRadius="15" 
+             Padding="30" 
+             VerticalAlignment="Center" 
+             HorizontalAlignment="Center" 
+             Width="280">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" Direction="270" ShadowDepth="2" Opacity="0.1"/>
+            </Border.Effect>
+
+            <StackPanel>
+                <TextBlock Text="כניסה למערכת" 
+                        FontSize="22" 
+                        FontWeight="ExtraLight" 
+                        HorizontalAlignment="Center" 
+                        Margin="0,0,0,25" 
+                        Foreground="#333333"/>
+
+                <TextBlock Text="הכנס סיסמה:" 
+        Margin="0,10,0,5" 
+        Foreground="#666666" 
+        HorizontalAlignment="Center"/>
+                <PasswordBox x:Name="txtPassword" 
+          Height="40" 
+          VerticalContentAlignment="Center" 
+          HorizontalContentAlignment="Center" Padding="10,0"
+          FontSize="16"/>
+
+
+                <Button x:Name="btnLogin" 
+                     Content="התחבר" 
+                     Margin="0,25,0,0" 
+                     Height="40" 
+                     Background="#28a745" 
+                     Foreground="White" 
+                     FontWeight="Bold"
+                     Cursor="Hand"
+                     Click="btnLogin_Click"/>
+
+                <Separator Margin="0,20" Background="#EEE"/>
+
+                <Button x:Name="btnAdminLogin" 
+                     Content="כניסת מנהל 🛠️" 
+                     Height="35" 
+                     Background="Transparent" 
+                     Foreground="#555" 
+                     BorderBrush="#CCC"
+                     Cursor="Hand"
+                     Click="btnAdminLogin_Click"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>
