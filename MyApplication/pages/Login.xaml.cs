@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MyApplication.pages;
+
 
 namespace MyApplication.pages
 {
@@ -30,66 +32,57 @@ namespace MyApplication.pages
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            string password = txtPassword.Password;
+            string password = txtPassword.Password; // קבלת הסיסמה מה-PasswordBox
 
             if (string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("אנא הכנס סיסמה", "שגיאה", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("נא להזין סיסמה", "שגיאה", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if (CheckUserPassword(password))
+            if (ValidateLogin(password))
             {
-                MessageBox.Show("התחברת בהצלחה כמשתמש!", "ברוך הבא", MessageBoxButton.OK, MessageBoxImage.Information);
-
+                // אם הסיסמה נכונה, עוברים לדף המתנדבים
+                
             }
             else
             {
-                MessageBox.Show("סיסמה שגויה", "שגיאה", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("סיסמה שגויה!", "כניסה נכשלה", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
-
-        private void btnAdminLogin_Click(object sender, RoutedEventArgs e)
+        private bool ValidateLogin(string pwd)
         {
-            string password = txtPassword.Password;
-            string adminPassword = "123";
+            bool isValid = false;
 
-            if (password == adminPassword)
-            {
-                MessageBox.Show("שלום מנהל, המערכת מוכנה", "כניסת מנהל", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            }
-            else
-            {
-                MessageBox.Show("סיסמת מנהל שגויה!", "אבטחה", MessageBoxButton.OK, MessageBoxImage.Stop);
-            }
-        }
-
-
-        private bool CheckUserPassword(string pass)
-        {
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-
-                    string query = "SELECT COUNT(1) FROM Person WHERE Password = @pass";
+                    // שאילתה שבודקת אם קיימת סיסמה כזו בטבלת המתנדבים
+                    string query = "SELECT COUNT(*) FROM Volunteers WHERE Password = @pwd";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@pass", pass);
-                        int count = Convert.ToInt32(cmd.ExecuteScalar());
-                        return count > 0;
+                        cmd.Parameters.AddWithValue("@pwd", pwd); // שימוש בפרמטר למניעת SQL Injection
+
+                        int count = (int)cmd.ExecuteScalar();
+                        if (count > 0) isValid = true;
                     }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("שגיאה בחיבור למסד הנתונים: " + ex.Message);
-                return false;
             }
+
+            return isValid;
         }
     }
+
+
+
+
 }
+
