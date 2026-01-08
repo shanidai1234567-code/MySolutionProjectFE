@@ -223,88 +223,88 @@ namespace Test1
             //INSERT ALL
 
 
-            Console.WriteLine("\nInsert City");
-            CityDB cdb3 = new CityDB();
-            City newCity3 = new City
-            {
-                City_Name = "Kiryat Ekron"
-            };
-            cdb3.Insert(newCity3);
-            int cy = cdb3.SaveChanges();
-            Console.WriteLine($"{cy} rows were inserted");
-            Console.WriteLine("cities after insert: ");
-            CityList cities = cdb3.SelectAll();
-            foreach (City c in cities)
-                Console.WriteLine(c.City_Name + "  id:" + c.Id);
+            //Console.WriteLine("\nInsert City");
+            //CityDB cdb3 = new CityDB();
+            //City newCity3 = new City
+            //{
+            //    City_Name = "Kiryat Ekron"
+            //};
+            //cdb3.Insert(newCity3);
+            //int cy = cdb3.SaveChanges();
+            //Console.WriteLine($"{cy} rows were inserted");
+            //Console.WriteLine("cities after insert: ");
+            //CityList cities = cdb3.SelectAll();
+            //foreach (City c in cities)
+            //    Console.WriteLine(c.City_Name + "  id:" + c.Id);
 
 
-            Console.WriteLine("\nInsert Status");
-            StatusDB sdb = new StatusDB();
-            Status newStatus = new Status
-            {
-                Description = "In Progress"
-            };
-            sdb.Insert(newStatus);
-            int sy = sdb.SaveChanges();
-            Console.WriteLine($"{sy} rows were inserted");
-            Console.WriteLine("statuses after insert: ");
-            StatusList statuses = sdb.SelectAll();
-            foreach (Status s1 in statuses)
-                Console.WriteLine(s1.Description + "  id:" + s1.Id);
+            //Console.WriteLine("\nInsert Status");
+            //StatusDB sdb = new StatusDB();
+            //Status newStatus = new Status
+            //{
+            //    Description = "In Progress"
+            //};
+            //sdb.Insert(newStatus);
+            //int sy = sdb.SaveChanges();
+            //Console.WriteLine($"{sy} rows were inserted");
+            //Console.WriteLine("statuses after insert: ");
+            //StatusList statuses = sdb.SelectAll();
+            //foreach (Status s1 in statuses)
+            //    Console.WriteLine(s1.Description + "  id:" + s1.Id);
 
 
-            Console.WriteLine("\nInsert Volunteer");
-            VolunteerDB volunteerDB = new VolunteerDB();
-            CityDB cityDB = new CityDB();
-            CityList Citylist = cityDB.SelectAll();
+            //Console.WriteLine("\nInsert Volunteer");
+            //VolunteerDB volunteerDB = new VolunteerDB();
+            //CityDB cityDB = new CityDB();
+            //CityList Citylist = cityDB.SelectAll();
 
-            Volunteer newVolunteer = new Volunteer
-            {
-                FirstName = "Ilan",
-                LastName = "Cohen",
-                PhoneNumber = "0523666689",
-                Pass = "677584",
-                Street = "Rahoven",
-                StreetNumber = 10,
-                CityNum = Citylist.Last(),
-                StoreOpeningTime = new DateTime(2023, 1, 1, 9, 0, 0),
-                StoreClosingTime = new DateTime(2023, 1, 1, 17, 0, 0),
-                JoinDate = DateTime.Now,
-                Location_X = 34.7818,
-                Location_Y = 32.0853,
-                Help_Category = Help_CategoryDB.SelectById(1)
+            //Volunteer newVolunteer = new Volunteer
+            //{
+            //    FirstName = "Ilan",
+            //    LastName = "Cohen",
+            //    PhoneNumber = "0523666689",
+            //    Pass = "677584",
+            //    Street = "Rahoven",
+            //    StreetNumber = 10,
+            //    CityNum = Citylist.Last(),
+            //    StoreOpeningTime = new DateTime(2023, 1, 1, 9, 0, 0),
+            //    StoreClosingTime = new DateTime(2023, 1, 1, 17, 0, 0),
+            //    JoinDate = DateTime.Now,
+            //    Location_X = 34.7818,
+            //    Location_Y = 32.0853,
+            //    Help_Category = Help_CategoryDB.SelectById(1)
 
-            };
-            volunteerDB.Insert(newVolunteer);
-            int vy = volunteerDB.SaveChanges();
-            Console.WriteLine($"{vy} rows were inserted");
-            Console.WriteLine("volunteers after insert: ");
-            VolunteerList volunteers = volunteerDB.SelectAll();
-            foreach (Volunteer v in volunteers)
-                Console.WriteLine(v.FirstName + "  id:" + v.Id);
+            //};
+            //volunteerDB.Insert(newVolunteer);
+            //int vy = volunteerDB.SaveChanges();
+            //Console.WriteLine($"{vy} rows were inserted");
+            //Console.WriteLine("volunteers after insert: ");
+            //VolunteerList volunteers = volunteerDB.SelectAll();
+            //foreach (Volunteer v in volunteers)
+            //    Console.WriteLine(v.FirstName + "  id:" + v.Id);
 
 
-            Console.WriteLine("\nInsert Person");
-            PersonDB personDB5 = new PersonDB();
-            CityDB cityDB5 = new CityDB();
-            CityList Citylist5 = cityDB5.SelectAll();
-            Person newPerson = new Person
-            {
-                FirstName = "David",
-                LastName = "Levi",
-                PhoneNumber = "0521234567",
-                Street = "Herzl",
-                CityNum = Citylist5.Last(),
-                StreetNumber = 5,
-                Pass = "123456"
-            };
-            personDB5.Insert(newPerson);
-            int personRowsAffected = personDB5.SaveChanges();
-            Console.WriteLine($"{personRowsAffected} rows were inserted");
-            Console.WriteLine("persons after insert: ");
-            PersonList personList = personDB5.SelectAll();
-            foreach (Person p in personList)
-                Console.WriteLine(p.FirstName + "  id:" + p.Id);
+            //Console.WriteLine("\nInsert Person");
+            //PersonDB personDB5 = new PersonDB();
+            //CityDB cityDB5 = new CityDB();
+            //CityList Citylist5 = cityDB5.SelectAll();
+            //Person newPerson = new Person
+            //{
+            //    FirstName = "David",
+            //    LastName = "Levi",
+            //    PhoneNumber = "0521234567",
+            //    Street = "Herzl",
+            //    CityNum = Citylist5.Last(),
+            //    StreetNumber = 5,
+            //    Pass = "123456"
+            //};
+            //personDB5.Insert(newPerson);
+            //int personRowsAffected = personDB5.SaveChanges();
+            //Console.WriteLine($"{personRowsAffected} rows were inserted");
+            //Console.WriteLine("persons after insert: ");
+            //PersonList personList = personDB5.SelectAll();
+            //foreach (Person p in personList)
+            //    Console.WriteLine(p.FirstName + "  id:" + p.Id);
 
 
             Console.WriteLine("\nInsert PasserBy");
@@ -331,62 +331,141 @@ namespace Test1
             foreach (PasserBy p in passerByList)
                 Console.WriteLine(p.FirstName + "  id:" + p.Id);
 
-            Console.WriteLine("\n insert HelpCategory");
-            Help_CategoryDB help_CategoryDB = new Help_CategoryDB();
-            Help_Category newHelpCategory = new Help_Category
+            //Console.WriteLine("\n insert HelpCategory");
+            //Help_CategoryDB help_CategoryDB = new Help_CategoryDB();
+            //Help_Category newHelpCategory = new Help_Category
+            //{
+            //    Description = "גישה לתשתיות העסק"
+            //};
+            //help_CategoryDB.Insert(newHelpCategory);
+            //int helpCategoryRowsAffected = help_CategoryDB.SaveChanges();
+            //Console.WriteLine($"{helpCategoryRowsAffected} rows were inserted");
+            //Console.WriteLine("HelpCategories after insert: ");
+            //Help_CategoryList help_CategoryList = help_CategoryDB.SelectAll();
+            //foreach (Help_Category hc in help_CategoryList)
+            //    Console.WriteLine(hc.Description + "  id:" + hc.Id);
+
+
+            //Console.WriteLine("\n insert Report");
+            //ReportDB reportDB1 = new ReportDB();
+            //CityDB cityDB6 = new CityDB();
+            //CityList Citylist6 = cityDB6.SelectAll();
+            //Report newReport = new Report
+            //{
+            //    Description = "",
+            //    Location_X = 34.7818,
+            //    Location_Y = 32.0853,
+            //    Update_Time = DateTime.Now,
+            //    PasserBy_ID = PasserByDB.SelectById(1).Id,
+            //    HCategory = Help_CategoryDB.SelectById(1),
+            //    City_Num = Citylist6.Last(),
+            //    Photo_Optinal = "photo1.jpg"
+            //};
+            //reportDB1.Insert(newReport);
+            //int reportRowsAffected6 = reportDB1.SaveChanges();
+            //Console.WriteLine($"{reportRowsAffected6} rows were inserted");
+            //Console.WriteLine("Reports after insert: ");
+            //ReportList reportList = reportDB1.SelectAll();
+            //foreach (Report r in reportList)
+            //    Console.WriteLine(r.Description + "  id:" + r.Id);
+
+
+            Console.WriteLine("\n Reseting and Inserting Real-World Reports...");
+
+            // אתחול מחלקות ה-DB
+            ReportDB reportDB = new ReportDB();
+            CityDB cityDB = new CityDB();
+            Help_CategoryDB hCatDB = new Help_CategoryDB();
+            CityList cities = cityDB.SelectAll();
+
+            // רשימת נתונים להזנה
+            var reportsToInsert = new[]
             {
-                Description = "Food Delivery"
-            };
-            help_CategoryDB.Insert(newHelpCategory);
-            int helpCategoryRowsAffected = help_CategoryDB.SaveChanges();
-            Console.WriteLine($"{helpCategoryRowsAffected} rows were inserted");
-            Console.WriteLine("HelpCategories after insert: ");
-            Help_CategoryList help_CategoryList = help_CategoryDB.SelectAll();
-            foreach (Help_Category hc in help_CategoryList)
-                Console.WriteLine(hc.Description + "  id:" + hc.Id);
+    new {
+        Desc = "אדם מבוגר יושב על ספסל, נראה תשוש מאוד וזקוק לאוכל חם",
+        Lat = 32.0560, Lon = 34.7790, // דרום תל אביב (ליד התחנה המרכזית)
+        CatId = 11 // תרומת אוכל
+    },
+    new {
+        Desc = "צעיר ללא מחסה בגשם, מחפש מקום לינה ללילה הקרוב",
+        Lat = 32.8090, Lon = 34.9850, // חיפה (אזור העיר התחתית)
+        CatId = 10 // מציאת מקום לינה
+    },
+    new {
+        Desc = "פצוע בכף הרגל, זקוק לחבישה נקייה ועזרה רפואית ראשונית",
+        Lat = 31.7870, Lon = 35.2150, // ירושלים (ליד כיכר ציון)
+        CatId = 12 // עזרה רפואית
+    },
+    new {
+        Desc = "בעל עסק באזור מציע הטענת טלפונים וגישה למים קרים",
+        Lat = 32.0840, Lon = 34.8870, // בני ברק (אזור ז'בוטינסקי)
+        CatId = 13 // גישה לתשתיות העסק
+    },
+    new {
+        Desc = "אישה זקוקה למקום בטוח לשמור בו את הציוד שלה לכמה שעות",
+        Lat = 31.8920, Lon = 34.8110, // רחובות (ליד תחנת הרכבת)
+        CatId = 14 // מרחב בטוח ושמירת חפצים
+    }
+};
 
-
-            Console.WriteLine("\n insert Report");
-            ReportDB reportDB1 = new ReportDB();
-            CityDB cityDB6 = new CityDB();
-            CityList Citylist6 = cityDB6.SelectAll();
-            Report newReport = new Report
+            foreach (var item in reportsToInsert)
             {
-                Description = "Need help with groceries",
-                Location_X = 34.7818,
-                Location_Y = 32.0853,
-                Update_Time = DateTime.Now,
-                PasserBy_ID = PasserByDB.SelectById(1).Id,
-                HCategory = Help_CategoryDB.SelectById(1),
-                City_Num = Citylist6.Last(),
-                Photo_Optinal = "photo1.jpg"
-            };
-            reportDB1.Insert(newReport);
-            int reportRowsAffected6 = reportDB1.SaveChanges();
-            Console.WriteLine($"{reportRowsAffected6} rows were inserted");
-            Console.WriteLine("Reports after insert: ");
-            ReportList reportList = reportDB1.SelectAll();
-            foreach (Report r in reportList)
-                Console.WriteLine(r.Description + "  id:" + r.Id);
+                Report r = new Report
+                {
+                    Description = item.Desc,
+                    Location_X = item.Lon, // X הוא בד"כ אורך (Longitude)
+                    Location_Y = item.Lat, // Y הוא בד"כ רוחב (Latitude)
+                    Update_Time = DateTime.Now,
+                    PasserBy_ID = 1, // מניח שיש משתמש עם ID 1
+                    HCategory = Help_CategoryDB.SelectById(item.CatId),
+                    City_Num = cities.FirstOrDefault() ?? new City { Id = 1 }, // ברירת מחדל לעיר הראשונה
+                    Photo_Optinal = "default_report.jpg"
+                };
 
-            Console.WriteLine("\n     volunteer Respond");
-            VolunteerRespondDB volunteerRespondDB = new VolunteerRespondDB();
-            VolunteerRespond newVolunteerRespond = new VolunteerRespond
-            {
-                IdReport = ReportDB.SelectById(1),
-                IdVol = VolunteerDB.SelectById(1),
-                Repsond_status = StatusDB.SelectById(1)
-            };
-            volunteerRespondDB.Insert(newVolunteerRespond);
-            int volunteerRespondRowsAffected = volunteerRespondDB.SaveChanges();
-            Console.WriteLine($"{volunteerRespondRowsAffected} rows were inserted");
-            Console.WriteLine("VolunteerResponds after insert: ");
-            VolunteerRespondList volunteerRespondList = volunteerRespondDB.SelectAll();
-            foreach (VolunteerRespond vr in volunteerRespondList)
-                Console.WriteLine("id:" + vr.Id + "  Report id:" + vr.IdReport + " Volunteer id:" + vr.IdVol);
+                reportDB.Insert(r);
+            }
+
+            int rows = reportDB.SaveChanges();
+            Console.WriteLine($"{rows} reports were successfully restored to the database.");
 
 
-            //UPDATE ALL    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //Console.WriteLine("\n     volunteer Respond");
+            //VolunteerRespondDB volunteerRespondDB = new VolunteerRespondDB();
+            //VolunteerRespond newVolunteerRespond = new VolunteerRespond
+            //{
+            //    IdReport = ReportDB.SelectById(1),
+            //    IdVol = VolunteerDB.SelectById(1),
+            //    Repsond_status = StatusDB.SelectById(1)
+            //};
+            //volunteerRespondDB.Insert(newVolunteerRespond);
+            //int volunteerRespondRowsAffected = volunteerRespondDB.SaveChanges();
+            //Console.WriteLine($"{volunteerRespondRowsAffected} rows were inserted");
+            //Console.WriteLine("VolunteerResponds after insert: ");
+            //VolunteerRespondList volunteerRespondList = volunteerRespondDB.SelectAll();
+            //foreach (VolunteerRespond vr in volunteerRespondList)
+            //    Console.WriteLine("id:" + vr.Id + "  Report id:" + vr.IdReport + " Volunteer id:" + vr.IdVol);
+
+
+            ////UPDATE ALL    
 
             //Console.WriteLine("\nUpdate City");
             //CityDB cdb = new CityDB();
@@ -531,7 +610,7 @@ namespace Test1
             //    Console.WriteLine(p.FirstName + "  id:" + p.Id);
 
 
-            
+
 
         }
     }

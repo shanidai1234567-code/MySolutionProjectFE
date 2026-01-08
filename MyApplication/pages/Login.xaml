@@ -3,63 +3,97 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       Title="Login"
       FlowDirection="RightToLeft">
+
     <Grid>
-        <Image Source="C:\Users\User\source\repos\shanidai1234567-code\MySolutionProjectFE\MyApplication\Images\צילום מסך 2025-12-07 144054.png" 
-       Stretch="UniformToFill">
-            <Image.Effect>
-                <BlurEffect Radius="15" />
-            </Image.Effect>
-        </Image>
+        <Grid>
+            <Image Source="C:\Users\User\source\repos\shanidai1234567-code\MySolutionProjectFE\MyApplication\Images\צילום מסך 2025-12-07 144054.png" 
+                   Stretch="UniformToFill">
+                <Image.Effect>
+                    <BlurEffect Radius="20" />
+                </Image.Effect>
+            </Image>
+            <Rectangle Fill="#2C3E50" Opacity="0.4"/>
+        </Grid>
 
-        <Rectangle Fill="Black" Opacity="0.2"/>
-
-        <Border Style="{StaticResource VolunteerCardStyle}" 
-                VerticalAlignment="Center" 
+        <Border VerticalAlignment="Center" 
                 HorizontalAlignment="Center" 
-                Width="320" 
-                Padding="30">
+                Width="380" 
+                Padding="40"
+                Background="White"
+                CornerRadius="20">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Direction="0" ShadowDepth="0" Opacity="0.3"/>
+            </Border.Effect>
 
             <StackPanel>
-                <TextBlock Text="כניסה למערכת" 
-                           Style="{StaticResource HeaderLabelStyle}"
+                <TextBlock Text="🔒" FontSize="40" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+
+                <TextBlock Text="ברוכים השבים" 
+                           FontSize="28" FontWeight="ExtraBold"
+                           Foreground="#2D3748"
                            HorizontalAlignment="Center" 
-                           Margin="0,0,0,25"/>
+                           Margin="0,0,0,5"/>
 
-                <TextBlock Text="הכנס סיסמה:" 
-                           Foreground="{StaticResource LightTextColor}" 
-                           HorizontalAlignment="Right" 
-                           Margin="0,0,5,5"/>
+                <TextBlock Text="התחבר כדי להמשיך לעזור" 
+                           FontSize="14" Foreground="#718096"
+                           HorizontalAlignment="Center" 
+                           Margin="0,0,0,30"/>
 
-                <PasswordBox x:Name="txtPassword" 
-                             Height="45" 
-                             VerticalContentAlignment="Center" 
-                             HorizontalContentAlignment="Center" 
-                             FontSize="18"
-                             BorderBrush="#DDD"/>
+                <StackPanel Margin="0,0,0,20">
+                    <TextBlock Text="סיסמה" 
+                               FontWeight="SemiBold"
+                               Foreground="#4A5568" 
+                               Margin="0,0,5,8"/>
+
+                    <PasswordBox x:Name="txtPassword" 
+                                 Height="50" 
+                                 VerticalContentAlignment="Center" 
+                                 Padding="15,0"
+                                 FontSize="18"
+                                 BorderThickness="1.5"
+                                 BorderBrush="#E2E8F0">
+                    </PasswordBox>
+                </StackPanel>
 
                 <Button x:Name="btnLogin" 
-                        Content="התחבר למערכת" 
+                        Content="התחברות" 
+                        Height="50"
+                        Cursor="Hand"
                         Style="{StaticResource PrimaryButtonStyle}"
-                        Background="{StaticResource SecondaryColor}" 
-                        Margin="0,25,0,0" 
-                        Click="btnLogin_Click"/>
-
-                <Separator Margin="0,20" Background="#EEE"/>
+                        Background="{StaticResource PrimaryColor}" 
+                        Foreground="White"
+                        FontWeight="Bold"
+                        FontSize="16"
+                        Click="btnLogin_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
 
                 <Button x:Name="btnAdminLogin" 
-                        Content="כניסת מנהל 🛠️" 
-                        Height="35" 
+                        Content="כניסת מנהל מערכת 🛠️" 
+                        Margin="0,20,0,0"
                         Background="Transparent" 
                         BorderThickness="0"
-                        Foreground="{StaticResource PrimaryColor}"
-                        FontWeight="SemiBold"
+                        Foreground="#718096"
+                        FontSize="13"
                         Cursor="Hand"
                         Click="btnAdminLogin_Click">
                     <Button.Style>
                         <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <TextBlock Text="{TemplateBinding Content}" 
+                                                   TextDecorations="Underline"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Foreground" Value="{StaticResource UrgentColor}"/>
+                                    <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>

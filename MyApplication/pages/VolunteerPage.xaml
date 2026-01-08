@@ -5,40 +5,62 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MyApplication.pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="VolunteerPage">
-
-    <Grid Background="{StaticResource BackgroundColor}">
+      d:DesignHeight="600" d:DesignWidth="900"
+      Title="VolunteerPage"
+      FlowDirection="RightToLeft">
+    <Grid Background="#F5F7FA">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" >
-            <TextBlock Text="שלום, מתנדב יקר! 👋" 
-                       Style="{StaticResource HeaderLabelStyle}" 
-                       FontSize="28" Margin="0,0,0,5"/>
-            <TextBlock Text="הנה קריאות לעזרה שממתינות לך באזורך:" 
-                       Foreground="{StaticResource LightTextColor}" 
-                       FontSize="16" Margin="0,0,0,20"/>
+        <Border Grid.Row="0" Background="White" Padding="30,20" CornerRadius="0,0,30,30">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" Direction="270" ShadowDepth="2" Opacity="0.1"/>
+            </Border.Effect>
+            <StackPanel>
+                <TextBlock Text="שלום, מתנדב יקר! 👋" 
+                           FontWeight="ExtraBold" Foreground="#2D3748"
+                           FontSize="32" Margin="0,0,0,5"/>
+                <TextBlock Text="הנה קריאות לעזרה שממתינות לך באזורך:" 
+                           Foreground="#718096" FontSize="16" Margin="0,0,0,20"/>
 
-            <StackPanel Orientation="Horizontal">
-                <Button Content="הכל" Style="{StaticResource PrimaryButtonStyle}" Margin="0,0,10,0" Width="80"/>
-                <Button Content="חלוקת מזון" Style="{StaticResource PrimaryButtonStyle}" Background="{StaticResource SecondaryColor}" Margin="0,0,10,0"/>
-                <Button Content="הסעות" Style="{StaticResource PrimaryButtonStyle}" Background="{StaticResource SecondaryColor}" Margin="0,0,10,0"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="הכל" Style="{StaticResource FilterButtonStyle}" IsEnabled="False"/>
+                    <Button Content="מציאת לינה" Style="{StaticResource FilterButtonStyle}" Tag="Housing"/>
+                    <Button Content="חלוקת אוכל" Style="{StaticResource FilterButtonStyle}" Tag="Food"/>
+                    <Button Content="עזרה רפואית" Style="{StaticResource FilterButtonStyle}" Tag="Medical"/>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </Border>
 
         <ListBox Grid.Row="1" 
                  x:Name="lstReports" 
                  Background="Transparent" 
                  BorderThickness="0" 
-                 Padding="20,0,20,20"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                 Padding="30,20"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 HorizontalContentAlignment="Stretch">
+
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border Style="{StaticResource VolunteerCardStyle}" Width="700">
+                    <Border Margin="0,0,0,15" Background="White" CornerRadius="15" Padding="20">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" Opacity="0.05" ShadowDepth="1"/>
+                        </Border.Effect>
+
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -47,29 +69,34 @@
 
                             <StackPanel Grid.Column="0">
                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                                    <TextBlock Text="{Binding Title}" FontSize="20" FontWeight="Bold" Foreground="{StaticResource PrimaryColor}"/>
-                                    <Border Background="{StaticResource UrgentColor}" CornerRadius="10" Padding="8,2" Margin="15,0,0,0" 
+                                    <Border Background="#EBF4FF" CornerRadius="5" Padding="8,3">
+                                        <TextBlock Text="{Binding CategoryName}" Foreground="#3182CE" FontSize="11" FontWeight="Bold"/>
+                                    </Border>
+
+                                    <Border Background="#FFF5F5" CornerRadius="5" Padding="8,3" Margin="10,0"
                                             Visibility="{Binding IsUrgent, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                        <TextBlock Text="דחוף" Foreground="White" FontSize="12" FontWeight="Bold"/>
+                                        <TextBlock Text="🔥 דחוף" Foreground="#E53E3E" FontSize="11" FontWeight="Bold"/>
                                     </Border>
                                 </StackPanel>
 
-                                <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Foreground="{StaticResource MainTextColor}" Margin="0,0,0,10"/>
+                                <TextBlock Text="{Binding Title}" FontSize="22" FontWeight="Bold" Foreground="#2D3748" Margin="0,0,0,8"/>
+                                <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Foreground="#4A5568" FontSize="14" LineHeight="20"/>
 
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="📍" Margin="0,0,5,0"/>
-                                    <TextBlock Text="{Binding Location}" Foreground="{StaticResource LightTextColor}"/>
-                                    <TextBlock Text=" | " Foreground="#CCC" Margin="10,0"/>
-                                    <TextBlock Text="📅" Margin="0,0,5,0"/>
-                                    <TextBlock Text="{Binding Date}" Foreground="{StaticResource LightTextColor}"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                                    <TextBlock Text="📍" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                    <TextBlock Text="{Binding Location}" Foreground="#718096" FontSize="13"/>
+                                    <TextBlock Text="🕒" VerticalAlignment="Center" Margin="15,0,5,0"/>
+                                    <TextBlock Text="{Binding TimeAgo}" Foreground="#718096" FontSize="13"/>
                                 </StackPanel>
                             </StackPanel>
 
-                            <Button Grid.Column="1" 
-                                    Content="אני רוצה לעזור" 
-                                    Style="{StaticResource PrimaryButtonStyle}" 
-                                    VerticalAlignment="Center" 
-                                    Padding="20,10"/>
+                            <Button Grid.Column="1" VerticalAlignment="Bottom"
+                                    Style="{StaticResource ActionButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="אני רוצה לעזור" VerticalAlignment="Center"/>
+                                    <TextBlock Text="←" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
                         </Grid>
                     </Border>
                 </DataTemplate>

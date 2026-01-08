@@ -116,5 +116,15 @@
   <ItemGroup>
     <Resource Include="Images\צילום מסך 2025-12-07 144054.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
+      <Project>{35cecdd6-55ca-4900-af8b-56ab11835505}</Project>
+      <Name>ViewModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApplication1\WebApplication1.csproj">
+      <Project>{e0db73f7-d33d-43b7-9a29-0b0e048de116}</Project>
+      <Name>WebApplication1</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
