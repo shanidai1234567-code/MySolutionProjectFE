@@ -1,0 +1,39 @@
+﻿<Window x:Class="MyApplication.windows.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Login" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid>
+            <Image Source="/Images/background.png" Stretch="UniformToFill">
+                <Image.Effect>
+                    <BlurEffect Radius="20" />
+                </Image.Effect>
+            </Image>
+            <Rectangle Fill="#2C3E50" Opacity="0.4"/>
+        </Grid>
+
+        <Border VerticalAlignment="Center" HorizontalAlignment="Center" 
+                Width="380" Padding="40" Background="White" CornerRadius="20">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Opacity="0.3"/>
+            </Border.Effect>
+
+            <StackPanel>
+                <TextBlock Text="🔒" FontSize="40" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                <TextBlock Text="ברוכים השבים" FontSize="28" FontWeight="ExtraBold" HorizontalAlignment="Center"/>
+
+                <StackPanel Margin="0,20,0,20">
+                    <TextBlock Text="סיסמה" Margin="0,0,5,8"/>
+                    <Border CornerRadius="10" BorderThickness="1" BorderBrush="#E2E8F0" Padding="5">
+                        <PasswordBox x:Name="txtPassword" BorderThickness="0" Height="40" VerticalContentAlignment="Center"/>
+                    </Border>
+                </StackPanel>
+
+                <Button x:Name="btnLogin" Content="התחברות" Height="50" Cursor="Hand"
+                        Background="#3498db" Foreground="White" Click="btnLogin_Click">
+                </Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
