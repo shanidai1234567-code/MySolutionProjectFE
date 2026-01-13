@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ICloseToHelp\ICloseToHelp.csproj" />
+    <ProjectReference Include="..\ICloseToHelp\Link.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
   </ItemGroup>
 

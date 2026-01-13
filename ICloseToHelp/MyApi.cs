@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using ViewModel;
 
 
-namespace ICloseToHelp
+namespace Link
 {
     public class MyApi : InterfaceLink
     {

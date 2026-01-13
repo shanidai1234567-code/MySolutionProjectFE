@@ -8,7 +8,7 @@ using ViewModel;
 
 
 
-namespace ICloseToHelp
+namespace Link
 {
     public interface InterfaceLink
     {
