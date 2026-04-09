@@ -28,7 +28,7 @@ namespace Model
 
         public override string ToString()
         {
-            return $"storeOpeningTime: {storeOpeningTime},  storeClosingTime: {storeClosingTime},joinDate: {joinDate}, location_X: {location_X}, location_Y: {location_Y}, help_Category: {help_Category}." +base.ToString();
+            return $"storeOpeningTime: {storeOpeningTime},  storeClosingTime: {storeClosingTime},joinDate: {joinDate}, location_X: {location_X}, location_Y: {location_Y}, help_Category: {help_Category}." + base.ToString();
         }
     }
 }

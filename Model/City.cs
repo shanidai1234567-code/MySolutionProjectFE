@@ -13,7 +13,7 @@ namespace Model
         public string City_Name { get => city_Name; set => city_Name = value; }
         public override string ToString()
         {
-            return $"City Name: {city_Name}";
+            return base.ToString() + $" City Name: {city_Name}";
         }
     }
 }
