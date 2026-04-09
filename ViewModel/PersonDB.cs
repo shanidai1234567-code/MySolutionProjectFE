@@ -20,15 +20,13 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Person p = entity as Person;
-            p.FirstName = reader["First_Name"].ToString();
-            p.LastName = reader["Last_Name"].ToString();
-            p.Phone_Numer = reader["Phone_Number"].ToString();
+            p.FirstName = reader["FirstName"].ToString(); // Fixed
+            p.LastName = reader["LastName"].ToString();   
+            p.PhoneNumber = reader["PhoneNumber"].ToString(); 
             p.Street = reader["Street"].ToString();
-            p.StreetNumber = Convert.ToInt32(reader["streetNumber"]);
-            p.City_Num = CityDB.SelectById((int)reader["City_Num"]);
+            p.StreetNumber = Convert.ToInt32(reader["StreetNumber"]); 
+            p.CityNum = CityDB.SelectById((int)reader["CityNum"]); 
             p.Pass = reader["Pass"].ToString();
-
-
             base.CreateModel(entity);
             return p;
         }
@@ -62,13 +60,19 @@ namespace ViewModel
             Person c = entity as Person;
             if (c != null)
             {
-                string sqlStr = $"Insert INTO  Person (FirstName) VALUES (@cName)";
+                // SQL string must match the column names in your image
+                string sqlStr = "INSERT INTO Person (FirstName, LastName, PhoneNumber, Street, CityNum, Pass, StreetNumber) " +
+                                "VALUES (@fName, @lName, @phone, @street, @city, @pass, @sNum)";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
-                command.Parameters.Add(new OleDbParameter("@lName", c.LastName));
-                command.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                command.Parameters.Add(new OleDbParameter("@hName", c.Phone_Numer));
+                cmd.CommandText = sqlStr;
+                // Order matters for OleDb!
+                cmd.Parameters.Add(new OleDbParameter("@fName", c.FirstName));
+                cmd.Parameters.Add(new OleDbParameter("@lName", c.LastName));
+                cmd.Parameters.Add(new OleDbParameter("@phone", c.PhoneNumber));
+                cmd.Parameters.Add(new OleDbParameter("@street", c.Street));
+                cmd.Parameters.Add(new OleDbParameter("@city", c.CityNum.Id));
+                cmd.Parameters.Add(new OleDbParameter("@pass", c.Pass));
+                cmd.Parameters.Add(new OleDbParameter("@sNum", c.StreetNumber));
             }
         }
 
@@ -77,14 +81,19 @@ namespace ViewModel
             Person c = entity as Person;
             if (c != null)
             {
-                string sqlStr = $"UPDATE Person SET FirstName=@cName, LastName=@lName, LivingAdress=@bName, Phone_Numer=@hName WHERE ID=@id";
-                cmd.CommandText = sqlStr;
-                cmd.Parameters.Add(new OleDbParameter("@cName", c.FirstName));
-                cmd.Parameters.Add(new OleDbParameter("@lName", c.LastName));
-                cmd.Parameters.Add(new OleDbParameter("@bName", c.LivingAdress));
-                cmd.Parameters.Add(new OleDbParameter("@hName", c.Phone_Numer));
-                cmd.Parameters.Add(new OleDbParameter("@id", c.Id));
+                // Corrected column names: FirstName, LastName, PhoneNumber, etc.
+                string sqlStr = "UPDATE Person SET FirstName=@fName, LastName=@lName, PhoneNumber=@phone, " +
+                                "Street=@street, CityNum=@city, Pass=@pass, StreetNumber=@sNum WHERE ID=@id";
 
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@fName", c.FirstName));
+                cmd.Parameters.Add(new OleDbParameter("@lName", c.LastName));
+                cmd.Parameters.Add(new OleDbParameter("@phone", c.PhoneNumber));
+                cmd.Parameters.Add(new OleDbParameter("@street", c.Street));
+                cmd.Parameters.Add(new OleDbParameter("@city", c.CityNum.Id));
+                cmd.Parameters.Add(new OleDbParameter("@pass", c.Pass));
+                cmd.Parameters.Add(new OleDbParameter("@sNum", c.StreetNumber));
+                cmd.Parameters.Add(new OleDbParameter("@id", c.Id));
             }
         }
     }
