@@ -1,0 +1,53 @@
+﻿<Application x:Class="MyApplication.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MyApplication"
+             StartupUri="MainWindow.xaml">
+
+    <Application.Resources>
+        <SolidColorBrush x:Key="PrimaryColor" Color="#2A5C82" />
+        <SolidColorBrush x:Key="SecondaryColor" Color="#48B078" />
+        <SolidColorBrush x:Key="BackgroundColor" Color="#F8F9FA" />
+        <SolidColorBrush x:Key="UrgentColor" Color="#FF9F43" />
+        <SolidColorBrush x:Key="MainTextColor" Color="#2D3436" />
+        <SolidColorBrush x:Key="LightTextColor" Color="#636E72" />
+
+        <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Padding" Value="15,8" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="20" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.9" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="VolunteerCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Margin" Value="0,10" />
+            <Setter Property="Padding" Value="15" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.1" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Application.Resources>
+</Application>

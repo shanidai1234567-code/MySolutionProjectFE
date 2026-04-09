@@ -21,9 +21,17 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             VolunteerRespond p = entity as VolunteerRespond;
-            p.IdReport = Convert.ToInt32(reader["ID_Report"]);
+            if (reader["ID_Report"] != DBNull.Value)
+            {
+                int reportId = Convert.ToInt32(reader["ID_Report"]);
+                p.IdReport = ReportDB.SelectById(reportId);
+            }
 
-            p.IdVol = Convert.ToInt32(reader["ID_Volunteer"]);
+            if (reader["ID_Volunteer"] != DBNull.Value)
+            {
+                int volunteerId = Convert.ToInt32(reader["ID_Volunteer"]);
+                p.IdVol = VolunteerDB.SelectById(volunteerId);
+            }
             return p;   
 
         }

@@ -26,7 +26,7 @@ namespace ViewModel
             p.Street = reader["Street"].ToString();
             p.StreetNumber = Convert.ToInt32(reader["streetNumber"]);
             p.City_Num = CityDB.SelectById((int)reader["City_Num"]);
-            p.Pass = reader["pass"].ToString();
+            p.Pass = reader["Pass"].ToString();
 
 
             base.CreateModel(entity);
