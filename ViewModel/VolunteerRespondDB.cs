@@ -8,12 +8,12 @@ using System.Data.OleDb;
 
 namespace ViewModel
 {
-    public class VolunteerRespondDB : BaseDB
+    public class VolunteerRespondDB: BaseDB
     {
 
         public new VolunteerRespondList SelectAll()
         {
-            command.CommandText = $"SELECT * FROM VolunteerRespond ";
+            command.CommandText = $"SELECT VolunteerRespond.* FROM VolunteerRespond ";
             VolunteerRespondList pList = new VolunteerRespondList(base.Select());
             return pList;
         }
@@ -24,24 +24,17 @@ namespace ViewModel
             if (reader["ID_Report"] != DBNull.Value)
             {
                 int reportId = Convert.ToInt32(reader["ID_Report"]);
-                p.IdReport = ReportDB.SelectById(reportId); 
+                p.IdReport = ReportDB.SelectById(reportId);
             }
 
             if (reader["ID_Volunteer"] != DBNull.Value)
             {
                 int volunteerId = Convert.ToInt32(reader["ID_Volunteer"]);
-                p.IdVol = VolunteerDB.SelectById(volunteerId); 
+                p.IdVol = VolunteerDB.SelectById(volunteerId);
             }
+            return p;   
 
-            if (reader["Respond_status"] != DBNull.Value)
-            {
-                int statusId = Convert.ToInt32(reader["Respond_status"]);
-                p.Repsond_status = StatusDB.SelectById(statusId); 
-            }
-            base.CreateModel(p);
-            return p;
         }
-
         public override BaseEntity NewEntity()
         {
             return new VolunteerRespond();
@@ -72,12 +65,10 @@ namespace ViewModel
             VolunteerRespond c = entity as VolunteerRespond;
             if (c != null)
             {
-                string sqlStr = $"Insert INTO  VolunteerRespond (IdVol,IdReport,Repsond_status) VALUES (@cName, @ID_Report, @respond_status)";
+                string sqlStr = $"Insert INTO  VolunteerRespond (Description) VALUES (@cName)";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@cName", c.IdVol));
-                command.Parameters.Add(new OleDbParameter("@ID_Report", c.IdReport));
-                command.Parameters.Add(new OleDbParameter("@respond_status", c.Repsond_status));
 
             }
         }
@@ -87,18 +78,15 @@ namespace ViewModel
             VolunteerRespond c = entity as VolunteerRespond;
             if (c != null)
             {
-                string sqlStr = $" UPDATE VolunteerRespond  SET ID_Volunteer = @ID_Volunteer,   ID_Report = @ID_Report,   respond_status = @respond_status  WHERE Id = @Id" ;
+                string sqlStr = $"UPDATE VolunteerRespond  SET Description=@cName WHERE ID=@id";
+                //   string sqlStr = $"UPDATE Person  SET FirstName=@cName,lastName=@lName,livingadress=@ladd WHERE ID=@id";
 
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@cName", c.IdVol));
 
-                cmd.CommandText = sqlStr;
-
-                cmd.Parameters.Add(new OleDbParameter("@ID_Volunteer", c.IdVol.Id));
-                cmd.Parameters.Add(new OleDbParameter("@ID_Report", c.IdReport.Id));
-                cmd.Parameters.Add(new OleDbParameter("@repsond_status", c.Repsond_status.Id));
-                cmd.Parameters.Add(new OleDbParameter("@Id", c.Id));
+                command.Parameters.Add(new OleDbParameter("@id", c.Id));
             }
         }
-
     }
 }
 
