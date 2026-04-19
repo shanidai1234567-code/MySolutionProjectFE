@@ -416,7 +416,7 @@ namespace Test1
                     Location_X = item.Lon, // X הוא בד"כ אורך (Longitude)
                     Location_Y = item.Lat, // Y הוא בד"כ רוחב (Latitude)
                     Update_Time = DateTime.Now,
-                    PasserBy_ID = 1, // מניח שיש משתמש עם ID 1
+                    PasserBy_ID = PasserByDB.SelectById( 1), // מניח שיש משתמש עם ID 1
                     HCategory = Help_CategoryDB.SelectById(item.CatId),
                     City_Num = cities.FirstOrDefault() ?? new City { Id = 1 }, // ברירת מחדל לעיר הראשונה
                     Photo_Optinal = "default_report.jpg"

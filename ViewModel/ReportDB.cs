@@ -24,7 +24,7 @@ namespace ViewModel
             p.Location_X = Convert.ToDouble( reader["Location_X"]);
             p.Location_Y = Convert.ToDouble(reader["Location_Y"]);
             p.Update_Time = Convert.ToDateTime(reader["Update_Time"]);
-            p.PasserBy_ID = Convert.ToInt32(reader["PasserBy_ID"]);
+            p.PasserBy_ID = PasserByDB.SelectById(Convert.ToInt32(reader["PasserBy_ID"]));
             p.HCategory = Help_CategoryDB .SelectById( Convert.ToInt32( reader["Help_Category"]));
             p.City_Num = CityDB.SelectById(Convert.ToInt32(reader["City_Num"]));
             p.Photo_Optinal = reader["Photo_Optinal"].ToString();
@@ -72,7 +72,7 @@ namespace ViewModel
                 command.CommandText = sqlStr;
 
                 command.Parameters.Add(new OleDbParameter("@Description", c.Description));
-                command.Parameters.Add(new OleDbParameter("@PasserBy_ID", c.PasserBy_ID));
+                command.Parameters.Add(new OleDbParameter("@PasserBy_ID", c.PasserBy_ID.Id));
                 command.Parameters.Add(new OleDbParameter("@Help_Category", c.HCategory.Id));
                 command.Parameters.Add(new OleDbParameter("@City_Num", c.City_Num.Id));
                 command.Parameters.Add(new OleDbParameter("@Location_X", c.Location_X));
