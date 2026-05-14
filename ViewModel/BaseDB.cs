@@ -15,8 +15,14 @@ namespace ViewModel
         //              + System.IO.Path.GetFullPath(System.Reflection.Assembly.GetExecutingAssembly().Location
         //              + "\\MySolutionProjectFE\\ViewModel\\DatabaseBySup.accdb;");
 
-        protected static string connectionString = $"Provider = Microsoft.ACE.OLEDB.12.0;Data Source=\"C:\\Users\\User\\source\\shanidai1234567-code\\MySolutionProjectFE\\ViewModel\\DatabaseBySup.accdb\";";
+
+        // במקום הנתיב הארוך והקשיח
+        protected static string connectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={AppDomain.CurrentDomain.BaseDirectory}\DatabaseBySup.accdb;";
         protected static OleDbConnection connection;
+
+
+       // protected static string connectionString = $"Provider = Microsoft.ACE.OLEDB.12.0;Data Source=\"C:\\Users\\User\\source\\shanidai1234567-code\\MySolutionProjectFE\\ViewModel\\DatabaseBySup.accdb\";";
+     //   protected static OleDbConnection connection;
         protected OleDbCommand command;
         protected OleDbDataReader reader;
         public static string Path()

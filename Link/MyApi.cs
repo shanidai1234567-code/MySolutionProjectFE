@@ -21,7 +21,7 @@ namespace Link
         public MyApi()
         {
 
-            uri = "https://dlvwjnj5-5062.euw.devtunnels.ms";
+            uri = "https://7rv6g3ph-5062.euw.devtunnels.ms";
             Client = new HttpClient();
             Client.BaseAddress = new Uri(uri);
         }
@@ -54,6 +54,7 @@ namespace Link
         public async Task<CityList> GetAllCities()  // Implementation of GetCities method 2
         {
             HttpResponseMessage response = await Client.GetAsync("/api/Select/CitySelector");
+
             if (!response.IsSuccessStatusCode)
             {
                 string err = await response.Content.ReadAsStringAsync();
@@ -69,6 +70,7 @@ namespace Link
             {
                 PropertyNameCaseInsensitive = true
             });
+            return null;
         }
 
         public async Task<PersonList> GetAllPersons()  // Implementation of GetPersons method 3
