@@ -42,7 +42,8 @@ namespace ViewModel
         public static Report SelectById(int id)
         {
             ReportDB db = new ReportDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+                list = db.SelectAll();
 
             Report c = list.Find(item => item.Id == id);
             return c;

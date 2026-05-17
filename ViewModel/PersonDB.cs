@@ -38,7 +38,8 @@ namespace ViewModel
         public static Person SelectById(int id)
         {
             PersonDB db = new PersonDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+                list = db.SelectAll();
 
             Person g = list.Find(item => item.Id == id);
             return g;

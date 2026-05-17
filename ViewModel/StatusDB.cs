@@ -35,7 +35,8 @@ namespace ViewModel
         public static Status SelectById(int id)
         {
             StatusDB db = new StatusDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+                list = db.SelectAll();
 
             Status c = list.Find(item => item.Id == id);
             return c;

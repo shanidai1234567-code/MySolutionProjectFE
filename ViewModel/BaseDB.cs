@@ -80,8 +80,7 @@ namespace ViewModel
             catch (Exception e)
             {
 
-                System.Diagnostics.Debug.WriteLine(
-                    e.Message + "\nSQL:" + command.CommandText);
+                throw new Exception(e.Message + "\nSQL:" + command.CommandText);
             }
             finally
             {

@@ -13,7 +13,7 @@ namespace ViewModel
 
         public new VolunteerRespondList SelectAll()
         {
-            command.CommandText = $"SELECT VolunteerRespond.* FROM VolunteerRespond ";
+            command.CommandText = $"SELECT * FROM VolunteerRespond ";
             VolunteerRespondList pList = new VolunteerRespondList(base.Select());
             return pList;
         }
@@ -43,7 +43,8 @@ namespace ViewModel
         public static VolunteerRespond SelectById(int id)
         {
             VolunteerRespondDB db = new VolunteerRespondDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+                list = db.SelectAll();
 
             VolunteerRespond c = list.Find(item => item.Id == id);
             return c;

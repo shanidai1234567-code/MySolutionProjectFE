@@ -34,7 +34,9 @@ namespace ViewModel
         public static PasserBy SelectById(int id)
         {
             PasserByDB db = new PasserByDB();
-            list = db.SelectAll();
+
+            if(list.Count==0)
+               list = db.SelectAll();
 
             PasserBy c = list.Find(item => item.Id == id);
             return c;

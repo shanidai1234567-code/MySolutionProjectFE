@@ -34,7 +34,8 @@ namespace ViewModel
         public static Help_Category SelectById(int id)
         {
             Help_CategoryDB db = new Help_CategoryDB();
-            list = db.SelectAll();
+           if (list.Count==0)
+              list = db.SelectAll();
 
             Help_Category c = list.Find(item => item.Id == id);
             return c;
