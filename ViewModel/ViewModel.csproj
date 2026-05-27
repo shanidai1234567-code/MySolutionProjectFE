@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <None Update="DatabaseBySup.accdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

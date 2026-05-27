@@ -20,7 +20,7 @@ namespace Link
 
         public MyApi()
         {
-
+           // uri = "http://localhost:5062";
             uri = "https://7rv6g3ph-5062.euw.devtunnels.ms";
             Client = new HttpClient();
             Client.BaseAddress = new Uri(uri);
