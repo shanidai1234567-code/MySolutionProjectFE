@@ -8,7 +8,7 @@ using System.Data.OleDb;
 
 namespace ViewModel
 {
-    public class ReportDB: BaseDB
+    public class ReportDB : BaseDB
     {
         public new ReportList SelectAll()
         {
@@ -21,24 +21,25 @@ namespace ViewModel
         {
             Report p = entity as Report;
             p.Description = reader["Description"].ToString();
-            p.Location_X = Convert.ToDouble( reader["Location_X"]);
+            p.Location_X = Convert.ToDouble(reader["Location_X"]);
             p.Location_Y = Convert.ToDouble(reader["Location_Y"]);
             p.Update_Time = Convert.ToDateTime(reader["Update_Time"]);
             p.PasserBy_ID = PasserByDB.SelectById(Convert.ToInt32(reader["PasserBy_ID"]));
-            p.HCategory = Help_CategoryDB .SelectById( Convert.ToInt32( reader["Help_Category"]));
+            p.HCategory = Help_CategoryDB.SelectById(Convert.ToInt32(reader["Help_Category"]));
             p.City_Num = CityDB.SelectById(Convert.ToInt32(reader["City_Num"]));
             p.Photo_Optinal = reader["Photo_Optinal"].ToString();
-            
-            //p.Id = reader["ID"].ToString();
 
             base.CreateModel(entity);
             return p;
         }
+
         public override BaseEntity NewEntity()
         {
             return new Report();
         }
+
         static private ReportList list = new ReportList();
+
         public static Report SelectById(int id)
         {
             ReportDB db = new ReportDB();
@@ -55,11 +56,12 @@ namespace ViewModel
             if (c != null)
             {
                 string sqlStr = $"DELETE FROM Report where id=@pid";
-
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@pid", c.Id));
             }
         }
+
+       
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand command)
         {
             Report c = entity as Report;
@@ -72,40 +74,45 @@ namespace ViewModel
 
                 command.CommandText = sqlStr;
 
-                command.Parameters.Add(new OleDbParameter("@Description", c.Description));
-                command.Parameters.Add(new OleDbParameter("@PasserBy_ID", c.PasserBy_ID.Id));
-                command.Parameters.Add(new OleDbParameter("@Help_Category", c.HCategory.Id));
-                command.Parameters.Add(new OleDbParameter("@City_Num", c.City_Num.Id));
+                // הוספת הפרמטרים בדיוק לפי סדר הופעתם בשאילתה (קריטי עבור Access)
+                command.Parameters.Add(new OleDbParameter("@Description", c.Description ?? ""));
+                command.Parameters.Add(new OleDbParameter("@PasserBy_ID", c.PasserBy_ID?.Id ?? 0));
+                command.Parameters.Add(new OleDbParameter("@Help_Category", c.HCategory?.Id ?? 0));
+                command.Parameters.Add(new OleDbParameter("@City_Num", c.City_Num?.Id ?? 0));
                 command.Parameters.Add(new OleDbParameter("@Location_X", c.Location_X));
                 command.Parameters.Add(new OleDbParameter("@Location_Y", c.Location_Y));
 
                 OleDbParameter oleDbParameter = new OleDbParameter("@Update_Time", OleDbType.DBDate);
-                oleDbParameter.Value = c.Update_Time;
+                oleDbParameter.Value = c.Update_Time == DateTime.MinValue ? DateTime.Now : c.Update_Time;
                 command.Parameters.Add(oleDbParameter);
 
-                // Handle nullable photo field
-                command.Parameters.Add(new OleDbParameter("@Photo_Optinal",
-                    c.Photo_Optinal ?? (object)DBNull.Value));
+                // פרמטר התמונה מופיע פעם אחת בלבד בסוף
+                command.Parameters.Add(new OleDbParameter("@Photo_Optinal", c.Photo_Optinal ?? (object)DBNull.Value));
             }
         }
 
-
+        /// <summary>
+        /// תיקון מנגנון העדכון: מעדכן את טבלת Report, כולל תאריך עדכון וסטטוס
+        /// </summary>
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            Report c = entity as Report ;
+            Report c = entity as Report;
             if (c != null)
             {
-                string sqlStr = $"UPDATE Help_Category  SET Description=@cName WHERE ID=@id";
-                //   string sqlStr = $"UPDATE Person  SET FirstName=@cName,lastName=@lName,livingadress=@ladd WHERE ID=@id";
+                // שאילתת עדכון נכונה לטבלת Report
+                // משנה את תאריך העדכון לזמן הנוכחי ומעדכן את הסטטוס (בהנחה ששם העמודה ב-Access הוא Help_Category או שיש לך עמודת סטטוס ייעודית)
+                string sqlStr = "UPDATE Report SET Description=@Description, Update_Time=@UpdateTime WHERE ID=@id";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@cName", c.Description));
+
+                command.Parameters.Add(new OleDbParameter("@Description", c.Description));
+
+                OleDbParameter timeParam = new OleDbParameter("@UpdateTime", OleDbType.DBDate);
+                timeParam.Value = DateTime.Now; // מעדכן אוטומטית לתאריך והשעה של עכשיו
+                command.Parameters.Add(timeParam);
 
                 command.Parameters.Add(new OleDbParameter("@id", c.Id));
             }
         }
     }
-
-
 }
-

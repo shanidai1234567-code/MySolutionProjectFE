@@ -66,10 +66,10 @@ namespace ViewModel
             VolunteerRespond c = entity as VolunteerRespond;
             if (c != null)
             {
-                string sqlStr = $"Insert INTO  VolunteerRespond (Description) VALUES (@cName)";
+                string sqlStr = $"Insert INTO  VolunteerRespond (Repsond_status) VALUES (@cName)";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@cName", c.IdVol));
+                command.Parameters.Add(new OleDbParameter("@cName", c.Repsond_status));
 
             }
         }
@@ -79,12 +79,17 @@ namespace ViewModel
             VolunteerRespond c = entity as VolunteerRespond;
             if (c != null)
             {
-                string sqlStr = $"UPDATE VolunteerRespond  SET Description=@cName WHERE ID=@id";
-                //   string sqlStr = $"UPDATE Person  SET FirstName=@cName,lastName=@lName,livingadress=@ladd WHERE ID=@id";
+                // השאילתה נשארת דינמית
+                string sqlStr = "UPDATE VolunteerRespond SET Respond_Status = @status WHERE ID = @id";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@cName", c.IdVol));
 
+                // כאן הקסם: אנחנו לוקחים את ה-Id של הסטטוס שנמצא בתוך הישות c.
+                // ואם במקרה הוא ריק (null), נשים 1 (בטיפול) כברירת מחדל כדי שהקוד לא יקרוס.
+                int statusId = (c.Repsond_status != null) ? c.Repsond_status.Id : 1;
+                command.Parameters.Add(new OleDbParameter("@status", statusId));
+
+                // אומרים לו איזו שורה לעדכן לפי ה-ID שלה
                 command.Parameters.Add(new OleDbParameter("@id", c.Id));
             }
         }
